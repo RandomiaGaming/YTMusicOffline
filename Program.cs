@@ -17,17 +17,7 @@ public static class Program
     [STAThread]
     public static void Main()
     {
-        Random RNG = new Random((int)DateTime.Now.Ticks);
-        YouTubeAPIHelper.VideoMeta[] likes = YouTubeAPIHelper.LoadData<YouTubeAPIHelper.VideoMeta[]>("C:\\Users\\RandomiaGaming\\Desktop\\YouTubeMusicData\\Likes.json");
-
-        while (true)
-        {
-            string videoID = likes[RNG.Next(0, likes.Length)].VideoID;
-
-            Process.Start($"https://www.youtube.com/watch?v={videoID}");
-
-            Console.ReadLine();
-        }
+        DataOrganizer.LogUnliked();
 
         PressAnyKeyToExit();
     }

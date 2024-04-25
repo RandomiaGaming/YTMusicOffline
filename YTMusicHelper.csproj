@@ -62,6 +62,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataOrganizer.cs" />
+    <Compile Include="ThumbnailScraper.cs" />
+    <Compile Include="VideoLauncher.cs" />
     <Compile Include="YouTubeAPIHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
