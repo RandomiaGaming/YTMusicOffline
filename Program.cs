@@ -1,29 +1,76 @@
-﻿using Google.Apis.Auth.OAuth2;
+﻿using System;
+using System.Diagnostics;
+using System.Collections.Generic;
+using System.Threading;
+
+using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
-using System.IO;
-using System;
-using System.Diagnostics;
-using System.Threading;
 
 public static class Program
 {
-    public const string ClientID = "";
-    public const string ClientSecret = "";
-    public const string ApplicationName = "YTMusicHelper";
-    public const string MyChannelID = "UCw5RjEHFoSDk433jursVulQ";
-    public const string LikesPlaylistID = "LL";
-    public const string MusicLikesPlaylistID = "LM";
+    private static string clientID = "";
+    private static string clientSecret = "";
     [STAThread]
     public static void Main()
     {
-        DataOrganizer.LogUnliked();
-
-        PressAnyKeyToExit();
+        /*
+        string videoID = "0axoCtPJXho";
+        string command1 = $"yt-dlp.exe -f bestaudio --extract-audio -o \"{videoID}.%(ext)s\" \"https://www.youtube.com/watch?v={videoID}\"";
+        string command2 = $"ffmpeg.exe -i \"{videoID}.opus\" -c:a aac -b:a 192k -map 0:a:0 -map -0:v -map -0:s -map -0:d -map -0:t -map_chapters -1 -metadata comment=\"Encoded With BackupService.cs\" -movflags +faststart -y \"{videoID}.m4a\"";
+        Console.WriteLine(command1);
+        Console.WriteLine(command2);
+        */
+        try
+        {
+            YTDataDownloader.Run(clientID, clientSecret);
+            //List<YTDataDownloader.PlaylistData> playlists = YTDataDownloader.LoadData("C:\\Users\\RandomiaGaming\\Desktop\\YTDataDownload.json");
+            Console.WriteLine("All tasks completed successfully.");
+            PressAnyKeyToExit();
+        }
+        catch (Exception ex)
+        {
+            ConsoleColor originalColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"ERROR: {ex.Message}");
+            Console.ForegroundColor = originalColor;
+            PressAnyKeyToExit();
+        }
     }
+    private static YouTubeService AuthYTService()
+    {
+        string clientID = "";
+        string clientSecret = "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"; // "";
+        string applicationName = "peaceful-nation-447609-c2"; //"YTMusicHelper";
 
+        try
+        {
+            ClientSecrets clientSecrets = new ClientSecrets();
+            clientSecrets.ClientId = clientID;
+            clientSecrets.ClientSecret = clientSecret;
+
+            string[] scopes = new string[1] { YouTubeService.Scope.YoutubeReadonly };
+            string user = "user";
+
+            UserCredential userCredential = GoogleWebAuthorizationBroker.AuthorizeAsync(clientSecrets, scopes, user, CancellationToken.None).Result;
+
+            BaseClientService.Initializer initializer = new BaseClientService.Initializer();
+
+            initializer.HttpClientInitializer = userCredential;
+            initializer.ApplicationName = applicationName;
+
+            YouTubeService youtubeService = new YouTubeService(initializer);
+
+            return youtubeService;
+        }
+        catch (Exception ex)
+        {
+            return null;
+        }
+    }
     public static void PressAnyKeyToExit()
     {
+        Console.WriteLine();
         Console.WriteLine("Press any key to exit...");
         Stopwatch bufferConsumeStopwatch = Stopwatch.StartNew();
         while (true)
@@ -34,7 +81,6 @@ public static class Program
                 break;
             }
         }
-        Process.GetCurrentProcess().Kill();
     }
 }
 /*
