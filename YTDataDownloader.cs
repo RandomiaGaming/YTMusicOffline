@@ -10,6 +10,25 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
+public sealed class PlaylistData
+{
+    public string PlaylistID = null;
+    public string Title = null;
+    public string Description = null;
+    public List<VideoData> Videos = null;
+}
+public sealed class VideoData
+{
+    public string VideoID = null;
+    public string Title = null;
+    public string Description = null;
+    public string ThumbnailUrl = null;
+    public string ChannelID = null;
+    public string ChannelTitle = null;
+    public DateTime? UploadDate = null;
+    public TimeSpan? ContentDuration = null;
+}
+
 public static class YTDataDownloader
 {
     // NOTE
@@ -22,11 +41,13 @@ public static class YTDataDownloader
         Console.WriteLine("Authenticating with YouTube API...");
         YouTubeService ytService = AuthYTService(clientID, clientSecret);
         Console.WriteLine("Enumerating playlists...");
-        List<PlaylistData> playlists = EnumPlaylists(ytService);
+        List<PlaylistData> playlists = EnumPlaylistIDs(ytService);
         for (int i = 0; i < playlists.Count; i++)
         {
             Console.WriteLine($"Enumerating videos in playlist {i + 1}/{playlists.Count}...");
-            EnumVideos(playlists[i], ytService);
+            EnumVideoIDs(playlists[i], ytService);
+            Console.WriteLine($"Enumerating video details for playlist {i + 1}/{playlists.Count}...");
+            EnumVideoDetails(playlists[i], ytService);
         }
         string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
         string outputFilePath = Path.Combine(desktopFolderPath, "YTDataDownload.json");
@@ -54,104 +75,192 @@ public static class YTDataDownloader
         return youtubeService;
     }
 
-    public sealed class PlaylistData
+    // Enumerates all PlaylistIDs on the current users account
+    // The PlaylistData objects will have empty Videos arrays at this time
+    private static List<PlaylistData> EnumPlaylistIDs(YouTubeService ytService)
     {
-        public string PlaylistID = null;
-        public string PlaylistTitle = null;
-        public string PlaylistDescription = null;
-        public List<VideoData> Videos = null;
-        public override string ToString()
-        {
-            if (Videos is null)
-            {
-                return $"PlaylistData(\"{PlaylistID}\", \"{PlaylistTitle}\", \"{PlaylistDescription}\", null)";
-            }
-            return $"PlaylistData(\"{PlaylistID}\", \"{PlaylistTitle}\", \"{PlaylistDescription}\", {Videos.Count})";
-        }
-        public PlaylistData(string playlistID, string playlistTitle, string playlistDescription)
-        {
-            PlaylistID = playlistID;
-            PlaylistTitle = playlistTitle;
-            PlaylistDescription = playlistDescription;
-        }
-    }
-    // Enumerates all playlists on the current users account
-    // The playlist videos will be empty at this step
-    private static List<PlaylistData> EnumPlaylists(YouTubeService youTubeService)
-    {
+        // Prepare output list
         List<PlaylistData> output = new List<PlaylistData>();
-        PlaylistsResource.ListRequest request = youTubeService.Playlists.List("snippet");
+
+        // Prepare for first request
+        PlaylistsResource.ListRequest request = ytService.Playlists.List("snippet");
         request.Mine = true;
         request.MaxResults = 50; // 50 is the max results allowed per query
-
         request.PageToken = null;
-        PlaylistListResponse response = request.Execute();
-        for (int i = 0; i < response.Items.Count; i++)
-        {
-            output.Add(new PlaylistData(response.Items[i].Id, response.Items[i].Snippet.Title, response.Items[i].Snippet.Description));
-        }
+        PlaylistListResponse response = null;
 
-        while (response.NextPageToken != null)
+        do
         {
-            request.PageToken = response.NextPageToken;
+            // Execute the API request
             response = request.Execute();
+
+            // Parse the results
             for (int i = 0; i < response.Items.Count; i++)
             {
-                output.Add(new PlaylistData(response.Items[i].Id, response.Items[i].Snippet.Title, response.Items[i].Snippet.Description));
+                PlaylistData newPlaylistData = new PlaylistData();
+                newPlaylistData.PlaylistID = response.Items[i].Id;
+                newPlaylistData.Title = response.Items[i].Snippet.Title;
+                newPlaylistData.Description = response.Items[i].Snippet.Description;
+                output.Add(newPlaylistData);
             }
-        }
 
-        //output.Add(new PlaylistData("LL", "Liked Videos", ""));
-        output.Add(new PlaylistData("LM", "Liked Music", ""));
-        //output.Add(new PlaylistData("WL", "Watch Later", ""));
+            // Prepare for the next itteration
+            request.PageToken = response.NextPageToken;
+        }
+        while (response.NextPageToken != null && response.NextPageToken != "");
+
+        // Add special short code playlists to output
+        PlaylistData likedMusicPlaylistData = new PlaylistData();
+        likedMusicPlaylistData.PlaylistID = "LM";
+        likedMusicPlaylistData.Title = "Liked Music";
+        likedMusicPlaylistData.Description = null;
+        output.Add(likedMusicPlaylistData);
+        /*
+        PlaylistData likedVideosPlaylistData = new PlaylistData();
+        likedVideosPlaylistData.PlaylistID = "LL";
+        likedVideosPlaylistData.Title = "Liked Videos";
+        likedVideosPlaylistData.Description = null;
+        output.Add(likedVideosPlaylistData);
+        */
+        /*
+        PlaylistData watchLaterPlaylistData = new PlaylistData();
+        watchLaterPlaylistData.PlaylistID = "WL";
+        watchLaterPlaylistData.Title = "Watch Later";
+        watchLaterPlaylistData.Description = null;
+        output.Add(watchLaterPlaylistData);
+        */
+
+        // Return output
         return output;
     }
 
-    public sealed class VideoData
+    // Enumerates all VideoIDs in a playlist
+    // The VideoData objects will have only their VideoID set at this time
+    private static void EnumVideoIDs(PlaylistData playlist, YouTubeService ytService)
     {
-        public string VideoID = null;
-        public string VideoTitle = null;
-        public string VideoDescription = null;
-        public string ChannelID = null;
-        public string ChannelTitle = null;
-        //release date
-        public override string ToString()
-        {
-            return $"VideoData(\"{VideoID}\", \"{VideoTitle}\", \"{VideoDescription}\", \"{ChannelID}\", \"{ChannelTitle}\")";
-        }
-        public VideoData(string videoID, string videoTitle, string videoDescription, string channelID, string channelTitle)
-        {
-            VideoID = videoID;
-            VideoTitle = videoTitle;
-            VideoDescription = videoDescription;
-            ChannelID = channelID;
-            ChannelTitle = channelTitle;
-        }
-    }
-    // Enumerates all videos in a playlist and populates the playlist videos list
-    private static void EnumVideos(PlaylistData playlist, YouTubeService youTubeService)
-    {
+        // Prepare the videos list
         playlist.Videos = new List<VideoData>();
-        PlaylistItemsResource.ListRequest request = youTubeService.PlaylistItems.List("snippet");
+
+        // Prepare the first request
+        PlaylistItemsResource.ListRequest request = ytService.PlaylistItems.List("snippet");
         request.PlaylistId = playlist.PlaylistID;
-        // 50 is the max allowed per query
-        request.MaxResults = 50;
-
+        request.MaxResults = 50; // 50 is the max allowed per query
         request.PageToken = null;
-        PlaylistItemListResponse response = request.Execute();
-        for (int i = 0; i < response.Items.Count; i++)
-        {
-            playlist.Videos.Add(new VideoData(response.Items[i].Snippet.ResourceId.VideoId, response.Items[i].Snippet.Title, response.Items[i].Snippet.Description, response.Items[i].Snippet.VideoOwnerChannelId, response.Items[i].Snippet.VideoOwnerChannelTitle));
-        }
+        PlaylistItemListResponse response = null;
 
-        while (response.NextPageToken != null)
+        do
         {
-            request.PageToken = response.NextPageToken;
+            // Execute the API request
             response = request.Execute();
+
+            // Parse the results
             for (int i = 0; i < response.Items.Count; i++)
             {
-                playlist.Videos.Add(new VideoData(response.Items[i].Snippet.ResourceId.VideoId, response.Items[i].Snippet.Title, response.Items[i].Snippet.Description, response.Items[i].Snippet.VideoOwnerChannelId, response.Items[i].Snippet.VideoOwnerChannelTitle));
+                VideoData newVideoData = new VideoData();
+                newVideoData.VideoID = response.Items[i].Snippet.ResourceId.VideoId;
+                playlist.Videos.Add(newVideoData);
             }
+
+            // Prepare for the next itteration
+            request.PageToken = response.NextPageToken;
+        }
+        while (response.NextPageToken != null && response.NextPageToken != "");
+    }
+
+    // Fills in all the details for all the VideoData objects in the Videos array of a PlaylistData object
+    private static void EnumVideoDetails(PlaylistData playlist, YouTubeService ytService)
+    {
+        // This stores our progress through the videos in this playlist
+        int index = 0;
+
+        // Prepare the first request
+        VideosResource.ListRequest request = ytService.Videos.List("snippet,contentDetails");
+        request.MaxResults = 50; // 50 is the max allowed per query
+        request.PageToken = null;
+        VideoListResponse response = null;
+
+        do
+        {
+            // Prepare this API request
+            List<string> videoIDs = new List<string>();
+            for (int i = 0; (i < request.MaxResults) && (index < playlist.Videos.Count); i++)
+            {
+                videoIDs.Add(playlist.Videos[index].VideoID);
+                index++;
+            }
+            request.Id = videoIDs;
+
+            // Execute the API request
+            response = request.Execute();
+
+            // Parse the results
+            for (int i = 0; i < response.Items.Count; i++)
+            {
+                for (int j = 0; j < playlist.Videos.Count; j++)
+                {
+                    if (playlist.Videos[j].VideoID == response.Items[i].Id)
+                    {
+                        playlist.Videos[j].Title = response.Items[i].Snippet.Title;
+                        playlist.Videos[j].Description = response.Items[i].Snippet.Description;
+                        playlist.Videos[j].ThumbnailUrl = GetBestThumbnailUrl(response.Items[i].Snippet.Thumbnails);
+                        playlist.Videos[j].ChannelID = response.Items[i].Snippet.ChannelId;
+                        playlist.Videos[j].ChannelTitle = response.Items[i].Snippet.ChannelTitle;
+                        playlist.Videos[j].UploadDate = ParseReleaseDate(response.Items[i].Snippet.PublishedAtRaw);
+                        playlist.Videos[j].ContentDuration = ParseContentDuration(response.Items[i].ContentDetails.Duration);
+                        break;
+                    }
+                }
+            }
+        }
+        while (index < playlist.Videos.Count);
+    }
+    private static string GetBestThumbnailUrl(ThumbnailDetails thumbnailDetails)
+    {
+        // Create an array to store all the options for thumbnails
+        Thumbnail[] thumbnails = new Thumbnail[] {
+            thumbnailDetails.Default__,
+            thumbnailDetails.Standard,
+            thumbnailDetails.Medium,
+            thumbnailDetails.High,
+            thumbnailDetails.Maxres,
+        };
+
+        // Create a field to store the best thumbnail found so far
+        string bestThumbnailUrl = null;
+        long bestThumbnailSize = long.MinValue;
+
+        // Loop over each thumbnail and check if it's better than what we found so far
+        foreach (Thumbnail thumbnail in thumbnails)
+        {
+            if (thumbnail != null && thumbnail.Height * thumbnail.Width > bestThumbnailSize)
+            {
+                bestThumbnailUrl = thumbnail.Url;
+                bestThumbnailSize = thumbnail.Height.Value * thumbnail.Width.Value;
+            }
+        }
+
+        // Return the best thumbnail found so far or null if no thumbnails are availible
+        return bestThumbnailUrl;
+    }
+    private static DateTime? ParseReleaseDate(string releaseDateRaw)
+    {
+        DateTime output;
+        if (!DateTime.TryParse(releaseDateRaw, out output))
+        {
+            return null;
+        }
+        return output;
+    }
+    private static TimeSpan? ParseContentDuration(string contentDurationRaw)
+    {
+        try
+        {
+            // System.Xml.XmlConvert.ToTimeSpan can handle ISO 8601 durations
+            return System.Xml.XmlConvert.ToTimeSpan(contentDurationRaw);
+        }
+        catch
+        {
+            return null;
         }
     }
 
