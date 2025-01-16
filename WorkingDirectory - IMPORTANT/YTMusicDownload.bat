@@ -1,4 +1,4 @@
-set VideoID={VIDEOID}
+set VideoID=xCP7bCJxxm8
 if not "%errorlevel%"=="0" ( pause && exit /B 1 )
 
 yt-dlp.exe --force-overwrites --verbose --no-continue --sleep-interval 0 --max-sleep-interval 3 --format bestaudio --output "YTTemp0.%%(ext)s" "https://www.youtube.com/watch?v=%VideoID%"
@@ -14,5 +14,6 @@ move /-Y "YTTemp1.m4a" "Songs/%VideoID%.m4a"
 if not "%errorlevel%"=="0" ( pause && exit /B 1 )
 
 del /F "%YTDLPOutPath%"
+if not "%errorlevel%"=="0" ( pause && exit /B 1 )
 
 exit /B 0

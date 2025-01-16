@@ -36,7 +36,7 @@ public static class YTDataDownloader
     // snippet,contentDetails,fileDetails,player,processingDetails,recordingDetails,statistics,status,suggestions,topicDetails
     // But for other people's videos the max amount is:
     // snippet,contentDetails,player,recordingDetails,statistics,status,topicDetails
-    public static void Run(string clientID, string clientSecret)
+    public static void Run(string clientID, string clientSecret, string outputFilePath)
     {
         Console.WriteLine("Authenticating with YouTube API...");
         YouTubeService ytService = AuthYTService(clientID, clientSecret);
@@ -49,8 +49,6 @@ public static class YTDataDownloader
             Console.WriteLine($"Enumerating video details for playlist {i + 1}/{playlists.Count}...");
             EnumVideoDetails(playlists[i], ytService);
         }
-        string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-        string outputFilePath = Path.Combine(desktopFolderPath, "YTDataDownload.json");
         Console.WriteLine($"Saving output to \"{outputFilePath}\"...");
         SaveData(playlists, outputFilePath);
     }

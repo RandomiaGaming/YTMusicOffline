@@ -12,18 +12,14 @@ public static class Program
     {
         try
         {
-            //YTDataDownloader.Run(clientID, clientSecret);
-            //SongDataParser.Run();
             string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string outputFilePath = Path.Combine(desktopFolderPath, "YTMusicSongData.json");
-            List<SongData> songs = SongDataParser.LoadData(outputFilePath);
-            Random rng = new Random((int)DateTime.Now.Ticks);
-            while (true)
-            {
-                Process.Start($"https://music.youtube.com/watch?v={songs[rng.Next(0, songs.Count)].VideoID}");
-                Console.WriteLine("All tasks completed successfully.");
-                PressAnyKeyToExit();
-            }
+            string ytDataDownloaderPath = Path.Combine(desktopFolderPath, "YTVideos.json");
+            string songDataParserPath = Path.Combine(desktopFolderPath, "YTMusicSongs.json");
+            //YTDataDownloader.Run(clientID, clientSecret, ytDataDownloaderPath);
+            //SongDataParser.Run(ytDataDownloaderPath, songDataParserPath);
+
+            Console.WriteLine("All tasks completed successfully.");
+            PressAnyKeyToExit();
         }
         catch (Exception ex)
         {

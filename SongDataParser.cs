@@ -26,10 +26,10 @@ public sealed class YTMusicData
 }
 public static class SongDataParser
 {
-    public static void Run()
+    public static void Run(string inputFilePath, string outputFilePath)
     {
-        Console.WriteLine("Loading json data...");
-        List<PlaylistData> playlists = YTDataDownloader.LoadData("C:\\Users\\RandomiaGaming\\Desktop\\YTDataDownload.json");
+        Console.WriteLine($"Loading input from \"{inputFilePath}\"...");
+        List<PlaylistData> playlists = YTDataDownloader.LoadData(inputFilePath);
         Console.WriteLine("Parsing songs...");
         List<SongData> songs = new List<SongData>();
         foreach (PlaylistData playlist in playlists)
@@ -39,8 +39,6 @@ public static class SongDataParser
                 ParseSong(video, songs);
             }
         }
-        string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-        string outputFilePath = Path.Combine(desktopFolderPath, "YTMusicSongData.json");
         Console.WriteLine($"Saving output to \"{outputFilePath}\"...");
         SaveData(songs, outputFilePath);
     }
