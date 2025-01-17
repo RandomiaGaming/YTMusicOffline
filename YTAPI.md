@@ -120,19 +120,25 @@ Optional: False
 
 # Unavailible YTMusic videos
 Some youtube music videos are unavailible when you try to download them.
-This likely has to do with some weirdness with how youtube license songs for youtube music.
-But don't worry we can still listen to and download these songs.
-We can tell we have one of these weird videos in multiple ways:
-1. It fails to download with the error video unavailible.
-2. It shows as blocked in every country in the metadata.
-3. It has videos.items[0].contentDetails.licensedContent == false
-Because it is marked as blocked in all countries when we try to watch the video from youtube.com
-it won't work, but if we navigate to music.youtube.com instead it suddenly works like magic.
-So how does this happen?
-Well under the hood youtube music swaps out the video id to a new one which isn't blocked anymore.
-We can actually see this happen in the url bar.
-So how do we get this non-blocked url from a blocked one.
-First use the command below to download the html:
+We will call these videos indirect music videos since they can be downloaded
+but must be accessed through another videoID.
+Each of these types of videos has two videoIDs.
+One of which is blocked in all countries and the other one functions normally.
+
+You can identify if you have one of these videos by looking for the following characteristics:
+video.contentDetails.regionRestriction.allowed == null;
+video.contentDetails.regionRestriction.blocked.Contains(["AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AW","AX","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BL","BM","BN","BO","BQ","BR","BS","BT","BV","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL","CM","CN","CO","CR","CU","CV","CW","CX","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","EH","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA","GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GS","GT","GU","GW","GY","HK","HM","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO","IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG","UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","YE","YT","ZA","ZM","ZW"]);
+video.contentDetails.licensedContent == false;
+video.status.privacyStatus == "unlisted";
+video.topicDetails == null;
+
+But don't worry it is possible to get the other non-blocked videoID.
+We can get this videoID manually by changing https://www.youtube.com/watch?v={VIDEOID}
+to https://music.youtube.com/watch?v={VIDEOID}.
+When the page loads it will instantly redirect to a new page where the video id is unblocked.
+
+To do this automatically we can use the following:
+First use the command below to download the html
 curl -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" https://music.youtube.com/watch?v={VIDEOIDHERE} > ytmusic.html
 Then parse through the html for strings starting with "ytcfg.set(" and read until the matching end parenthese.
 There may be multiple matches and we want them all.

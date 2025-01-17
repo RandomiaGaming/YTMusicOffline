@@ -1,23 +1,27 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Collections.Generic;
-using System.IO;
 
 public static class Program
 {
-    private static string clientID = "";
-    private static string clientSecret = "";
     [STAThread]
     public static void Main()
     {
         try
         {
-            string desktopFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string ytDataDownloaderPath = Path.Combine(desktopFolderPath, "YTVideos.json");
-            string songDataParserPath = Path.Combine(desktopFolderPath, "YTMusicSongs.json");
-            //YTDataDownloader.Run(clientID, clientSecret, ytDataDownloaderPath);
-            //SongDataParser.Run(ytDataDownloaderPath, songDataParserPath);
+            string clientID = "";
+            string clientSecret = "";
+            string playlistsJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Playlists.json";
+            string playlistItemsJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\PlaylistItems.json";
+            string videosJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Videos.json";
+            string altVideoIDPairsJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\AltVideoIDPairs.json";
+            YTDataDownloader.Run(clientID, clientSecret, playlistsJsonFilePath, playlistItemsJsonFilePath, videosJsonFilePath, altVideoIDPairsJsonFilePath);
 
+            //string ytMusicSongsFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Songs.json";
+            //SongDataParser.Run(ytVideosDotJsonPath, ytMusicSongsDotJsonPath);
+
+            //string workingDirectoryFolderPath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\WorkingDirectory";
+            //BatchDownloader.RunThumbnails(ytMusicSongsDotJsonPath, workingDirectoryPath);
+            
             Console.WriteLine("All tasks completed successfully.");
             PressAnyKeyToExit();
         }

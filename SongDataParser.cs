@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Google.Apis.YouTube.v3.Data;
 using Newtonsoft.Json;
 
-public sealed class SongData
+public sealed class YTMAGDData
 {
     public string VideoID = null;
-    public string ThumbnailUrl = null;
-    public TimeSpan? ContentDuration = null;
-    public string SongName = null;
-    public string AlbumName = null;
-    public DateTime? ReleaseDate = null;
-    public string[] ArtistNames = null;
-    public bool YTMusicSong = false;
-}
-public sealed class YTMusicData
-{
     public string ProvidedBy = null;
     public string SongName = null;
     public string[] ArtistNames = null;
@@ -26,38 +17,25 @@ public sealed class YTMusicData
 }
 public static class SongDataParser
 {
-    public static void Run(string inputFilePath, string outputFilePath)
+    public static void Run(string playlistsJsonFilePath, string playlistItemsJsonFilePath, string videosJsonFilePath, string songsJsonFilePath)
     {
-        Console.WriteLine($"Loading input from \"{inputFilePath}\"...");
-        List<PlaylistData> playlists = YTDataDownloader.LoadData(inputFilePath);
+        Console.WriteLine($"Loading videos from \"{videosJsonFilePath}\"...");
+        List<Video> videos = YTDataDownloader.Load<List<Video>>(videosJsonFilePath);
+
         Console.WriteLine("Parsing songs...");
-        List<SongData> songs = new List<SongData>();
-        foreach (PlaylistData playlist in playlists)
+        List<Song> songs = new List<Song>();
+        foreach (Video video in videos)
         {
-            foreach (VideoData video in playlist.Videos)
-            {
-                ParseSong(video, songs);
-            }
-        }
-        Console.WriteLine($"Saving output to \"{outputFilePath}\"...");
-        SaveData(songs, outputFilePath);
-    }
-    private static void ParseSong(VideoData video, List<SongData> songs)
-    {
-        // Ignore duplicate songs
-        foreach (SongData song in songs)
-        {
-            if (song.VideoID == video.VideoID)
-            {
-                return;
-            }
+            songs.Add(ParseSong(video));
         }
 
-        // Ignore deleted or private videos
-        if (video.ThumbnailUrl == null && video.ChannelID == null && video.ChannelTitle == null && video.UploadDate == null)
-        {
-            return;
-        }
+        Console.WriteLine($"Saving songs to \"{songsJsonFilePath}\"...");
+        YTDataDownloader.Save(songs, songsJsonFilePath);
+    }
+
+    private static Song ParseSong(Video video)
+    {
+
 
         // Parse basic information from video metadata
         SongData songData = new SongData();
@@ -323,14 +301,25 @@ public static class SongDataParser
         return output.ToArray();
     }
 
-    private static void SaveData(List<SongData> data, string filePath)
+    public static DateTime? ParseYTDate(string releaseDateRaw)
     {
-        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-        File.WriteAllText(filePath, json);
+        DateTime output;
+        if (!DateTime.TryParse(releaseDateRaw, out output))
+        {
+            return null;
+        }
+        return output;
     }
-    public static List<SongData> LoadData(string filePath)
+    public static TimeSpan? ParseYTDuration(string contentDurationRaw)
     {
-        string json = File.ReadAllText(filePath);
-        return JsonConvert.DeserializeObject<List<SongData>>(json);
+        try
+        {
+            // System.Xml.XmlConvert.ToTimeSpan can handle ISO 8601 durations
+            return System.Xml.XmlConvert.ToTimeSpan(contentDurationRaw);
+        }
+        catch
+        {
+            return null;
+        }
     }
 }
