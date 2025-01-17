@@ -17,7 +17,7 @@ public static class Program
             YTDataDownloader.Run(clientID, clientSecret, playlistsJsonFilePath, playlistItemsJsonFilePath, videosJsonFilePath, altVideoIDPairsJsonFilePath);
 
             //string ytMusicSongsFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Songs.json";
-            //SongDataParser.Run(ytVideosDotJsonPath, ytMusicSongsDotJsonPath);
+            //SongDataParser.Run(ytVideosDotJsonPath, ytMusicSongsFilePath);
 
             //string workingDirectoryFolderPath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\WorkingDirectory";
             //BatchDownloader.RunThumbnails(ytMusicSongsDotJsonPath, workingDirectoryPath);
