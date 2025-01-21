@@ -10,11 +10,8 @@ public static class Program
         {
             string clientID = "";
             string clientSecret = "";
-            string playlistsJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Playlists.json";
-            string playlistItemsJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\PlaylistItems.json";
-            string videosJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Videos.json";
-            string altVideoIDPairsJsonFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\AltVideoIDPairs.json";
-            YTDataDownloader.Run(clientID, clientSecret, playlistsJsonFilePath, playlistItemsJsonFilePath, videosJsonFilePath, altVideoIDPairsJsonFilePath);
+            string databaseFolderPath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\";
+            YTDataDownloader.Run(clientID, clientSecret, databaseFolderPath);
 
             //string ytMusicSongsFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Songs.json";
             //SongDataParser.Run(ytVideosDotJsonPath, ytMusicSongsFilePath);

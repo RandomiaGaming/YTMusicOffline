@@ -146,3 +146,18 @@ These strings are json strings which must be parsed.
 Once parsed we should look through the json objects we found searching for one with an INITIAL_ENDPOINT field.
 The INITIAL_ENDPOINT field contains another json string which must be parsed into another json object.
 From there we can extract the value of initialEndpoint.watchEndpoint.videoId to get the video id of the non-blocked video.
+
+Additional notes: The initialEndpoint.watchEndpoint.videoId will simply store the current VideoID for YouTube music songs
+which do not require redirection and for all normal non-music YouTube videos.
+
+# Albums And Explicit Tags
+So how does one get the album and exclicit tag status of a YouTube music song?
+Short answer is that you don't it's really really hard.
+Long answer is you send an http post request to:
+https://music.youtube.com/youtubei/v1/next
+with special cookies and request headers and pray to Alphabet Inc you don't get banned.
+As for explicit tags those require another scary request to:
+https://music.youtube.com/youtubei/v1/player
+again with a bunch of cookies whose functions are currently unknown.
+So yeah that's scary :|
+Gonna investigate this more later but for now I got spooked.

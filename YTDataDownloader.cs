@@ -13,117 +13,227 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-public sealed class AltVideoIDPair
+public sealed class VideoRelocation
 {
-    public string BlockedPrimaryVideoID;
-    public string UnblockedAlternateVideoID;
+    public string OriginalVideoID = null;
+    public string NewVideoID = null;
+}
+public sealed class Ghosts
+{
+    public List<string> RemovedVideoIDs = new List<string>();
+    public List<string> UnavailableVideoIDs = new List<string>();
+}
+public sealed class Song
+{
+
 }
 public static class YTDataDownloader
 {
-    public static void Run(string clientID, string clientSecret, string playlistsJsonFilePath, string playlistItemsJsonFilePath, string videosJsonFilePath, string altVideoIDPairsJsonFilePath)
+    public static void Run(string clientID, string clientSecret, string databaseFolderPath)
     {
         YouTubeService ytService = null;
 
-        List<Playlist> playlists;
-        if (!File.Exists(playlistItemsJsonFilePath))
+        // Load playlists from json file or YouTube API if file does not exist
+        List<Playlist> playlists = new List<Playlist>();
         {
-            if (ytService == null)
+            string playlistsJsonFilePath = Path.Combine(databaseFolderPath, "Playlists.json");
+            if (File.Exists(playlistsJsonFilePath))
             {
-                Console.WriteLine("Authenticating with YouTube API...");
-                ytService = AuthYTService(clientID, clientSecret, false);
+                Console.WriteLine($"Loading playlists from \"{playlistsJsonFilePath}\"...");
+                playlists = Load<List<Playlist>>(playlistsJsonFilePath);
             }
-
-            Console.WriteLine("Enumerating playlists...");
-            playlists = EnumMyPlaylists(ytService, false, true);
-            Console.WriteLine($"Saving playlists to \"{playlistsJsonFilePath}\"...");
-            Save(playlists, playlistsJsonFilePath);
-        }
-        else
-        {
-            Console.WriteLine($"Loading playlists from \"{playlistsJsonFilePath}\"...");
-            playlists = Load<List<Playlist>>(playlistsJsonFilePath);
-        }
-
-        List<PlaylistItem> playlistItems;
-        if (!File.Exists(playlistItemsJsonFilePath))
-        {
-            if (ytService == null)
+            else
             {
-                Console.WriteLine("Authenticating with YouTube API...");
-                ytService = AuthYTService(clientID, clientSecret, false);
-            }
-
-            Console.WriteLine("Enumerating playlistItems...");
-            playlistItems = new List<PlaylistItem>();
-            for (int i = 0; i < playlists.Count; i++)
-            {
-                Console.WriteLine($"Progress {i + 1}/{playlists.Count}...");
-                playlistItems.AddRange(EnumPlaylistItems(ytService, playlists[i].Id));
-            }
-            Console.WriteLine($"Saving playlistItems to \"{playlistItemsJsonFilePath}\"...");
-            Save(playlistItems, playlistItemsJsonFilePath);
-        }
-        else
-        {
-            Console.WriteLine($"Loading playlistItems from \"{playlistItemsJsonFilePath}\"...");
-            playlistItems = Load<List<PlaylistItem>>(playlistItemsJsonFilePath);
-        }
-
-        List<Video> videos;
-        if (!File.Exists(videosJsonFilePath))
-        {
-            if (ytService == null)
-            {
-                Console.WriteLine("Authenticating with YouTube API...");
-                ytService = AuthYTService(clientID, clientSecret, false);
-            }
-
-            // Compute unique videoIDs...
-            List<string> videoIDs = new List<string>();
-            foreach (PlaylistItem playlistItem in playlistItems)
-            {
-                videoIDs.Add(playlistItem.ContentDetails.VideoId);
-            }
-            videoIDs = videoIDs.Distinct().ToList();
-
-            Console.WriteLine("Enumerating videos...");
-            videos = EnumVideos(ytService, videoIDs);
-            Console.WriteLine($"Saving videos to \"{videosJsonFilePath}\"...");
-            Save(videos, videosJsonFilePath);
-        }
-        else
-        {
-            Console.WriteLine($"Loading videos from \"{videosJsonFilePath}\"...");
-            videos = Load<List<Video>>(videosJsonFilePath);
-        }
-
-        List<AltVideoIDPair> altVideoIDPairs;
-        if (!File.Exists(altVideoIDPairsJsonFilePath))
-        {
-            altVideoIDPairs = new List<AltVideoIDPair>();
-
-            foreach (Video video in videos)
-            {
-                if (video.ContentDetails.RegionRestriction != null
-                    && video.ContentDetails.RegionRestriction.Blocked != null
-                    && video.ContentDetails.RegionRestriction.Blocked.Count == 249
-                    && video.Status.PrivacyStatus == "unlisted")
+                if (ytService == null)
                 {
-                    string unblockedID = GetUnblockedVideoID(video.Id);
-                    AltVideoIDPair newAltVideoIDPair = new AltVideoIDPair();
-                    newAltVideoIDPair.BlockedPrimaryVideoID = video.Id;
-                    newAltVideoIDPair.UnblockedAlternateVideoID = unblockedID;
-                    altVideoIDPairs.Add(newAltVideoIDPair);
+                    Console.WriteLine("Authenticating with YouTube API...");
+                    ytService = AuthYTService(clientID, clientSecret, false);
+                }
+                Console.WriteLine("Enumerating playlists...");
+                playlists = EnumMyPlaylists(ytService, false, true);
+                Console.WriteLine($"Saving playlists to \"{playlistsJsonFilePath}\"...");
+                Save(playlists, playlistsJsonFilePath);
+            }
+        }
+
+        // Load playlist items from json file or YouTube API if file does not exist
+        List<PlaylistItem> playlistItems = new List<PlaylistItem>();
+        {
+            string playlistItemsJsonFilePath = Path.Combine(databaseFolderPath, "PlaylistItems.json");
+            if (File.Exists(playlistItemsJsonFilePath))
+            {
+                Console.WriteLine($"Loading playlistItems from \"{playlistItemsJsonFilePath}\"...");
+                playlistItems = Load<List<PlaylistItem>>(playlistItemsJsonFilePath);
+            }
+            else
+            {
+                if (ytService == null)
+                {
+                    Console.WriteLine("Authenticating with YouTube API...");
+                    ytService = AuthYTService(clientID, clientSecret, false);
+                }
+                Console.WriteLine("Enumerating playlistItems...");
+                playlistItems = new List<PlaylistItem>();
+                for (int i = 0; i < playlists.Count; i++)
+                {
+                    List<PlaylistItem> newPlaylistItems = EnumPlaylistItems(ytService, playlists[i].Id);
+                    playlistItems.AddRange(newPlaylistItems);
+                }
+                Console.WriteLine($"Saving playlistItems to \"{playlistItemsJsonFilePath}\"...");
+                Save(playlistItems, playlistItemsJsonFilePath);
+            }
+        }
+
+        List<Video> videos = new List<Video>();
+        List<VideoRelocation> videoRelocations = new List<VideoRelocation>();
+        Ghosts ghosts = new Ghosts();
+        {
+            // Load videos from json file if file exists
+            string videosJsonFilePath = Path.Combine(databaseFolderPath, "Videos.json");
+            if (File.Exists(videosJsonFilePath))
+            {
+                Console.WriteLine($"Loading videos from \"{videosJsonFilePath}\"...");
+                videos = Load<List<Video>>(videosJsonFilePath);
+            }
+
+            // Load video relocations from json file if file exists
+            string videoRelocationsJsonFilePath = Path.Combine(databaseFolderPath, "VideoRelocations.json");
+            if (File.Exists(videoRelocationsJsonFilePath))
+            {
+                Console.WriteLine($"Loading videoRelocations from \"{videoRelocationsJsonFilePath}\"...");
+                videoRelocations = Load<List<VideoRelocation>>(videoRelocationsJsonFilePath);
+            }
+
+            // Load ghosts from json file if file exists
+            string ghostsJsonFilePath = Path.Combine(databaseFolderPath, "Ghosts.json");
+            if (File.Exists(ghostsJsonFilePath))
+            {
+                Console.WriteLine($"Loading ghosts from \"{ghostsJsonFilePath}\"...");
+                ghosts = Load<Ghosts>(ghostsJsonFilePath);
+            }
+
+            // Run this loop until didSomething is false
+            while (true)
+            {
+                bool didSomething = false;
+
+                // Compute a list of video IDs we need videos for
+                List<string> videoNeededVideoIDs = new List<string>();
+                foreach (PlaylistItem playlistItem in playlistItems)
+                {
+                    videoNeededVideoIDs.Add(playlistItem.ContentDetails.VideoId);
+                }
+                foreach (VideoRelocation videoRelocation in videoRelocations)
+                {
+                    videoNeededVideoIDs.Add(videoRelocation.NewVideoID);
+                }
+                // Then remove duplicates and the ones we already did
+                videoNeededVideoIDs = videoNeededVideoIDs.Distinct().ToList();
+                foreach (Video video in videos)
+                {
+                    videoNeededVideoIDs.Remove(video.Id);
+                }
+                foreach (string removedVideoID in ghosts.RemovedVideoIDs)
+                {
+                    videoNeededVideoIDs.Remove(removedVideoID);
+                }
+                // Finally download the ones left in the todo list and save our progress if we made any
+                if (videoNeededVideoIDs.Count > 0)
+                {
+                    if (ytService == null)
+                    {
+                        Console.WriteLine("Authenticating with YouTube API...");
+                        ytService = AuthYTService(clientID, clientSecret, false);
+                    }
+                    List<Video> newVideos = EnumVideos(ytService, videoNeededVideoIDs);
+                    videos.AddRange(newVideos);
+                    foreach (Video newVideo in newVideos)
+                    {
+                        videoNeededVideoIDs.Remove(newVideo.Id);
+                    }
+                    ghosts.RemovedVideoIDs.AddRange(videoNeededVideoIDs);
+                    Console.WriteLine($"Saving videos to \"{videosJsonFilePath}\"...");
+                    Save(videos, videosJsonFilePath);
+                    Console.WriteLine($"Saving ghosts to \"{ghostsJsonFilePath}\"...");
+                    Save(ghosts, ghostsJsonFilePath);
+                    didSomething = true;
+                }
+
+                // Compute a list of video IDs we need relocations for
+                List<string> relocationNeededVideoIDs = new List<string>();
+                foreach (Video video in videos)
+                {
+                    if ((video.ContentDetails.RegionRestriction != null
+                        && video.ContentDetails.RegionRestriction.Blocked != null
+                        && video.ContentDetails.RegionRestriction.Blocked.Contains("US"))
+                        || (video.Status.PrivacyStatus != "public"
+                        && video.Status.PrivacyStatus != "unlisted"))
+                    {
+                        relocationNeededVideoIDs.Add(video.Id);
+                    }
+                }
+                // Then remove duplicates and the ones we already did
+                relocationNeededVideoIDs = relocationNeededVideoIDs.Distinct().ToList();
+                foreach (VideoRelocation videoRelocation in videoRelocations)
+                {
+                    relocationNeededVideoIDs.Remove(videoRelocation.OriginalVideoID);
+                }
+                foreach (string unavailableVideoID in ghosts.UnavailableVideoIDs)
+                {
+                    relocationNeededVideoIDs.Remove(unavailableVideoID);
+                }
+                // Finally download the ones left in the todo list and save our progress if we made any
+                if (relocationNeededVideoIDs.Count > 0)
+                {
+                    foreach (string originalVideoID in relocationNeededVideoIDs)
+                    {
+                        string newVideoID = GetRelocatedVideoID(originalVideoID);
+                        if (originalVideoID != newVideoID)
+                        {
+                            VideoRelocation newVideoRelocation = new VideoRelocation();
+                            newVideoRelocation.OriginalVideoID = originalVideoID;
+                            newVideoRelocation.NewVideoID = newVideoID;
+                            videoRelocations.Add(newVideoRelocation);
+                        }
+                        else
+                        {
+                            ghosts.UnavailableVideoIDs.Add(originalVideoID);
+                        }
+                    }
+                    Console.WriteLine($"Saving videoRelocations to \"{videoRelocationsJsonFilePath}\"...");
+                    Save(videoRelocations, videoRelocationsJsonFilePath);
+                    Console.WriteLine($"Saving ghosts to \"{ghostsJsonFilePath}\"...");
+                    Save(ghosts, ghostsJsonFilePath);
+                    didSomething = true;
+                }
+
+                if (!didSomething)
+                {
+                    break;
                 }
             }
-
-            Console.WriteLine($"Saving AltVideoIDPairs to \"{altVideoIDPairsJsonFilePath}\"...");
-            Save(altVideoIDPairs, altVideoIDPairsJsonFilePath);
         }
-        else
+
+        // Load songs from json file or by parsing videos if file does not exist
+        List<Song> songs = new List<Song>();
         {
-            Console.WriteLine($"Loading AltVideoIDPairs from \"{altVideoIDPairsJsonFilePath}\"...");
-            altVideoIDPairs = Load<List<AltVideoIDPair>>(altVideoIDPairsJsonFilePath);
+            string songsJsonFilePath = Path.Combine(databaseFolderPath, "Songs.json");
+            if (File.Exists(songsJsonFilePath))
+            {
+                Console.WriteLine($"Loading songs from \"{songsJsonFilePath}\"...");
+                songs = Load<List<Song>>(songsJsonFilePath);
+            }
+            else
+            {
+                Console.WriteLine("Parsing songs...");
+                foreach (Video video in videos)
+                {
+                    Song newSong = ParseSong(video);
+                    songs.Add(newSong);
+                }
+                Console.WriteLine($"Saving songs to \"{songsJsonFilePath}\"...");
+                Save(songs, songsJsonFilePath);
+            }
         }
     }
 
@@ -290,38 +400,28 @@ public static class YTDataDownloader
         return output;
     }
 
-    // Gets the unblocked VideoID for weird songs that are blocked in all countries
+    // For youtube music songs which have been relocated returns the new VideoID
+    // For normal videos simply returns originalVideoID
     // API COST: Free since this method uses webscraping (don't get banned though)
-    public static string GetUnblockedVideoID(string originalVideoID)
+    public static string GetRelocatedVideoID(string videoID)
     {
         // Don't forget to update your user agent every once in awhile
         // You can dump the user agent in chrome by searching google for "What is my user agent"
         // or running navigator.userAgent in the Chrome dev tools console
         string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
-        string musicUrl = $"https://music.youtube.com/watch?v={originalVideoID}";
-
+        string musicUrl = $"https://music.youtube.com/watch?v={videoID}";
         HttpClient client = new HttpClient();
         client.DefaultRequestHeaders.Add("User-Agent", userAgent);
-
         string html = client.GetStringAsync(musicUrl).Result;
-
         int ytcfgsetIndex = html.IndexOf("ytcfg.set");
         string json1 = ReadLayer(html, ytcfgsetIndex + "ytcfg.set".Length + 1);
         JObject jobj1 = JObject.Parse(json1);
-        if (jobj1.TryGetValue("INITIAL_ENDPOINT", out JToken initialEndpoint))
-        {
-            string json2 = initialEndpoint.Value<string>();
-            JObject jobj2 = JObject.Parse(json2);
-            if (jobj2.TryGetValue("watchEndpoint", out JToken watchEndpoint))
-            {
-                if (watchEndpoint.Value<JObject>().TryGetValue("videoId", out JToken videoID))
-                {
-                    return videoID.Value<string>();
-                }
-            }
-        }
-
-        throw new Exception("Failed to get unblocked video id.");
+        JToken initialEndpoint = jobj1.GetValue("INITIAL_ENDPOINT");
+        string json2 = initialEndpoint.Value<string>();
+        JObject jobj2 = JObject.Parse(json2);
+        JToken watchEndpoint = jobj2.GetValue("watchEndpoint");
+        JToken relocatedVideoID = watchEndpoint.Value<JObject>().GetValue("videoId");
+        return relocatedVideoID.Value<string>();
     }
     // Given a string like "Super Long (string [with {nested \"quotes\"}]) and shi"
     // It can successfully pull out one layer of the nesting at a time.
@@ -469,6 +569,13 @@ public static class YTDataDownloader
 
             index++;
         }
+    }
+
+    // Parses song data from an auto-generated YouTube music description
+    // API COST: Free since it parses the description already downloaded previously
+    public static Song ParseSong(Video video)
+    {
+
     }
 
     public static void Save<T>(T obj, string jsonFilePath)
