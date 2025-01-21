@@ -23,9 +23,16 @@ public sealed class Ghosts
     public List<string> RemovedVideoIDs = new List<string>();
     public List<string> UnavailableVideoIDs = new List<string>();
 }
-public sealed class Song
+public sealed class MusicDescription
 {
-
+    public string VideoID = null;
+    public string ProvidedBy = null;
+    public string SongName = null;
+    public string[] ArtistNames = null;
+    public string AlbumName = null;
+    public string[] PublishStatements = null;
+    public DateTime? ReleasedOn = null;
+    public Tuple<string, string>[] RoleNamePairs = null;
 }
 public static class YTDataDownloader
 {
@@ -62,7 +69,7 @@ public static class YTDataDownloader
             string playlistItemsJsonFilePath = Path.Combine(databaseFolderPath, "PlaylistItems.json");
             if (File.Exists(playlistItemsJsonFilePath))
             {
-                Console.WriteLine($"Loading playlistItems from \"{playlistItemsJsonFilePath}\"...");
+                Console.WriteLine($"Loading playlist items from \"{playlistItemsJsonFilePath}\"...");
                 playlistItems = Load<List<PlaylistItem>>(playlistItemsJsonFilePath);
             }
             else
@@ -72,14 +79,14 @@ public static class YTDataDownloader
                     Console.WriteLine("Authenticating with YouTube API...");
                     ytService = AuthYTService(clientID, clientSecret, false);
                 }
-                Console.WriteLine("Enumerating playlistItems...");
+                Console.WriteLine("Enumerating playlist items...");
                 playlistItems = new List<PlaylistItem>();
                 for (int i = 0; i < playlists.Count; i++)
                 {
                     List<PlaylistItem> newPlaylistItems = EnumPlaylistItems(ytService, playlists[i].Id);
                     playlistItems.AddRange(newPlaylistItems);
                 }
-                Console.WriteLine($"Saving playlistItems to \"{playlistItemsJsonFilePath}\"...");
+                Console.WriteLine($"Saving playlist items to \"{playlistItemsJsonFilePath}\"...");
                 Save(playlistItems, playlistItemsJsonFilePath);
             }
         }
@@ -100,7 +107,7 @@ public static class YTDataDownloader
             string videoRelocationsJsonFilePath = Path.Combine(databaseFolderPath, "VideoRelocations.json");
             if (File.Exists(videoRelocationsJsonFilePath))
             {
-                Console.WriteLine($"Loading videoRelocations from \"{videoRelocationsJsonFilePath}\"...");
+                Console.WriteLine($"Loading video relocations from \"{videoRelocationsJsonFilePath}\"...");
                 videoRelocations = Load<List<VideoRelocation>>(videoRelocationsJsonFilePath);
             }
 
@@ -200,7 +207,7 @@ public static class YTDataDownloader
                             ghosts.UnavailableVideoIDs.Add(originalVideoID);
                         }
                     }
-                    Console.WriteLine($"Saving videoRelocations to \"{videoRelocationsJsonFilePath}\"...");
+                    Console.WriteLine($"Saving video relocations to \"{videoRelocationsJsonFilePath}\"...");
                     Save(videoRelocations, videoRelocationsJsonFilePath);
                     Console.WriteLine($"Saving ghosts to \"{ghostsJsonFilePath}\"...");
                     Save(ghosts, ghostsJsonFilePath);
@@ -214,27 +221,34 @@ public static class YTDataDownloader
             }
         }
 
-        // Load songs from json file or by parsing videos if file does not exist
-        List<Song> songs = new List<Song>();
+        // Load music descriptions from json file or by parsing videos if file does not exist
+        List<MusicDescription> musicDescriptions = new List<MusicDescription>();
         {
-            string songsJsonFilePath = Path.Combine(databaseFolderPath, "Songs.json");
-            if (File.Exists(songsJsonFilePath))
+            string musicDescriptionsJsonFilePath = Path.Combine(databaseFolderPath, "MusicDescriptions.json");
+            if (File.Exists(musicDescriptionsJsonFilePath))
             {
-                Console.WriteLine($"Loading songs from \"{songsJsonFilePath}\"...");
-                songs = Load<List<Song>>(songsJsonFilePath);
+                Console.WriteLine($"Loading music descriptions from \"{musicDescriptionsJsonFilePath}\"...");
+                musicDescriptions = Load<List<MusicDescription>>(musicDescriptionsJsonFilePath);
             }
             else
             {
-                Console.WriteLine("Parsing songs...");
+                Console.WriteLine("Parsing music descriptions...");
                 foreach (Video video in videos)
                 {
-                    Song newSong = ParseSong(video);
-                    songs.Add(newSong);
+                    MusicDescription newMusicDescription = ParseMusicDescription(video);
+                    if (newMusicDescription != null)
+                    {
+                        musicDescriptions.Add(newMusicDescription);
+                    }
                 }
-                Console.WriteLine($"Saving songs to \"{songsJsonFilePath}\"...");
-                Save(songs, songsJsonFilePath);
+                Console.WriteLine($"Saving music descriptions to \"{musicDescriptionsJsonFilePath}\"...");
+                Save(musicDescriptions, musicDescriptionsJsonFilePath);
             }
         }
+
+        // TODO
+        // Check thumbnails and download those which do not exist
+        // Check videos and download those which do not exist
     }
 
     // Authenticates with the YouTube API and returns a YouTubeService
@@ -571,11 +585,261 @@ public static class YTDataDownloader
         }
     }
 
-    // Parses song data from an auto-generated YouTube music description
+    // Parses data from an auto-generated YouTube music description
     // API COST: Free since it parses the description already downloaded previously
-    public static Song ParseSong(Video video)
+    public static MusicDescription ParseMusicDescription(Video video)
     {
+        string videoDescription = video.Snippet.Description.Replace("\r\n", "\n");
+        if (!videoDescription.EndsWith("\n\nAuto-generated by YouTube."))
+        {
+            return null;
+        }
 
+        // If present split the sections
+        MusicDescription output = new MusicDescription();
+        output.VideoID = video.Id;
+        videoDescription = videoDescription.Substring(0, videoDescription.Length - "\n\nAuto-generated by YouTube.".Length);
+        string[] sections = Split(videoDescription, "\n\n");
+        int currentSection = 0;
+
+        // Parse each section and skip sections which are not present
+        if (ParseProvidedBy(currentSection < sections.Length ? sections[currentSection] : null, output))
+        {
+            currentSection++;
+        }
+        ParseSongAndArtist(currentSection < sections.Length ? sections[currentSection] : null, output);
+        {
+            currentSection++;
+        }
+        ParseAlbumName(currentSection < sections.Length ? sections[currentSection] : null, output);
+        {
+            currentSection++;
+        }
+        if (ParsePublishInfo(currentSection < sections.Length ? sections[currentSection] : null, output))
+        {
+            currentSection++;
+        }
+        if (ParseReleasedOn(currentSection < sections.Length ? sections[currentSection] : null, output))
+        {
+            currentSection++;
+        }
+        if (ParseRoleNamePairs(currentSection < sections.Length ? sections[currentSection] : null, output))
+        {
+            currentSection++;
+        }
+
+        // Check for errors
+        if (currentSection != sections.Length)
+        {
+            throw new Exception("Parsing YTMusic auto generated description failed.");
+        }
+
+        return output;
+    }
+    public static bool ParseProvidedBy(string section, MusicDescription musicDescription)
+    {
+        if (section == null)
+        {
+            return false;
+        }
+        if (!section.StartsWith("Provided to YouTube by "))
+        {
+            return false;
+        }
+        string providedBy = section.Substring("Provided to YouTube by ".Length);
+        if (providedBy == "")
+        {
+            return false;
+        }
+        if (providedBy.Contains("\n"))
+        {
+            return false;
+        }
+        musicDescription.ProvidedBy = providedBy;
+        return true;
+    }
+    public static void ParseSongAndArtist(string section, MusicDescription musicDescription)
+    {
+        if (section == null)
+        {
+            throw new Exception("No value provided for required section SongAndArtist.");
+        }
+        string[] names = Split(section, " · ");
+        if (names.Length < 2)
+        {
+            throw new Exception("Section SongAndArtist must contain at least 2 values.");
+        }
+        foreach (string name in names)
+        {
+            if (name == "")
+            {
+                throw new Exception("Name may not be empty.");
+            }
+            if (name.Contains("\n"))
+            {
+                throw new Exception("Name contained invalid characters.");
+            }
+        }
+        musicDescription.SongName = names[0];
+        musicDescription.ArtistNames = new string[names.Length - 1];
+        Array.Copy(names, 1, musicDescription.ArtistNames, 0, musicDescription.ArtistNames.Length);
+    }
+    public static void ParseAlbumName(string section, MusicDescription musicDescription)
+    {
+        if (section == null)
+        {
+            throw new Exception("No value provided for required section AlbumName.");
+        }
+        string albumName = section;
+        if (albumName == "")
+        {
+            throw new Exception("AlbumName may not be empty.");
+        }
+        if (albumName.Contains("\n"))
+        {
+            throw new Exception("AlbumName contained invalid characters.");
+        }
+        musicDescription.AlbumName = albumName;
+    }
+    public static bool ParsePublishInfo(string section, MusicDescription musicDescription)
+    {
+        if (section == null)
+        {
+            return false;
+        }
+        string[] publishStatements = Split(section, "\n");
+        foreach (string publishStatement in publishStatements)
+        {
+            if (publishStatement == "")
+            {
+                return false;
+            }
+            if (!publishStatement.StartsWith("℗ "))
+            {
+                return false;
+            }
+            if (publishStatement.Contains("\n"))
+            {
+                return false;
+            }
+        }
+        musicDescription.PublishStatements = publishStatements;
+        return true;
+    }
+    public static bool ParseReleasedOn(string section, MusicDescription musicDescription)
+    {
+        if (section == null)
+        {
+            return false;
+        }
+        if (!section.StartsWith("Released on: "))
+        {
+            return false;
+        }
+        string releasedOnString = section.Substring("Released on: ".Length);
+        if (releasedOnString == "")
+        {
+            return false;
+        }
+        if (releasedOnString.Contains("\n"))
+        {
+            return false;
+        }
+        DateTime releasedOn;
+        if (!DateTime.TryParse(releasedOnString, out releasedOn))
+        {
+            return false;
+        }
+        musicDescription.ReleasedOn = releasedOn;
+        return true;
+    }
+    public static bool ParseRoleNamePairs(string section, MusicDescription musicDescription)
+    {
+        if (section == null)
+        {
+            return false;
+        }
+        string[] roleNamePairs = Split(section, "\n");
+        Tuple<string, string>[] roleNamePairsParsed = new Tuple<string, string>[roleNamePairs.Length];
+        for (int i = 0; i < roleNamePairs.Length; i++)
+        {
+            string roleNamePair = roleNamePairs[i];
+            int index = roleNamePair.IndexOf(": ");
+            if (index == -1)
+            {
+                return false;
+            }
+            string role = roleNamePair.Substring(0, index);
+            string name = roleNamePair.Substring(index + ": ".Length);
+            if (role == "")
+            {
+                return false;
+            }
+            if (role.Contains("\n"))
+            {
+                return false;
+            }
+            if (name == "")
+            {
+                return false;
+            }
+            if (name.Contains("\n"))
+            {
+                return false;
+            }
+            Tuple<string, string> roleNamePairParsed = new Tuple<string, string>(role, name);
+            roleNamePairsParsed[i] = roleNamePairParsed;
+        }
+        musicDescription.RoleNamePairs = roleNamePairsParsed;
+        return true;
+    }
+
+    public static string[] Split(string value, string separator)
+    {
+        List<string> output = new List<string>();
+        while (true)
+        {
+            int i = value.IndexOf(separator);
+            if (i == -1)
+            {
+                output.Add(value);
+                break;
+            }
+            else
+            {
+                output.Add(value.Substring(0, i));
+                value = value.Substring(i + separator.Length);
+
+                if (value.Length == 0)
+                {
+                    output.Add("");
+                    break;
+                }
+            }
+        }
+        return output.ToArray();
+    }
+
+    public static DateTime? ParseYTDate(string releaseDateRaw)
+    {
+        DateTime output;
+        if (!DateTime.TryParse(releaseDateRaw, out output))
+        {
+            return null;
+        }
+        return output;
+    }
+    public static TimeSpan? ParseYTDuration(string contentDurationRaw)
+    {
+        try
+        {
+            // System.Xml.XmlConvert.ToTimeSpan can handle ISO 8601 durations
+            return System.Xml.XmlConvert.ToTimeSpan(contentDurationRaw);
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     public static void Save<T>(T obj, string jsonFilePath)
