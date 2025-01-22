@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -34,8 +37,27 @@ public sealed class MusicDescription
     public DateTime? ReleasedOn = null;
     public Tuple<string, string>[] RoleNamePairs = null;
 }
+public sealed class Song
+{
+    public string VideoID = null;
+    public string ThumbnailUrl = null;
+    public string SongName = null;
+    public string AlbumName = null;
+    public string ArtistName = null;
+    public string[] FeaturedArtistNames = null;
+    public DateTime ReleaseDate = new DateTime();
+}
 public static class YTDataDownloader
 {
+    public static HttpClient ReusableHttpClient = CreateReusableHttpClient();
+    public static HttpClient CreateReusableHttpClient()
+    {
+        HttpClient output = new HttpClient();
+        string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+        output.DefaultRequestHeaders.Add("User-Agent", userAgent);
+        return output;
+    }
+    public static Random RNG = new Random((int)DateTime.Now.Ticks);
     public static void Run(string clientID, string clientSecret, string databaseFolderPath)
     {
         YouTubeService ytService = null;
@@ -246,9 +268,139 @@ public static class YTDataDownloader
             }
         }
 
-        // TODO
-        // Check thumbnails and download those which do not exist
-        // Check videos and download those which do not exist
+        // Load songs from json file or by parsing database if file does not exist
+        List<Song> songs = new List<Song>();
+        {
+            string songsJsonFilePath = Path.Combine(databaseFolderPath, "Songs.json");
+            if (File.Exists(songsJsonFilePath))
+            {
+                Console.WriteLine($"Loading songs from \"{songsJsonFilePath}\"...");
+                songs = Load<List<Song>>(songsJsonFilePath);
+            }
+            else
+            {
+                Console.WriteLine("Parsing songs...");
+                foreach (Video video in videos)
+                {
+                    if (ghosts.RemovedVideoIDs.Contains(video.Id))
+                    {
+                        continue;
+                    }
+                    if (ghosts.UnavailableVideoIDs.Contains(video.Id))
+                    {
+                        continue;
+                    }
+                    bool relocated = false;
+                    foreach (VideoRelocation videoRelocation in videoRelocations)
+                    {
+                        if (videoRelocation.OriginalVideoID == video.Id)
+                        {
+                            relocated = true;
+                            break;
+                        }
+                    }
+                    if (relocated)
+                    {
+                        continue;
+                    }
+                    Song newSong = new Song();
+                    newSong.VideoID = video.Id;
+                    newSong.ThumbnailUrl = GetBestThumbnailUrl(video.Snippet.Thumbnails);
+                    newSong.SongName = video.Snippet.Title;
+                    newSong.AlbumName = "";
+                    if (video.Snippet.ChannelTitle.EndsWith(" - Topic"))
+                    {
+                        newSong.ArtistName = video.Snippet.ChannelTitle.Substring(0, video.Snippet.ChannelTitle.Length - " - Topic".Length);
+                    }
+                    else
+                    {
+                        newSong.ArtistName = video.Snippet.ChannelTitle;
+                    }
+                    newSong.FeaturedArtistNames = new string[0];
+                    newSong.ReleaseDate = (DateTime)ParseYTDate(video.Snippet.PublishedAtRaw);
+                    foreach (MusicDescription musicDescription in musicDescriptions)
+                    {
+                        if (musicDescription.VideoID == video.Id)
+                        {
+                            if (musicDescription.SongName != null)
+                            {
+                                newSong.SongName = musicDescription.SongName;
+                            }
+                            if (musicDescription.AlbumName != null)
+                            {
+                                newSong.AlbumName = musicDescription.AlbumName;
+                            }
+                            if (musicDescription.ArtistNames != null && musicDescription.ArtistNames.Length > 0)
+                            {
+                                newSong.ArtistName = musicDescription.ArtistNames[0];
+                                newSong.FeaturedArtistNames = new string[musicDescription.ArtistNames.Length - 1];
+                                Array.Copy(musicDescription.ArtistNames, 1, newSong.FeaturedArtistNames, 0, newSong.FeaturedArtistNames.Length);
+                            }
+                            if (musicDescription.ReleasedOn != null)
+                            {
+                                newSong.ReleaseDate = (DateTime)musicDescription.ReleasedOn;
+                            }
+                            break;
+                        }
+                    }
+                    songs.Add(newSong);
+                }
+                Console.WriteLine($"Saving songs to \"{songsJsonFilePath}\"...");
+                Save(songs, songsJsonFilePath);
+            }
+        }
+
+        // Download each song's thumbnail if it doesn't already exist
+        {
+            Console.WriteLine("Checking and downloading thumbnails...");
+            string thumbnailFolderPath = Path.Combine(databaseFolderPath, "Thumbnails");
+            if (!Directory.Exists(thumbnailFolderPath))
+            {
+                Directory.CreateDirectory(thumbnailFolderPath);
+            }
+            for (int i = 0; i < songs.Count; i++)
+            {
+                Song song = songs[i];
+                string thumbnailFilePath = Path.Combine(thumbnailFolderPath, song.VideoID + ".png");
+                if (File.Exists(thumbnailFilePath))
+                {
+                    continue;
+                }
+                Console.WriteLine($"Progress {i + 1} of {songs.Count} complete...");
+                DownloadImageAsPng(song.ThumbnailUrl, thumbnailFilePath);
+            }
+        }
+
+        // Download each song if it doesn't already exist
+        {
+            Console.WriteLine("Downloading songs this may take a really long time...");
+            string songsFolderPath = Path.Combine(databaseFolderPath, "Songs");
+            if (!Directory.Exists(songsFolderPath))
+            {
+                Directory.CreateDirectory(songsFolderPath);
+            }
+            string workingFolderPath = Path.Combine(databaseFolderPath, "WorkingDirectory");
+            if (!Directory.Exists(workingFolderPath))
+            {
+                Directory.CreateDirectory(workingFolderPath);
+            }
+            for (int i = 0; i < songs.Count; i++)
+            {
+                Song song = songs[i];
+                string[] matchFiles = Directory.GetFiles(songsFolderPath, song.VideoID + ".*");
+                if (matchFiles.Length > 0)
+                {
+                    continue;
+                }
+                Console.WriteLine($"Progress {i + 1} of {songs.Count} at {DateTime.Now}...");
+                YTDLPDownload(song.VideoID, workingFolderPath, songsFolderPath);
+                if(i % 50 == 0)
+                {
+                    Console.WriteLine($"Sleeping for 15 minutes starting at {DateTime.Now}...");
+                    Thread.Sleep(1000 * 60 * 15);
+                }
+            }
+        }
     }
 
     // Authenticates with the YouTube API and returns a YouTubeService
@@ -419,14 +571,8 @@ public static class YTDataDownloader
     // API COST: Free since this method uses webscraping (don't get banned though)
     public static string GetRelocatedVideoID(string videoID)
     {
-        // Don't forget to update your user agent every once in awhile
-        // You can dump the user agent in chrome by searching google for "What is my user agent"
-        // or running navigator.userAgent in the Chrome dev tools console
-        string userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
         string musicUrl = $"https://music.youtube.com/watch?v={videoID}";
-        HttpClient client = new HttpClient();
-        client.DefaultRequestHeaders.Add("User-Agent", userAgent);
-        string html = client.GetStringAsync(musicUrl).Result;
+        string html = ReusableHttpClient.GetStringAsync(musicUrl).Result;
         int ytcfgsetIndex = html.IndexOf("ytcfg.set");
         string json1 = ReadLayer(html, ytcfgsetIndex + "ytcfg.set".Length + 1);
         JObject jobj1 = JObject.Parse(json1);
@@ -840,6 +986,70 @@ public static class YTDataDownloader
         {
             return null;
         }
+    }
+
+    public static void DownloadImageAsPng(string url, string filePath)
+    {
+        byte[] payload = ReusableHttpClient.GetByteArrayAsync(url).Result;
+        MemoryStream payloadStream = new MemoryStream(payload);
+        Bitmap output = new Bitmap(payloadStream);
+        output.Save(filePath, ImageFormat.Png);
+        output.Dispose();
+        payloadStream.Dispose();
+    }
+    public static string GetBestThumbnailUrl(ThumbnailDetails thumbnails)
+    {
+        long bestSize = 0;
+        string bestUrl = null;
+        Thumbnail[] thumbnailList = new Thumbnail[5] {
+            thumbnails.Default__,
+            thumbnails.High,
+            thumbnails.Maxres,
+            thumbnails.Medium,
+            thumbnails.Standard
+        };
+        foreach (Thumbnail thumbnail in thumbnailList)
+        {
+            if (thumbnail == null)
+            {
+                continue;
+            }
+            long size = (long)thumbnail.Width * (long)thumbnail.Height;
+            if (size > bestSize)
+            {
+                bestUrl = thumbnail.Url;
+                bestSize = size;
+            }
+        }
+        return bestUrl;
+    }
+
+    public static void YTDLPDownload(string videoID, string workingFolderPath, string songsFolderPath)
+    {
+        if (Directory.GetFiles(workingFolderPath).Length != 0)
+        {
+            throw new Exception("Working folder was not empty.");
+        }
+        string command = $"D:\\ImportantData\\Utilities\\YTDLP\\yt-dlp.exe --force-overwrites --verbose --no-continue --format bestaudio --output {videoID}.%(ext)s https://www.youtube.com/watch?v={videoID} || (pause && exit /b 1)";
+        ProcessStartInfo psi = new ProcessStartInfo();
+        psi.WindowStyle = ProcessWindowStyle.Minimized;
+        psi.WorkingDirectory = workingFolderPath;
+        psi.FileName = "cmd.exe";
+        psi.Arguments = $"/c {command}";
+        psi.UseShellExecute = true;
+        Process p = Process.Start(psi);
+        p.WaitForExit();
+        if (p.ExitCode != 0)
+        {
+            throw new Exception($"Error cmd.exe returned exit status code {p.ExitCode}.");
+        }
+        string[] filesInWorkingFolder = Directory.GetFiles(workingFolderPath);
+        if (filesInWorkingFolder.Length != 1 || !filesInWorkingFolder[0].StartsWith(workingFolderPath + "\\" + videoID + "."))
+        {
+            throw new Exception("Something was wrong with the output in the working folder.");
+        }
+        string finalFilePath = Path.Combine(songsFolderPath, videoID + Path.GetExtension(filesInWorkingFolder[0]));
+        File.Move(filesInWorkingFolder[0], finalFilePath);
     }
 
     public static void Save<T>(T obj, string jsonFilePath)

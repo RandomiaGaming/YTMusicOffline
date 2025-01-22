@@ -1,7 +1,4 @@
-set VideoID=xCP7bCJxxm8
-if not "%errorlevel%"=="0" ( pause && exit /B 1 )
-
-yt-dlp.exe --force-overwrites --verbose --no-continue --sleep-interval 0 --max-sleep-interval 3 --format bestaudio --output "YTTemp0.%%(ext)s" "https://www.youtube.com/watch?v=%VideoID%"
+yt-dlp.exe --force-overwrites --verbose --no-continue --sleep-interval 0 --max-sleep-interval 2 --format bestaudio --output "YTTemp0.%%(ext)s" "https://music.youtube.com/watch?v=xCP7bCJxxm8"
 if not "%errorlevel%"=="0" ( pause && exit /B 1 )
 
 for %%f in (YTTemp0.*) do set YTDLPOutPath=%%f

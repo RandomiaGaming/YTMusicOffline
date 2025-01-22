@@ -53,6 +53,7 @@
       <HintPath>packages\System.CodeDom.9.0.1\lib\net462\System.CodeDom.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -71,7 +72,6 @@
     <None Include="packages.config" />
     <None Include="YTAPI.md" />
     <EmbeddedResource Include="YTMusicDownload.bat" />
-    <EmbeddedResource Include="YTThumbnailDownload.bat" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
