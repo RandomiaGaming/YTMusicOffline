@@ -192,11 +192,7 @@ public static class YTDataDownloader
                 List<string> relocationNeededVideoIDs = new List<string>();
                 foreach (Video video in videos)
                 {
-                    if ((video.ContentDetails.RegionRestriction != null
-                        && video.ContentDetails.RegionRestriction.Blocked != null
-                        && video.ContentDetails.RegionRestriction.Blocked.Contains("US"))
-                        || (video.Status.PrivacyStatus != "public"
-                        && video.Status.PrivacyStatus != "unlisted"))
+                    if (VideoUnavailible(video))
                     {
                         relocationNeededVideoIDs.Add(video.Id);
                     }
@@ -394,13 +390,33 @@ public static class YTDataDownloader
                 }
                 Console.WriteLine($"Progress {i + 1} of {songs.Count} at {DateTime.Now}...");
                 YTDLPDownload(song.VideoID, workingFolderPath, songsFolderPath);
-                if(i % 50 == 0)
-                {
-                    Console.WriteLine($"Sleeping for 15 minutes starting at {DateTime.Now}...");
-                    Thread.Sleep(1000 * 60 * 15);
-                }
+                Thread.Sleep(1000 * RNG.Next(0, 15));
             }
         }
+    }
+    public static bool VideoUnavailible(Video video)
+    {
+        if (video.ContentDetails.RegionRestriction != null
+            && video.ContentDetails.RegionRestriction.Blocked != null
+            && video.ContentDetails.RegionRestriction.Blocked.Contains("US"))
+        {
+            return true;
+        }
+        
+        if (video.Status.PrivacyStatus != "public"
+            &&video.Status.PrivacyStatus != "unlisted")
+        {
+            return true;
+        }
+
+        if (video.ContentDetails.RegionRestriction != null
+            && video.ContentDetails.RegionRestriction.Allowed != null
+            && !video.ContentDetails.RegionRestriction.Allowed.Contains("US"))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     // Authenticates with the YouTube API and returns a YouTubeService
@@ -1030,7 +1046,7 @@ public static class YTDataDownloader
         {
             throw new Exception("Working folder was not empty.");
         }
-        string command = $"D:\\ImportantData\\Utilities\\YTDLP\\yt-dlp.exe --force-overwrites --verbose --no-continue --format bestaudio --output {videoID}.%(ext)s https://www.youtube.com/watch?v={videoID} || (pause && exit /b 1)";
+        string command = $"D:\\ImportantData\\Utilities\\YTDLP\\yt-dlp.exe --limit-rate 1.0M --sleep-interval 0 --max-sleep-interval 3 --abort-on-error --abort-on-unavailable-fragments --force-overwrites --no-continue --verbose --format bestaudio --output {videoID}.%(ext)s https://www.youtube.com/watch?v={videoID} || (pause && exit /b 1)";
         ProcessStartInfo psi = new ProcessStartInfo();
         psi.WindowStyle = ProcessWindowStyle.Minimized;
         psi.WorkingDirectory = workingFolderPath;
