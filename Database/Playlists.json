@@ -1,0 +1,5450 @@
+[
+  {
+    "contentDetails": {
+      "itemCount": 14,
+      "ETag": null
+    },
+    "etag": "lzsScER7SxcOGa4waiUA8VLULR0",
+    "id": "PLNrlsg1qD4IWn6mw-P9Vvk1AcXWUf6UG5",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWn6mw-P9Vvk1AcXWUf6UG5\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Joji",
+        "ETag": null
+      },
+      "publishedAt": "2024-11-29T02:53:09.831937Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/4De_ERjvuUI/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/4De_ERjvuUI/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/4De_ERjvuUI/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/4De_ERjvuUI/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/4De_ERjvuUI/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Joji",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 23,
+      "ETag": null
+    },
+    "etag": "dMMW5enFTs2w5-svtjjJ3o_77q4",
+    "id": "PLNrlsg1qD4IUX3H9WUDecwLyVnI9gww5-",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUX3H9WUDecwLyVnI9gww5-\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Snad Moments",
+        "ETag": null
+      },
+      "publishedAt": "2024-11-15T07:06:27.906253Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/LnttCOuRMVQ/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/LnttCOuRMVQ/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": null,
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/LnttCOuRMVQ/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": null,
+        "ETag": null
+      },
+      "title": "Snad Moments",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 16,
+      "ETag": null
+    },
+    "etag": "VBdKPdg73OtqGD5w8OuCIZzwiQQ",
+    "id": "PLNrlsg1qD4IWieo7Ixq3FMQYBVk0yjyI4",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWieo7Ixq3FMQYBVk0yjyI4\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Two Republicans",
+        "ETag": null
+      },
+      "publishedAt": "2024-08-07T01:44:44.346724Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/_GWKkqNoyEA/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/_GWKkqNoyEA/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/_GWKkqNoyEA/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/_GWKkqNoyEA/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/_GWKkqNoyEA/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Two Republicans",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 8,
+      "ETag": null
+    },
+    "etag": "cTw_534k-0JVAQaJE4nZYfsh6X4",
+    "id": "PLNrlsg1qD4IUgY6XdbkafdSz3hEntYiKT",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUgY6XdbkafdSz3hEntYiKT\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "TayTay",
+        "ETag": null
+      },
+      "publishedAt": "2024-06-03T05:58:48.153405Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/6hCqRb8Dtvo/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/6hCqRb8Dtvo/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/6hCqRb8Dtvo/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/6hCqRb8Dtvo/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/6hCqRb8Dtvo/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "TayTay",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 9,
+      "ETag": null
+    },
+    "etag": "5Xm-SGgtvsqlUp67FbyuMyL-Rwc",
+    "id": "PLNrlsg1qD4IUc94S-C2WpqpZtuZutOjzj",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUc94S-C2WpqpZtuZutOjzj\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "I Like Some Of The Gaga Songs",
+        "ETag": null
+      },
+      "publishedAt": "2024-05-31T05:52:19.820238Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/e6NIlIMSVdg/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/e6NIlIMSVdg/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/e6NIlIMSVdg/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/e6NIlIMSVdg/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/e6NIlIMSVdg/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "I Like Some Of The Gaga Songs",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 13,
+      "ETag": null
+    },
+    "etag": "CrDBbQw1HlYw0lCzm3sr5SkUH_4",
+    "id": "PLNrlsg1qD4IXXJKIHjQcWaqZ_Lfs9vFRe",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXXJKIHjQcWaqZ_Lfs9vFRe\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Ava Maxi Pad",
+        "ETag": null
+      },
+      "publishedAt": "2024-04-28T01:18:32.78244Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/hgQInx5xH5E/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/hgQInx5xH5E/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/hgQInx5xH5E/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/hgQInx5xH5E/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/hgQInx5xH5E/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Ava Maxi Pad",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 9,
+      "ETag": null
+    },
+    "etag": "ucfjquHGKa2T18bZ9uwyAz0r-XM",
+    "id": "PLNrlsg1qD4IUytkasdkPAcuKyX4Fas2eD",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUytkasdkPAcuKyX4Fas2eD\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Jack Harlow",
+        "ETag": null
+      },
+      "publishedAt": "2024-04-16T02:50:37.567817Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/fvuTYadfBQA/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/fvuTYadfBQA/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/fvuTYadfBQA/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/fvuTYadfBQA/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/fvuTYadfBQA/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Jack Harlow",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 40,
+      "ETag": null
+    },
+    "etag": "e94YTS55PLLvTJhn_FInqJYgy4k",
+    "id": "PLNrlsg1qD4IX9jlCi6RW-OTas1BMLayPs",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IX9jlCi6RW-OTas1BMLayPs\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "EDM",
+        "ETag": null
+      },
+      "publishedAt": "2024-04-08T01:54:50.770609Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/Cc-BAbWI29U/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/Cc-BAbWI29U/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/Cc-BAbWI29U/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/Cc-BAbWI29U/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/Cc-BAbWI29U/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "EDM",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 12,
+      "ETag": null
+    },
+    "etag": "FZGzFTqGZJpubcUGbK-eRyt0bAM",
+    "id": "PLNrlsg1qD4IWZ2aLMRvLnnspF5TsSTQ8e",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWZ2aLMRvLnnspF5TsSTQ8e\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Eltonio Johny",
+        "ETag": null
+      },
+      "publishedAt": "2024-03-06T02:47:43.925476Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/e-S1k9-soT4/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/e-S1k9-soT4/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/e-S1k9-soT4/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/e-S1k9-soT4/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/e-S1k9-soT4/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Eltonio Johny",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 21,
+      "ETag": null
+    },
+    "etag": "WLCn8PbOurRc4RayltUx5y30SNs",
+    "id": "PLNrlsg1qD4IWkul1XiQeL0NTOCsQAaFny",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWkul1XiQeL0NTOCsQAaFny\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Twenty Two Pilots",
+        "ETag": null
+      },
+      "publishedAt": "2023-12-13T21:32:31.088688Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/K1FlAphL2p8/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/K1FlAphL2p8/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/K1FlAphL2p8/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/K1FlAphL2p8/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/K1FlAphL2p8/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Twenty Two Pilots",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 9,
+      "ETag": null
+    },
+    "etag": "KuaxCAfy6RcSD3WBi7eAKv6S2gk",
+    "id": "PLNrlsg1qD4IU_iWWuNUjJgM61RppoYPV8",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IU_iWWuNUjJgM61RppoYPV8\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "OkGo",
+        "ETag": null
+      },
+      "publishedAt": "2023-07-15T21:59:30.91208Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/qKCLrJLLzo0/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/qKCLrJLLzo0/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/qKCLrJLLzo0/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/qKCLrJLLzo0/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/qKCLrJLLzo0/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "OkGo",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 9,
+      "ETag": null
+    },
+    "etag": "E5O71cDV3MakPXrG1RYZv6A0YzU",
+    "id": "PLNrlsg1qD4IWdODoe2JwMzyc4E9I2gbJM",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWdODoe2JwMzyc4E9I2gbJM\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Melanie Martinez",
+        "ETag": null
+      },
+      "publishedAt": "2023-05-28T02:20:34.826756Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/UaYBbzUXGzM/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/UaYBbzUXGzM/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/UaYBbzUXGzM/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/UaYBbzUXGzM/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/UaYBbzUXGzM/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Melanie Martinez",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 4,
+      "ETag": null
+    },
+    "etag": "FcNZghbobX9V4UyzAhnHg5WOu0I",
+    "id": "PLNrlsg1qD4IUxqkvV_ylq8lRLLARrsKbi",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUxqkvV_ylq8lRLLARrsKbi\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Of Monsters And Men",
+        "ETag": null
+      },
+      "publishedAt": "2023-05-05T03:12:56.698805Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/tuSqcy1a4Ms/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/tuSqcy1a4Ms/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/tuSqcy1a4Ms/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/tuSqcy1a4Ms/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/tuSqcy1a4Ms/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Of Monsters And Men",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 60,
+      "ETag": null
+    },
+    "etag": "3lZibfZl6YvBwqZARabF5kXjGsY",
+    "id": "PLNrlsg1qD4IXt3P41B7IiKm7LYBDcDz8Y",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXt3P41B7IiKm7LYBDcDz8Y\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Depression Sauce",
+        "ETag": null
+      },
+      "publishedAt": "2023-05-05T03:12:08.990535Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/iuXtcFS7Xsc/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/iuXtcFS7Xsc/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/iuXtcFS7Xsc/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/iuXtcFS7Xsc/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/iuXtcFS7Xsc/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Depression Sauce",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "EDWvSHM5F7R2BXpgjHZSrh3FGKA",
+    "id": "PLNrlsg1qD4IXUyX8TeTlncvW_vO85rPpg",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXUyX8TeTlncvW_vO85rPpg\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Rewind Dat Ass",
+        "ETag": null
+      },
+      "publishedAt": "2023-04-29T21:18:18.55261Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/diT6jc9flkc/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/diT6jc9flkc/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/diT6jc9flkc/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/diT6jc9flkc/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/diT6jc9flkc/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Rewind Dat Ass",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 36,
+      "ETag": null
+    },
+    "etag": "lBa8HkfFrLrape-erGJm-KcyyCc",
+    "id": "PLNrlsg1qD4IUvRCsUM29ENYY_KR8oJPMo",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUvRCsUM29ENYY_KR8oJPMo\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Marshmallo",
+        "ETag": null
+      },
+      "publishedAt": "2023-04-17T02:08:17.913206Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/JgDP1jskWAU/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/JgDP1jskWAU/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/JgDP1jskWAU/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/JgDP1jskWAU/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/JgDP1jskWAU/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Marshmallo",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "K526s2e77_2bTsSIJ2Qtd43fkVM",
+    "id": "PLNrlsg1qD4IVggTLutsTYi6cco65RcCNB",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVggTLutsTYi6cco65RcCNB\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "The Weekend",
+        "ETag": null
+      },
+      "publishedAt": "2023-04-01T20:40:40.666452Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/GfiJowcJiVw/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/GfiJowcJiVw/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/GfiJowcJiVw/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/GfiJowcJiVw/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/GfiJowcJiVw/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "The Weekend",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 8,
+      "ETag": null
+    },
+    "etag": "bZanWq897qAVtAwHIfLxqn7Oys4",
+    "id": "PLNrlsg1qD4IWdfQQ-3apnbfX4A5z1bWuk",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWdfQQ-3apnbfX4A5z1bWuk\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "The Great Gatsby",
+        "ETag": null
+      },
+      "publishedAt": "2023-03-25T06:18:41.012624Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/52nbIS93AIM/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/52nbIS93AIM/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/52nbIS93AIM/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/52nbIS93AIM/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/52nbIS93AIM/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "The Great Gatsby",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 21,
+      "ETag": null
+    },
+    "etag": "w67SaSvVVYwXtWvBRq0GALsS2-Y",
+    "id": "PLNrlsg1qD4IWYi3_jVgBGrivFZQQSJTXY",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWYi3_jVgBGrivFZQQSJTXY\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Phonk",
+        "ETag": null
+      },
+      "publishedAt": "2023-02-15T00:19:07.823896Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/yMiIrAxQhFA/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/yMiIrAxQhFA/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/yMiIrAxQhFA/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/yMiIrAxQhFA/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/yMiIrAxQhFA/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Phonk",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "Nd6ZX2M0ahAA0lwHw-eQY0z3o0w",
+    "id": "PLNrlsg1qD4IWiS_O8M7ZvWc1AU5UuD4EX",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWiS_O8M7ZvWc1AU5UuD4EX\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Postage Melon",
+        "ETag": null
+      },
+      "publishedAt": "2023-02-12T21:38:23.251412Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/z9VMaLxg9Ok/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/z9VMaLxg9Ok/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/z9VMaLxg9Ok/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/z9VMaLxg9Ok/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/z9VMaLxg9Ok/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Postage Melon",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 7,
+      "ETag": null
+    },
+    "etag": "gc_ZkmX0cOgAgAvolpUJGaAA304",
+    "id": "PLNrlsg1qD4IVVNUz4LFH_HI2ML4pkdB8b",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVVNUz4LFH_HI2ML4pkdB8b\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Flo Rida",
+        "ETag": null
+      },
+      "publishedAt": "2023-02-12T01:17:30.410831Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/uUL8a7eJCk8/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/uUL8a7eJCk8/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/uUL8a7eJCk8/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/uUL8a7eJCk8/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/uUL8a7eJCk8/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Flo Rida",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 20,
+      "ETag": null
+    },
+    "etag": "gzfYobgJ-k95kblh9_sMBfdpX5k",
+    "id": "PLNrlsg1qD4IXftVaJ30S3Kwor96zTP-pg",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXftVaJ30S3Kwor96zTP-pg\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "Latin/Spanish Pop Music",
+      "localized": {
+        "description": "Latin/Spanish Pop Music",
+        "title": "LPop",
+        "ETag": null
+      },
+      "publishedAt": "2023-01-23T20:06:56.135958Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/g4M0CMDcRNw/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/g4M0CMDcRNw/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/g4M0CMDcRNw/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/g4M0CMDcRNw/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/g4M0CMDcRNw/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "LPop",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 14,
+      "ETag": null
+    },
+    "etag": "ERF24tflQI2iANoznntHOLrs3X4",
+    "id": "PLNrlsg1qD4IUlR1FnPOC83i67ALVAx7Cd",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUlR1FnPOC83i67ALVAx7Cd\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "1nonly",
+        "ETag": null
+      },
+      "publishedAt": "2022-12-07T22:51:05.439232Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/ETecZsoA0jo/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/ETecZsoA0jo/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/ETecZsoA0jo/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/ETecZsoA0jo/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/ETecZsoA0jo/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "1nonly",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 10,
+      "ETag": null
+    },
+    "etag": "17seihQ6imz8hCFuFYKLSUXA67Y",
+    "id": "PLNrlsg1qD4IWpnmKCWplKOaG9BO5WjT6K",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWpnmKCWplKOaG9BO5WjT6K\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Lil Peep",
+        "ETag": null
+      },
+      "publishedAt": "2022-12-04T00:13:26.635253Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/PhCYFpMHoaU/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/PhCYFpMHoaU/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/PhCYFpMHoaU/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/PhCYFpMHoaU/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/PhCYFpMHoaU/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Lil Peep",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 5,
+      "ETag": null
+    },
+    "etag": "A5Zf1Yylj8OWhitnXGaBgE6SSfc",
+    "id": "PLNrlsg1qD4IU4z76sI4ITaOFUZlp7Th6s",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IU4z76sI4ITaOFUZlp7Th6s\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Jonas Brothers",
+        "ETag": null
+      },
+      "publishedAt": "2022-10-18T23:52:24.781855Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/2AeugUfVctM/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/2AeugUfVctM/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/2AeugUfVctM/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/2AeugUfVctM/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/2AeugUfVctM/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Jonas Brothers",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 3,
+      "ETag": null
+    },
+    "etag": "U2f_YihCgaH8TkyQY8uXfIXBKE0",
+    "id": "PLNrlsg1qD4IXFR3njviH3DXhH17_lxHJN",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXFR3njviH3DXhH17_lxHJN\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "2 Unlimited",
+        "ETag": null
+      },
+      "publishedAt": "2022-09-27T03:34:45.734238Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/ZrWIWHRX-Eg/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/ZrWIWHRX-Eg/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/ZrWIWHRX-Eg/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/ZrWIWHRX-Eg/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/ZrWIWHRX-Eg/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "2 Unlimited",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 5,
+      "ETag": null
+    },
+    "etag": "k30MEzueK93g-0yZqoPPJuY0vg4",
+    "id": "PLNrlsg1qD4IUchbDHpoz0cxy92bOsZuJ7",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUchbDHpoz0cxy92bOsZuJ7\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Journey",
+        "ETag": null
+      },
+      "publishedAt": "2022-09-27T03:27:51.253149Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/kMgaA6RkcVU/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/kMgaA6RkcVU/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/kMgaA6RkcVU/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/kMgaA6RkcVU/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/kMgaA6RkcVU/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Journey",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 5,
+      "ETag": null
+    },
+    "etag": "UBu7PMAPFozxbEWusCC63PJdIus",
+    "id": "PLNrlsg1qD4IVO0ggklvYPWvUVlC8cnQkd",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVO0ggklvYPWvUVlC8cnQkd\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Weezer",
+        "ETag": null
+      },
+      "publishedAt": "2022-09-27T03:24:27.746263Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/cQzMHhRCTYw/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/cQzMHhRCTYw/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/cQzMHhRCTYw/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/cQzMHhRCTYw/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/cQzMHhRCTYw/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Weezer",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 5,
+      "ETag": null
+    },
+    "etag": "8yM2cY7mN7w7mt5E7iHs-jytniA",
+    "id": "PLNrlsg1qD4IWnTJym44JvUndE02y8uJRn",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWnTJym44JvUndE02y8uJRn\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Pat Benatar",
+        "ETag": null
+      },
+      "publishedAt": "2022-09-27T03:22:45.828978Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/CV6n5QBnne8/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/CV6n5QBnne8/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/CV6n5QBnne8/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/CV6n5QBnne8/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/CV6n5QBnne8/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Pat Benatar",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 8,
+      "ETag": null
+    },
+    "etag": "eXt_pqjyHdqBEuh1U1LzXvpok9Q",
+    "id": "PLNrlsg1qD4IVge5bmNDERRw3vBIkaB_Yi",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVge5bmNDERRw3vBIkaB_Yi\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Green Day",
+        "ETag": null
+      },
+      "publishedAt": "2022-09-22T03:37:55.365064Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/gYCTXzOTnXg/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/gYCTXzOTnXg/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/gYCTXzOTnXg/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/gYCTXzOTnXg/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/gYCTXzOTnXg/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Green Day",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 46,
+      "ETag": null
+    },
+    "etag": "zBER_Kco_m0LiZpplHRcaqhQGE8",
+    "id": "PLNrlsg1qD4IX0DqgfMl-lm_uDqid5AABE",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IX0DqgfMl-lm_uDqid5AABE\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "TinyBabyPriceGravy",
+        "ETag": null
+      },
+      "publishedAt": "2022-09-03T22:42:03.707345Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/33ivEQtEhpA/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/33ivEQtEhpA/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/33ivEQtEhpA/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/33ivEQtEhpA/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/33ivEQtEhpA/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "TinyBabyPriceGravy",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 1,
+      "ETag": null
+    },
+    "etag": "pvf6_dqvSKFg_gmRxdeVB_vWid8",
+    "id": "PLNrlsg1qD4IXa72y883AhUWFh-bf7glqV",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXa72y883AhUWFh-bf7glqV\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Rag N Bone Man",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-15T05:32:51.333991Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/L3wKzyIN1yk/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/L3wKzyIN1yk/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/L3wKzyIN1yk/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/L3wKzyIN1yk/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/L3wKzyIN1yk/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Rag N Bone Man",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "_zcDZgxEmAjVyj940TteTrjYStE",
+    "id": "PLNrlsg1qD4IWTBjUJ179XgK3Oqdebxu_R",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWTBjUJ179XgK3Oqdebxu_R\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Adele",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-04T20:46:27.282749Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/H9NJenpBV2I/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/H9NJenpBV2I/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/H9NJenpBV2I/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/H9NJenpBV2I/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/H9NJenpBV2I/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Adele",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 8,
+      "ETag": null
+    },
+    "etag": "IbD2X5E53vfExLSgq3ShEJRXAB8",
+    "id": "PLNrlsg1qD4IVbnaUjku6DJ3rA0QEnzKfZ",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVbnaUjku6DJ3rA0QEnzKfZ\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "XXXTentacion",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-04T20:39:48.041757Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/ic9KOmxNrDc/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/ic9KOmxNrDc/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/ic9KOmxNrDc/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/ic9KOmxNrDc/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/ic9KOmxNrDc/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "XXXTentacion",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 244,
+      "ETag": null
+    },
+    "etag": "_wp9VQE56E7cNjXzpZT_esENG18",
+    "id": "PLNrlsg1qD4IVGhCueVuI3kPLpAKct7IsF",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVGhCueVuI3kPLpAKct7IsF\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "One Hit Wonders",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T18:12:04.485438Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/Hx4nWW9z0ig/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/Hx4nWW9z0ig/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/Hx4nWW9z0ig/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/Hx4nWW9z0ig/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/Hx4nWW9z0ig/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "One Hit Wonders",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 10,
+      "ETag": null
+    },
+    "etag": "Wq2hjyDv57P8A95J6yJZTkbFEZs",
+    "id": "PLNrlsg1qD4IVCmTWwaNBRsfdwEmhANogW",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVCmTWwaNBRsfdwEmhANogW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Justin Bieber",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T17:54:14.226948Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/RcSX0hOWcQ0/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/RcSX0hOWcQ0/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/RcSX0hOWcQ0/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/RcSX0hOWcQ0/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/RcSX0hOWcQ0/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Justin Bieber",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 15,
+      "ETag": null
+    },
+    "etag": "17eklm7P39nnjLDtKXH27oIaHrg",
+    "id": "PLNrlsg1qD4IXFCk9m5nme2lnBaUqdUN8b",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXFCk9m5nme2lnBaUqdUN8b\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Katy Perry",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T02:03:03.994366Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/9PACaJ8lQBw/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/9PACaJ8lQBw/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/9PACaJ8lQBw/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/9PACaJ8lQBw/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/9PACaJ8lQBw/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Katy Perry",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 9,
+      "ETag": null
+    },
+    "etag": "ifWLVnDfpZ5s4FTBnJr1sYZge-8",
+    "id": "PLNrlsg1qD4IVtEKoVpom9n-os7ZJizmAG",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVtEKoVpom9n-os7ZJizmAG\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Logic",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T02:00:36.473258Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/WJxGRolGZ58/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/WJxGRolGZ58/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/WJxGRolGZ58/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/WJxGRolGZ58/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/WJxGRolGZ58/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Logic",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 3,
+      "ETag": null
+    },
+    "etag": "8fGLbZ1MCdANSEaMKhUiCNYnYG0",
+    "id": "PLNrlsg1qD4IVzjBruJCrXvAzD5B0EnUXd",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVzjBruJCrXvAzD5B0EnUXd\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Fall Out Boy",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T01:59:29.545165Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/dfk6i41GCNo/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/dfk6i41GCNo/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/dfk6i41GCNo/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/dfk6i41GCNo/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/dfk6i41GCNo/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Fall Out Boy",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 7,
+      "ETag": null
+    },
+    "etag": "gXJqMrC0zrnLyGPXFRrdAndto64",
+    "id": "PLNrlsg1qD4IXxTkbHdzuNEs_mFlJAD3bH",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXxTkbHdzuNEs_mFlJAD3bH\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Linkin Park",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T01:58:32.353207Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/qu0k38VMaV4/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/qu0k38VMaV4/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/qu0k38VMaV4/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/qu0k38VMaV4/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/qu0k38VMaV4/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Linkin Park",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 4,
+      "ETag": null
+    },
+    "etag": "2bQA3hWuG8F1u_0J3kmVJhaGkKs",
+    "id": "PLNrlsg1qD4IUfG8j_rNBJ3RoCLMFkFA1O",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUfG8j_rNBJ3RoCLMFkFA1O\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Clean Bandit",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T01:57:25.899991Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/-SttFgyRNCI/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/-SttFgyRNCI/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/-SttFgyRNCI/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/-SttFgyRNCI/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/-SttFgyRNCI/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Clean Bandit",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 4,
+      "ETag": null
+    },
+    "etag": "kYYq7mDgn_qTCm5XJEPpSquMWxA",
+    "id": "PLNrlsg1qD4IVYGKkNDezMAQaH-L2doUvJ",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVYGKkNDezMAQaH-L2doUvJ\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Shawn Mendes",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T01:56:27.255005Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/VKC_hzJ3jzg/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/VKC_hzJ3jzg/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/VKC_hzJ3jzg/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/VKC_hzJ3jzg/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/VKC_hzJ3jzg/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Shawn Mendes",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 10,
+      "ETag": null
+    },
+    "etag": "Pau_6xC9yVR7u74ijnURJGkcs9M",
+    "id": "PLNrlsg1qD4IXEC5xxC9pC8zNFa9Pkvf3R",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXEC5xxC9pC8zNFa9Pkvf3R\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Pitbull",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T01:54:31.76927Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/GcYF1xnmZTI/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/GcYF1xnmZTI/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/GcYF1xnmZTI/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/GcYF1xnmZTI/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/GcYF1xnmZTI/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Pitbull",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 10,
+      "ETag": null
+    },
+    "etag": "KKrVJH0Ogt6nOS1DuPuSL9hyckU",
+    "id": "PLNrlsg1qD4IUsXd4F24Knlxcanigc9Zfx",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUsXd4F24Knlxcanigc9Zfx\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Imagine Dragons",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T01:52:09.59252Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/cnRB2CgUpSw/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/cnRB2CgUpSw/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/cnRB2CgUpSw/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/cnRB2CgUpSw/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/cnRB2CgUpSw/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Imagine Dragons",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 4,
+      "ETag": null
+    },
+    "etag": "2ySuyBjrnBJxzXsVQwqcShdjzwU",
+    "id": "PLNrlsg1qD4IW6lJXgO9znQECdD0FWFaDt",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IW6lJXgO9znQECdD0FWFaDt\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Fun.",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T01:51:36.559129Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/eTedtzozrAo/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/eTedtzozrAo/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/eTedtzozrAo/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/eTedtzozrAo/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/eTedtzozrAo/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Fun.",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "1PQwNMHigJgV6n5pe4ZLaU-JVyg",
+    "id": "PLNrlsg1qD4IVvLoIidEUIk4JnZNDuyhWa",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVvLoIidEUIk4JnZNDuyhWa\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Panic At The Disco",
+        "ETag": null
+      },
+      "publishedAt": "2022-08-03T00:38:49.655258Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/GJY8OMJXRAk/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/GJY8OMJXRAk/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/GJY8OMJXRAk/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/GJY8OMJXRAk/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/GJY8OMJXRAk/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Panic At The Disco",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 18,
+      "ETag": null
+    },
+    "etag": "hT6ukMEDMfd-37YchBGfCuME5RU",
+    "id": "PLNrlsg1qD4IV7-p4eIiqqbMAhy469ZKHT",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IV7-p4eIiqqbMAhy469ZKHT\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Super Powerful Oder Blocker Body Wash",
+        "ETag": null
+      },
+      "publishedAt": "2022-06-04T21:11:35.324632Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/24FEoGOa9r8/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/24FEoGOa9r8/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/24FEoGOa9r8/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/24FEoGOa9r8/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/24FEoGOa9r8/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Super Powerful Oder Blocker Body Wash",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 14,
+      "ETag": null
+    },
+    "etag": "M4GsHSkDU40tKq3GX1TTrwYER3U",
+    "id": "PLNrlsg1qD4IWXdM_UnmZHBMejIn_DWdK3",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWXdM_UnmZHBMejIn_DWdK3\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Coldplay",
+        "ETag": null
+      },
+      "publishedAt": "2022-03-18T18:22:21.613974Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/Q0TEUMPIhk8/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/Q0TEUMPIhk8/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/Q0TEUMPIhk8/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/Q0TEUMPIhk8/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/Q0TEUMPIhk8/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Coldplay",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 4,
+      "ETag": null
+    },
+    "etag": "GWu9jPy5xz5yPX0vxVL1keTuqSY",
+    "id": "PLNrlsg1qD4IWpKA5l9wjto2mBh35Z2dly",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWpKA5l9wjto2mBh35Z2dly\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Olivia Rodrigo",
+        "ETag": null
+      },
+      "publishedAt": "2022-02-22T19:22:30.237121Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/l0txe6yk8Kc/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/l0txe6yk8Kc/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/l0txe6yk8Kc/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/l0txe6yk8Kc/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/l0txe6yk8Kc/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Olivia Rodrigo",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 21,
+      "ETag": null
+    },
+    "etag": "3j2Rf3oUi_W2yakx0mJoIRmvNJ8",
+    "id": "PLNrlsg1qD4IWi1jzeqTjXv43rPhl1QDPa",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWi1jzeqTjXv43rPhl1QDPa\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Maroon 5",
+        "ETag": null
+      },
+      "publishedAt": "2022-01-30T23:38:05.090003Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/ULFXeCsiXUQ/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/ULFXeCsiXUQ/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/ULFXeCsiXUQ/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/ULFXeCsiXUQ/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/ULFXeCsiXUQ/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Maroon 5",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 28,
+      "ETag": null
+    },
+    "etag": "0CIlaPAKk_YFI-3o16ltg9EY9H4",
+    "id": "PLNrlsg1qD4IU_K8vV4_4FO7p4RBSr7pJt",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IU_K8vV4_4FO7p4RBSr7pJt\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "The Fat Rat",
+        "ETag": null
+      },
+      "publishedAt": "2021-11-06T03:07:02.353495Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/n8X9_MgEdCg/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/n8X9_MgEdCg/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/n8X9_MgEdCg/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/n8X9_MgEdCg/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/n8X9_MgEdCg/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "The Fat Rat",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 24,
+      "ETag": null
+    },
+    "etag": "J3-taY5lQu2QrdBqU2ZvVkQPN84",
+    "id": "PLNrlsg1qD4IUZppu1oUTvE_syi6q8bHJm",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUZppu1oUTvE_syi6q8bHJm\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Charlie Puth",
+        "ETag": null
+      },
+      "publishedAt": "2021-11-01T05:57:19.764662Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/f7HwUtZUYbE/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/f7HwUtZUYbE/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/f7HwUtZUYbE/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/f7HwUtZUYbE/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/f7HwUtZUYbE/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Charlie Puth",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 8,
+      "ETag": null
+    },
+    "etag": "i-bGqPIpN3SqTKv5yYzYrhQwhzY",
+    "id": "PLNrlsg1qD4IXkuOULv1iC-WLA6T82VTUS",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXkuOULv1iC-WLA6T82VTUS\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Lil Nas X",
+        "ETag": null
+      },
+      "publishedAt": "2021-09-03T06:20:19.193291Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/jPe0bX_GtBo/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/jPe0bX_GtBo/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/jPe0bX_GtBo/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/jPe0bX_GtBo/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/jPe0bX_GtBo/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Lil Nas X",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "kY93wl1PZYXLYZBrB8dsjQmKPFI",
+    "id": "PLNrlsg1qD4IUaVKgdu_QjyCTnk9boYBxe",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUaVKgdu_QjyCTnk9boYBxe\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Sub Urban",
+        "ETag": null
+      },
+      "publishedAt": "2021-09-02T20:04:57.940333Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/zgjcNd2EqvQ/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/zgjcNd2EqvQ/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/zgjcNd2EqvQ/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/zgjcNd2EqvQ/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/zgjcNd2EqvQ/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Sub Urban",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 26,
+      "ETag": null
+    },
+    "etag": "_NTR7PJNt8Q7k3fIkGfAN_aXKt0",
+    "id": "PLNrlsg1qD4IVnL_UYEq4xGY9r8i3WFnRy",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVnL_UYEq4xGY9r8i3WFnRy\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "AJR",
+        "ETag": null
+      },
+      "publishedAt": "2021-09-02T20:03:43.311959Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/tsODB-N84WY/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/tsODB-N84WY/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/tsODB-N84WY/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/tsODB-N84WY/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/tsODB-N84WY/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "AJR",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "oiGKjENkUi6sGG29y0SPadmd2CI",
+    "id": "PLNrlsg1qD4IUsRLB8Beg5Eq5fsxiSCTOa",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUsRLB8Beg5Eq5fsxiSCTOa\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Kesha",
+        "ETag": null
+      },
+      "publishedAt": "2021-09-02T20:02:17.531108Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/RxUZLmN5RsY/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/RxUZLmN5RsY/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/RxUZLmN5RsY/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/RxUZLmN5RsY/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/RxUZLmN5RsY/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Kesha",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 11,
+      "ETag": null
+    },
+    "etag": "NbHZG-i9vDF6XicWL7SUmDgZuPM",
+    "id": "PLNrlsg1qD4IVT55Y_yqn7t8bw7xyYUOJO",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVT55Y_yqn7t8bw7xyYUOJO\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Blackpink",
+        "ETag": null
+      },
+      "publishedAt": "2021-08-07T16:38:08.071415Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/8mA6jIeojnk/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/8mA6jIeojnk/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/8mA6jIeojnk/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/8mA6jIeojnk/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/8mA6jIeojnk/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Blackpink",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 6,
+      "ETag": null
+    },
+    "etag": "oXyugWFNIII6s2r2wrYEomvWaSw",
+    "id": "PLNrlsg1qD4IXcALYX4RuvPA_Vo2vZhS5i",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXcALYX4RuvPA_Vo2vZhS5i\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Nirvana",
+        "ETag": null
+      },
+      "publishedAt": "2021-07-09T23:28:58.40316Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/7TDeBi34OtE/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/7TDeBi34OtE/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/7TDeBi34OtE/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/7TDeBi34OtE/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/7TDeBi34OtE/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Nirvana",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 10,
+      "ETag": null
+    },
+    "etag": "-ON7T6MdPAV5T41tqQDpBV4TBvc",
+    "id": "PLNrlsg1qD4IUrYdqLvcra3JQ5m8yBtx-N",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUrYdqLvcra3JQ5m8yBtx-N\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Rock",
+        "ETag": null
+      },
+      "publishedAt": "2021-03-15T23:23:24.159637Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/Ew2XwkAgbd4/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/Ew2XwkAgbd4/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/Ew2XwkAgbd4/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/Ew2XwkAgbd4/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/Ew2XwkAgbd4/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Rock",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 4,
+      "ETag": null
+    },
+    "etag": "0n7psyLoiotLFOit5_1YWgIU90k",
+    "id": "PLNrlsg1qD4IVW5TVvLHN1EJTE0Hn2tsF6",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVW5TVvLHN1EJTE0Hn2tsF6\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Burno Mars",
+        "ETag": null
+      },
+      "publishedAt": "2021-01-30T04:56:32.593016Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/sLRtf41L12A/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/sLRtf41L12A/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/sLRtf41L12A/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/sLRtf41L12A/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/sLRtf41L12A/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Burno Mars",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 7,
+      "ETag": null
+    },
+    "etag": "keeo_1awRFsGnmZq4XgrqwuA5hA",
+    "id": "PLNrlsg1qD4IXJlCGrOECkSKC4_049qNxk",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXJlCGrOECkSKC4_049qNxk\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "NF",
+        "ETag": null
+      },
+      "publishedAt": "2021-01-30T04:55:00.940774Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/-z2nfin2hiI/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/-z2nfin2hiI/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/-z2nfin2hiI/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/-z2nfin2hiI/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/-z2nfin2hiI/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "NF",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 7,
+      "ETag": null
+    },
+    "etag": "AxyKqNfZ-rniX9de-z26DLt5gmc",
+    "id": "PLNrlsg1qD4IVDIFZRnniPklJi65pxmDrS",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVDIFZRnniPklJi65pxmDrS\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Drake",
+        "ETag": null
+      },
+      "publishedAt": "2020-11-18T19:26:04.648351Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/ccIk7jOACpk/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/ccIk7jOACpk/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/ccIk7jOACpk/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/ccIk7jOACpk/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/ccIk7jOACpk/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Drake",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 5,
+      "ETag": null
+    },
+    "etag": "Ph31lZUzgACU6sBN98xrymFcQhI",
+    "id": "PLNrlsg1qD4IVG6idZaUMNkWWi3ov03KDD",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVG6idZaUMNkWWi3ov03KDD\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Electro Swing",
+        "ETag": null
+      },
+      "publishedAt": "2020-11-10T00:46:46.223249Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/JWp4JXc_0uY/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/JWp4JXc_0uY/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/JWp4JXc_0uY/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/JWp4JXc_0uY/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/JWp4JXc_0uY/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Electro Swing",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 26,
+      "ETag": null
+    },
+    "etag": "uWFeQ5dAZk2TkwmrHXfQ2Ola3cY",
+    "id": "PLNrlsg1qD4IXWwaSV-4loKUNZVuIp7Chh",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXWwaSV-4loKUNZVuIp7Chh\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Grandayy",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-30T01:49:58.187689Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/XtWU3Y15FaE/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/XtWU3Y15FaE/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/XtWU3Y15FaE/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/XtWU3Y15FaE/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/XtWU3Y15FaE/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Grandayy",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 9,
+      "ETag": null
+    },
+    "etag": "qvFfA_sj6vYdI3FsZ7mzRFMpfv0",
+    "id": "PLNrlsg1qD4IWBokf0m_j6crYSdK0FE0Jz",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWBokf0m_j6crYSdK0FE0Jz\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Other Memes",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-30T01:49:27.22286Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/jhExvE5fvJw/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/jhExvE5fvJw/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/jhExvE5fvJw/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/jhExvE5fvJw/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/jhExvE5fvJw/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Other Memes",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 14,
+      "ETag": null
+    },
+    "etag": "RIyJiFHdmBmnOHoiQzYOAP1bi9w",
+    "id": "PLNrlsg1qD4IVs9mXG2X1GSXoBBORXzEF9",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVs9mXG2X1GSXoBBORXzEF9\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Avicii",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-22T18:43:07.977522Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/As_4JTmHuW4/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/As_4JTmHuW4/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/As_4JTmHuW4/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/As_4JTmHuW4/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/As_4JTmHuW4/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Avicii",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 51,
+      "ETag": null
+    },
+    "etag": "HUw2fUEo875auWwq24Ibv_GvIRA",
+    "id": "PLNrlsg1qD4IXeAnwTGkPxdyjb_tgpe9B6",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IXeAnwTGkPxdyjb_tgpe9B6\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Klaypex",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-22T18:37:45.376294Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/CgHTdh-ivLs/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/CgHTdh-ivLs/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/CgHTdh-ivLs/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/CgHTdh-ivLs/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/CgHTdh-ivLs/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Klaypex",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 23,
+      "ETag": null
+    },
+    "etag": "6bwvRk8OWIceAuQMjAPsVzX7jQ8",
+    "id": "PLNrlsg1qD4IUGCc4BDCDaFVQggcjbuwRQ",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IUGCc4BDCDaFVQggcjbuwRQ\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Juice Wrld",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-20T22:56:25.529113Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/hHtv2XMZlKs/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/hHtv2XMZlKs/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/hHtv2XMZlKs/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/hHtv2XMZlKs/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/hHtv2XMZlKs/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Juice Wrld",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 25,
+      "ETag": null
+    },
+    "etag": "itnA_YivKH8j-jyuYMvPkMRJKrY",
+    "id": "PLNrlsg1qD4IW30Gk0x9deJXMiBWN658P6",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IW30Gk0x9deJXMiBWN658P6\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Party in Backyard",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-20T22:27:16.001925Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/K3ZeOfYFni0/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/K3ZeOfYFni0/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/K3ZeOfYFni0/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/K3ZeOfYFni0/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/K3ZeOfYFni0/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Party in Backyard",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 54,
+      "ETag": null
+    },
+    "etag": "GeuaSasXwBtWHJC3hR4vCBCmXbU",
+    "id": "PLNrlsg1qD4IU-qEuUcjfV3mgncIRfxU-E",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IU-qEuUcjfV3mgncIRfxU-E\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Eminem",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-16T00:03:36.452327Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/Xm0OCPZROkk/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/Xm0OCPZROkk/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/Xm0OCPZROkk/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/Xm0OCPZROkk/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/Xm0OCPZROkk/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Eminem",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 9,
+      "ETag": null
+    },
+    "etag": "uDEf7ja06tCDp6MEXHXQOGYmssA",
+    "id": "PLNrlsg1qD4IVcV4ZcVk0_qeyn21VFLZOb",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVcV4ZcVk0_qeyn21VFLZOb\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Blackbear",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-15T23:58:10.255287Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/dKJsJcqubWw/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/dKJsJcqubWw/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/dKJsJcqubWw/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/dKJsJcqubWw/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/dKJsJcqubWw/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Blackbear",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 27,
+      "ETag": null
+    },
+    "etag": "gC5V61mPsZlgW-NXFnaSjShcOoE",
+    "id": "PLNrlsg1qD4IVTvMfVcZpHxKN6sUau9-nZ",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IVTvMfVcZpHxKN6sUau9-nZ\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Alec Benjamin",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-14T22:09:20.248863Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/CtnR6ayIEpk/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/CtnR6ayIEpk/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/CtnR6ayIEpk/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/CtnR6ayIEpk/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/CtnR6ayIEpk/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Alec Benjamin",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 38,
+      "ETag": null
+    },
+    "etag": "14i9_P_2ybjcr076LPBjqhbBFko",
+    "id": "PLNrlsg1qD4IWMn1uIAmy46hnDSTWTgocW",
+    "kind": "youtube#playlist",
+    "localizations": null,
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=PLNrlsg1qD4IWMn1uIAmy46hnDSTWTgocW\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCw5RjEHFoSDk433jursVulQ",
+      "channelTitle": "RandomiaGaming",
+      "defaultLanguage": null,
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Oliver Tree",
+        "ETag": null
+      },
+      "publishedAt": "2020-10-01T01:48:06.245538Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/7CLUzGsnSA8/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/7CLUzGsnSA8/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/7CLUzGsnSA8/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/7CLUzGsnSA8/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/7CLUzGsnSA8/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Oliver Tree",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  },
+  {
+    "contentDetails": {
+      "itemCount": 3653,
+      "ETag": null
+    },
+    "etag": "Guxn72F-nh-Ahpjxvxv27vKCrCc",
+    "id": "LM",
+    "kind": "youtube#playlist",
+    "localizations": {
+      "es-US": {
+        "description": null,
+        "title": "Música que te gustó",
+        "ETag": null
+      },
+      "ro": {
+        "description": null,
+        "title": "Muzică apreciată",
+        "ETag": null
+      },
+      "th": {
+        "description": null,
+        "title": "เพลงที่ชอบ",
+        "ETag": null
+      },
+      "ta": {
+        "description": null,
+        "title": "விரும்பிய இசை",
+        "ETag": null
+      },
+      "hy": {
+        "description": null,
+        "title": "Հավանած երաժշտություն",
+        "ETag": null
+      },
+      "ru": {
+        "description": null,
+        "title": "Понравившаяся музыка",
+        "ETag": null
+      },
+      "my": {
+        "description": null,
+        "title": "လိုက်ခ်လုပ်ထားသော တေးဂီတ",
+        "ETag": null
+      },
+      "el": {
+        "description": null,
+        "title": "Μουσική που μου αρέσει",
+        "ETag": null
+      },
+      "pt": {
+        "description": null,
+        "title": "Música marcada como \"Gostei\"",
+        "ETag": null
+      },
+      "sr": {
+        "description": null,
+        "title": "Музика која вам се свиђа",
+        "ETag": null
+      },
+      "si": {
+        "description": null,
+        "title": "කැමති වූ සංගීත",
+        "ETag": null
+      },
+      "cs": {
+        "description": null,
+        "title": "Hudba, která se líbila",
+        "ETag": null
+      },
+      "fr-CA": {
+        "description": null,
+        "title": "Musique que j'aime",
+        "ETag": null
+      },
+      "mr": {
+        "description": null,
+        "title": "आवडलेले संगीत",
+        "ETag": null
+      },
+      "ar-XB": {
+        "description": null,
+        "title": "‏‮Liked‬‏ ‏‮Music‬‏",
+        "ETag": null
+      },
+      "bg": {
+        "description": null,
+        "title": "Харесана музика",
+        "ETag": null
+      },
+      "lt": {
+        "description": null,
+        "title": "Patikusi muzika",
+        "ETag": null
+      },
+      "pt-PT": {
+        "description": null,
+        "title": "Música de que gosta",
+        "ETag": null
+      },
+      "zh-TW": {
+        "description": null,
+        "title": "喜歡的音樂",
+        "ETag": null
+      },
+      "no": {
+        "description": null,
+        "title": "Likt musikk",
+        "ETag": null
+      },
+      "sr-Latn": {
+        "description": null,
+        "title": "Muzika koja vam se sviđa",
+        "ETag": null
+      },
+      "te": {
+        "description": null,
+        "title": "లైక్ చేసిన మ్యూజిక్",
+        "ETag": null
+      },
+      "fi": {
+        "description": null,
+        "title": "Tykätty musiikki",
+        "ETag": null
+      },
+      "eu": {
+        "description": null,
+        "title": "Gustatzen zaidan musika",
+        "ETag": null
+      },
+      "en-XA": {
+        "description": null,
+        "title": "[Ļîķéð Mûšîç one two]",
+        "ETag": null
+      },
+      "gl": {
+        "description": null,
+        "title": "Música que me gusta",
+        "ETag": null
+      },
+      "zh-CN": {
+        "description": null,
+        "title": "赞过的音乐",
+        "ETag": null
+      },
+      "hi": {
+        "description": null,
+        "title": "पसंद किया गया संगीत",
+        "ETag": null
+      },
+      "lo": {
+        "description": null,
+        "title": "ເພງທີ່ມັກ",
+        "ETag": null
+      },
+      "it": {
+        "description": null,
+        "title": "Musica che ti piace",
+        "ETag": null
+      },
+      "sq": {
+        "description": null,
+        "title": "Muzika e pëlqyer",
+        "ETag": null
+      },
+      "es-419": {
+        "description": null,
+        "title": "Música que te gustó",
+        "ETag": null
+      },
+      "zh-HK": {
+        "description": null,
+        "title": "喜歡的音樂",
+        "ETag": null
+      },
+      "de": {
+        "description": null,
+        "title": "Musik, die ich mag",
+        "ETag": null
+      },
+      "ms": {
+        "description": null,
+        "title": "Muzik Yang Disukai",
+        "ETag": null
+      },
+      "fr": {
+        "description": null,
+        "title": "Musique \"J'aime\"",
+        "ETag": null
+      },
+      "es": {
+        "description": null,
+        "title": "Música que me gusta",
+        "ETag": null
+      },
+      "ky": {
+        "description": null,
+        "title": "Жаккан музыка",
+        "ETag": null
+      },
+      "bn": {
+        "description": null,
+        "title": "পছন্দ করা মিউজিক",
+        "ETag": null
+      },
+      "is": {
+        "description": null,
+        "title": "Lækuð tónlist",
+        "ETag": null
+      },
+      "en-IN": {
+        "description": null,
+        "title": "Liked music",
+        "ETag": null
+      },
+      "sv": {
+        "description": null,
+        "title": "Musik jag gillar",
+        "ETag": null
+      },
+      "da": {
+        "description": null,
+        "title": "Musik, jeg kan lide",
+        "ETag": null
+      },
+      "af": {
+        "description": null,
+        "title": "Gelaaikte musiek",
+        "ETag": null
+      },
+      "be": {
+        "description": null,
+        "title": "Упадабаная музыка",
+        "ETag": null
+      },
+      "ar": {
+        "description": null,
+        "title": "الموسيقى المفضّلة",
+        "ETag": null
+      },
+      "iw": {
+        "description": null,
+        "title": "מוזיקה שאהבתי",
+        "ETag": null
+      },
+      "ko": {
+        "description": null,
+        "title": "좋아요 표시한 음악",
+        "ETag": null
+      },
+      "nl": {
+        "description": null,
+        "title": "Muziek die ik leuk vind",
+        "ETag": null
+      },
+      "sw": {
+        "description": null,
+        "title": "Muziki Unaopenda",
+        "ETag": null
+      },
+      "ka": {
+        "description": null,
+        "title": "მოწონებული მუსიკა",
+        "ETag": null
+      },
+      "ja": {
+        "description": null,
+        "title": "高く評価した音楽",
+        "ETag": null
+      },
+      "ne": {
+        "description": null,
+        "title": "लाइक गरिएका सङ्गीत",
+        "ETag": null
+      },
+      "pl": {
+        "description": null,
+        "title": "Muzyka, która Ci się podoba",
+        "ETag": null
+      },
+      "mn": {
+        "description": null,
+        "title": "Дуртай хөгжим",
+        "ETag": null
+      },
+      "kk": {
+        "description": null,
+        "title": "Ұнаған музыка",
+        "ETag": null
+      },
+      "gu": {
+        "description": null,
+        "title": "પસંદ કરેલું મ્યુઝિક",
+        "ETag": null
+      },
+      "am": {
+        "description": null,
+        "title": "የተወደደ ሙዚቃ",
+        "ETag": null
+      },
+      "as": {
+        "description": null,
+        "title": "লাইক কৰা সংগীত",
+        "ETag": null
+      },
+      "fa": {
+        "description": null,
+        "title": "موسیقی‌های پسندیده‌شده",
+        "ETag": null
+      },
+      "bs": {
+        "description": null,
+        "title": "Muzika s oznakom \"Sviđa mi se\"",
+        "ETag": null
+      },
+      "sl": {
+        "description": null,
+        "title": "Všečkana glasba",
+        "ETag": null
+      },
+      "or": {
+        "description": null,
+        "title": "ପସନ୍ଦ କରାଯାଇଥିବା ମ୍ୟୁଜିକ",
+        "ETag": null
+      },
+      "ur": {
+        "description": null,
+        "title": "پسند کردہ موسیقی",
+        "ETag": null
+      },
+      "hu": {
+        "description": null,
+        "title": "Lájkolt zenék",
+        "ETag": null
+      },
+      "vi": {
+        "description": null,
+        "title": "Nhạc đã thích",
+        "ETag": null
+      },
+      "id": {
+        "description": null,
+        "title": "Musik yang Disukai",
+        "ETag": null
+      },
+      "az": {
+        "description": null,
+        "title": "Bəyənilmiş musiqi",
+        "ETag": null
+      },
+      "zu": {
+        "description": null,
+        "title": "Umculo othandiwe",
+        "ETag": null
+      },
+      "ca": {
+        "description": null,
+        "title": "Música que m'agrada",
+        "ETag": null
+      },
+      "uz": {
+        "description": null,
+        "title": "Yoqqan musiqalar",
+        "ETag": null
+      },
+      "lv": {
+        "description": null,
+        "title": "Iecienītākā mūzika",
+        "ETag": null
+      },
+      "et": {
+        "description": null,
+        "title": "Meeldinud muusika",
+        "ETag": null
+      },
+      "hr": {
+        "description": null,
+        "title": "Pozitivno ocijenjena glazba",
+        "ETag": null
+      },
+      "km": {
+        "description": null,
+        "title": "តន្ត្រីដែលចូលចិត្ត",
+        "ETag": null
+      },
+      "sk": {
+        "description": null,
+        "title": "Obľúbená hudba",
+        "ETag": null
+      },
+      "en": {
+        "description": "",
+        "title": "Liked Music",
+        "ETag": null
+      },
+      "kn": {
+        "description": null,
+        "title": "ಇಷ್ಟಪಟ್ಟ ಸಂಗೀತ",
+        "ETag": null
+      },
+      "ml": {
+        "description": null,
+        "title": "ലൈക്ക് ചെയ്ത സംഗീതം",
+        "ETag": null
+      },
+      "mk": {
+        "description": null,
+        "title": "Лајкната музика",
+        "ETag": null
+      },
+      "en-GB": {
+        "description": null,
+        "title": "Liked music",
+        "ETag": null
+      },
+      "tr": {
+        "description": null,
+        "title": "Beğendiğim müzikler",
+        "ETag": null
+      },
+      "uk": {
+        "description": null,
+        "title": "Музика, яка сподобалась",
+        "ETag": null
+      },
+      "fil": {
+        "description": null,
+        "title": "Ni-like na Musika",
+        "ETag": null
+      },
+      "pa": {
+        "description": null,
+        "title": "ਪਸੰਦ ਕੀਤਾ ਸੰਗੀਤ",
+        "ETag": null
+      }
+    },
+    "player": {
+      "embedHtml": "<iframe width=\"640\" height=\"360\" src=\"http://www.youtube.com/embed/videoseries?list=LM\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>",
+      "ETag": null
+    },
+    "snippet": {
+      "channelId": "UCBR8-60-B28hp2BmDPdntcQ",
+      "channelTitle": "YouTube",
+      "defaultLanguage": "en",
+      "description": "",
+      "localized": {
+        "description": "",
+        "title": "Liked Music",
+        "ETag": null
+      },
+      "publishedAt": "2020-07-23T22:42:15Z",
+      "tags": null,
+      "thumbnailVideoId": null,
+      "thumbnails": {
+        "default": {
+          "height": 90,
+          "url": "https://i.ytimg.com/vi/0btEM1PF2a8/default.jpg",
+          "width": 120,
+          "ETag": null
+        },
+        "high": {
+          "height": 360,
+          "url": "https://i.ytimg.com/vi/0btEM1PF2a8/hqdefault.jpg",
+          "width": 480,
+          "ETag": null
+        },
+        "maxres": {
+          "height": 720,
+          "url": "https://i.ytimg.com/vi/0btEM1PF2a8/maxresdefault.jpg",
+          "width": 1280,
+          "ETag": null
+        },
+        "medium": {
+          "height": 180,
+          "url": "https://i.ytimg.com/vi/0btEM1PF2a8/mqdefault.jpg",
+          "width": 320,
+          "ETag": null
+        },
+        "standard": {
+          "height": 480,
+          "url": "https://i.ytimg.com/vi/0btEM1PF2a8/sddefault.jpg",
+          "width": 640,
+          "ETag": null
+        },
+        "ETag": null
+      },
+      "title": "Liked Music",
+      "ETag": null
+    },
+    "status": {
+      "podcastStatus": null,
+      "privacyStatus": "private",
+      "ETag": null
+    }
+  }
+]
