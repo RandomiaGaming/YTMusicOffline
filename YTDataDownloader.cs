@@ -8,8 +8,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -40,7 +38,6 @@ public sealed class MusicDescription
 public sealed class Song
 {
     public string VideoID = null;
-    public string ThumbnailUrl = null;
     public string SongName = null;
     public string AlbumName = null;
     public string ArtistName = null;
@@ -62,7 +59,7 @@ public static class YTDataDownloader
     {
         YouTubeService ytService = null;
 
-        // Load playlists from json file or YouTube API if file does not exist
+        #region Load playlists from json file or YouTube API if file does not exist
         List<Playlist> playlists = new List<Playlist>();
         {
             string playlistsJsonFilePath = Path.Combine(databaseFolderPath, "Playlists.json");
@@ -84,8 +81,9 @@ public static class YTDataDownloader
                 Save(playlists, playlistsJsonFilePath);
             }
         }
+        #endregion
 
-        // Load playlist items from json file or YouTube API if file does not exist
+        #region Load playlist items from json file or YouTube API if file does not exist
         List<PlaylistItem> playlistItems = new List<PlaylistItem>();
         {
             string playlistItemsJsonFilePath = Path.Combine(databaseFolderPath, "PlaylistItems.json");
@@ -112,40 +110,44 @@ public static class YTDataDownloader
                 Save(playlistItems, playlistItemsJsonFilePath);
             }
         }
+        #endregion
 
         List<Video> videos = new List<Video>();
         List<VideoRelocation> videoRelocations = new List<VideoRelocation>();
         Ghosts ghosts = new Ghosts();
         {
-            // Load videos from json file if file exists
+            #region Load videos from json file if file exists
             string videosJsonFilePath = Path.Combine(databaseFolderPath, "Videos.json");
             if (File.Exists(videosJsonFilePath))
             {
                 Console.WriteLine($"Loading videos from \"{videosJsonFilePath}\"...");
                 videos = Load<List<Video>>(videosJsonFilePath);
             }
+            #endregion
 
-            // Load video relocations from json file if file exists
+            #region Load video relocations from json file if file exists
             string videoRelocationsJsonFilePath = Path.Combine(databaseFolderPath, "VideoRelocations.json");
             if (File.Exists(videoRelocationsJsonFilePath))
             {
                 Console.WriteLine($"Loading video relocations from \"{videoRelocationsJsonFilePath}\"...");
                 videoRelocations = Load<List<VideoRelocation>>(videoRelocationsJsonFilePath);
             }
+            #endregion
 
-            // Load ghosts from json file if file exists
+            #region Load ghosts from json file if file exists
             string ghostsJsonFilePath = Path.Combine(databaseFolderPath, "Ghosts.json");
             if (File.Exists(ghostsJsonFilePath))
             {
                 Console.WriteLine($"Loading ghosts from \"{ghostsJsonFilePath}\"...");
                 ghosts = Load<Ghosts>(ghostsJsonFilePath);
             }
+            #endregion
 
-            // Run this loop until didSomething is false
             while (true)
             {
                 bool didSomething = false;
 
+                #region Download videos from the YouTube API which haven't been downloaded already 
                 // Compute a list of video IDs we need videos for
                 List<string> videoNeededVideoIDs = new List<string>();
                 foreach (PlaylistItem playlistItem in playlistItems)
@@ -187,7 +189,9 @@ public static class YTDataDownloader
                     Save(ghosts, ghostsJsonFilePath);
                     didSomething = true;
                 }
+                #endregion
 
+                #region WebScrape the video relocations which haven't been download already
                 // Compute a list of video IDs we need relocations for
                 List<string> relocationNeededVideoIDs = new List<string>();
                 foreach (Video video in videos)
@@ -231,6 +235,7 @@ public static class YTDataDownloader
                     Save(ghosts, ghostsJsonFilePath);
                     didSomething = true;
                 }
+                #endregion
 
                 if (!didSomething)
                 {
@@ -239,7 +244,7 @@ public static class YTDataDownloader
             }
         }
 
-        // Load music descriptions from json file or by parsing videos if file does not exist
+        #region Load music descriptions from json file or by parsing videos if file does not exist
         List<MusicDescription> musicDescriptions = new List<MusicDescription>();
         {
             string musicDescriptionsJsonFilePath = Path.Combine(databaseFolderPath, "MusicDescriptions.json");
@@ -263,8 +268,9 @@ public static class YTDataDownloader
                 Save(musicDescriptions, musicDescriptionsJsonFilePath);
             }
         }
+        #endregion
 
-        // Load songs from json file or by parsing database if file does not exist
+        #region Load songs from json file or by parsing database if file does not exist
         List<Song> songs = new List<Song>();
         {
             string songsJsonFilePath = Path.Combine(databaseFolderPath, "Songs.json");
@@ -301,7 +307,6 @@ public static class YTDataDownloader
                     }
                     Song newSong = new Song();
                     newSong.VideoID = video.Id;
-                    newSong.ThumbnailUrl = GetBestThumbnailUrl(video.Snippet.Thumbnails);
                     newSong.SongName = video.Snippet.Title;
                     newSong.AlbumName = "";
                     if (video.Snippet.ChannelTitle.EndsWith(" - Topic"))
@@ -345,32 +350,43 @@ public static class YTDataDownloader
                 Save(songs, songsJsonFilePath);
             }
         }
+        #endregion
 
-        // Download each song's thumbnail if it doesn't already exist
+        #region Download each song's thumbnail if it doesn't already exist
         {
-            Console.WriteLine("Checking and downloading thumbnails...");
-            string thumbnailFolderPath = Path.Combine(databaseFolderPath, "Thumbnails");
-            if (!Directory.Exists(thumbnailFolderPath))
+            Console.WriteLine("Downloading thumbnails...");
+            string thumbnailsFolderPath = Path.Combine(databaseFolderPath, "RawThumbnails");
+            if (!Directory.Exists(thumbnailsFolderPath))
             {
-                Directory.CreateDirectory(thumbnailFolderPath);
+                Directory.CreateDirectory(thumbnailsFolderPath);
             }
             for (int i = 0; i < songs.Count; i++)
             {
                 Song song = songs[i];
-                string thumbnailFilePath = Path.Combine(thumbnailFolderPath, song.VideoID + ".png");
-                if (File.Exists(thumbnailFilePath))
+                string[] matchFiles = Directory.GetFiles(thumbnailsFolderPath, song.VideoID + ".*");
+                if (matchFiles.Length > 0)
                 {
                     continue;
                 }
-                Console.WriteLine($"Progress {i + 1} of {songs.Count} complete...");
-                DownloadImageAsPng(song.ThumbnailUrl, thumbnailFilePath);
+                Console.WriteLine($"Progress {i + 1} of {songs.Count} at {DateTime.Now}...");
+                Video matchingVideo = null;
+                foreach (Video video in videos)
+                {
+                    if (video.Id == song.VideoID)
+                    {
+                        matchingVideo = video;
+                        break;
+                    }
+                }
+                DownloadThumbnail(thumbnailsFolderPath, matchingVideo);
             }
         }
+        #endregion
 
-        // Download each song if it doesn't already exist
+        #region Download each song if it doesn't already exist
         {
-            Console.WriteLine("Downloading songs this may take a really long time...");
-            string songsFolderPath = Path.Combine(databaseFolderPath, "Songs");
+            Console.WriteLine("Downloading songs this will take a really long time...");
+            string songsFolderPath = Path.Combine(databaseFolderPath, "RawSongs");
             if (!Directory.Exists(songsFolderPath))
             {
                 Directory.CreateDirectory(songsFolderPath);
@@ -393,6 +409,12 @@ public static class YTDataDownloader
                 Thread.Sleep(1000 * RNG.Next(0, 15));
             }
         }
+        #endregion
+
+        // TODO
+        // Convert Thumbnails
+        // Convert Videos
+        // Auto Generate SongsLoader.js
     }
     public static bool VideoUnavailible(Video video)
     {
@@ -402,9 +424,9 @@ public static class YTDataDownloader
         {
             return true;
         }
-        
+
         if (video.Status.PrivacyStatus != "public"
-            &&video.Status.PrivacyStatus != "unlisted")
+            && video.Status.PrivacyStatus != "unlisted")
         {
             return true;
         }
@@ -1004,14 +1026,14 @@ public static class YTDataDownloader
         }
     }
 
-    public static void DownloadImageAsPng(string url, string filePath)
+    public static void DownloadThumbnail(string outputFolderPath, Video video)
     {
-        byte[] payload = ReusableHttpClient.GetByteArrayAsync(url).Result;
-        MemoryStream payloadStream = new MemoryStream(payload);
-        Bitmap output = new Bitmap(payloadStream);
-        output.Save(filePath, ImageFormat.Png);
-        output.Dispose();
-        payloadStream.Dispose();
+        string thumbnailUrl = GetBestThumbnailUrl(video.Snippet.Thumbnails);
+        byte[] payload = ReusableHttpClient.GetByteArrayAsync(thumbnailUrl).Result;
+        Uri thumbnailUri = new Uri(thumbnailUrl);
+        string ext = Path.GetExtension(thumbnailUri.AbsolutePath);
+        string outputFilePath = Path.Combine(outputFolderPath, video.Id + ext);
+        File.WriteAllBytes(outputFilePath, payload);
     }
     public static string GetBestThumbnailUrl(ThumbnailDetails thumbnails)
     {
@@ -1046,9 +1068,9 @@ public static class YTDataDownloader
         {
             throw new Exception("Working folder was not empty.");
         }
-        string command = $"D:\\ImportantData\\Utilities\\YTDLP\\yt-dlp.exe --limit-rate 1.0M --sleep-interval 0 --max-sleep-interval 3 --abort-on-error --abort-on-unavailable-fragments --force-overwrites --no-continue --verbose --format bestaudio --output {videoID}.%(ext)s https://www.youtube.com/watch?v={videoID} || (pause && exit /b 1)";
+        string command = $"D:\\ImportantData\\Utilities\\YTDLP\\yt-dlp.exe --limit-rate 1.0M --sleep-interval 0 --max-sleep-interval 3 --abort-on-error --abort-on-unavailable-fragments --force-overwrites --no-continue --verbose --format bestaudio --output {videoID}.%(ext)s https://www.youtube.com/watch?v={videoID} 1>ytdlp.log 2>&1 & exit /b %%ErrorLevel%%";
         ProcessStartInfo psi = new ProcessStartInfo();
-        psi.WindowStyle = ProcessWindowStyle.Minimized;
+        psi.WindowStyle = ProcessWindowStyle.Hidden;
         psi.WorkingDirectory = workingFolderPath;
         psi.FileName = "cmd.exe";
         psi.Arguments = $"/c {command}";
@@ -1057,15 +1079,23 @@ public static class YTDataDownloader
         p.WaitForExit();
         if (p.ExitCode != 0)
         {
-            throw new Exception($"Error cmd.exe returned exit status code {p.ExitCode}.");
+            File.Move(Path.Combine(workingFolderPath, "ytdlp.log"), Path.Combine(songsFolderPath, videoID + ".log"));
+            ConsoleColor originalColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine($"An error occured while downloading videoID \"{videoID}\" the log has been moved to the output folder!");
+            Console.ForegroundColor = originalColor;
         }
-        string[] filesInWorkingFolder = Directory.GetFiles(workingFolderPath);
-        if (filesInWorkingFolder.Length != 1 || !filesInWorkingFolder[0].StartsWith(workingFolderPath + "\\" + videoID + "."))
+        else
         {
-            throw new Exception("Something was wrong with the output in the working folder.");
+            File.Delete(Path.Combine(workingFolderPath, "ytdlp.log"));
+            string[] filesInWorkingFolder = Directory.GetFiles(workingFolderPath);
+            if (filesInWorkingFolder.Length != 1 || !filesInWorkingFolder[0].StartsWith(workingFolderPath + "\\" + videoID + "."))
+            {
+                throw new Exception("Something was wrong with the output in the working folder.");
+            }
+            string finalFilePath = Path.Combine(songsFolderPath, videoID + Path.GetExtension(filesInWorkingFolder[0]));
+            File.Move(filesInWorkingFolder[0], finalFilePath);
         }
-        string finalFilePath = Path.Combine(songsFolderPath, videoID + Path.GetExtension(filesInWorkingFolder[0]));
-        File.Move(filesInWorkingFolder[0], finalFilePath);
     }
 
     public static void Save<T>(T obj, string jsonFilePath)
