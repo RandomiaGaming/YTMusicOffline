@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>EzMusic</title>
+</head>
+
+<body>
+    <script src="/EzMusic/SongsLoader.js"></script>
+    <script>
+        function PlayRandomSong() {
+            const index = Math.floor(Math.random() * window.Songs.length);
+            Play(window.Songs[index]);
+        }
+        function SongByVideoID(videoID) {
+            for (let i = 0; i < window.Songs.length; i++) {
+                if (window.Songs[i].VideoID == videoID) {
+                    return Songs[i];
+                }
+            }
+            return null;
+        }
+        function Play(song) {
+            window.NowPlaying = song;
+
+            const player = document.querySelector("#player");
+            player.pause();
+            player.src = `/Database/RawSongs/${song.VideoID}.webm`;
+            player.currentTime = 0;
+            player.play();
+
+            const status = document.querySelector("#status");
+            const releaseDate = new Date(song.ReleaseDate);
+            const releaseDateFormatted = releaseDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+            let featuringStatement = "";
+            for (let i = 0; i < song.FeaturedArtistNames.length; i++) {
+                if (i == 0) {
+                    featuringStatement += " featuring ";
+                } else {
+                    featuringStatement += ", ";
+                }
+                featuringStatement += song.FeaturedArtistNames[i];
+            }
+            status.innerHTML = `Now playing ${song.SongName} by ${song.ArtistName} from ${song.AlbumName} released on ${releaseDateFormatted}${featuringStatement}.`;
+
+            const thumbnail = document.querySelector("#thumbnail");
+            thumbnail.src = `/Database/RawThumbnails/${song.VideoID}.png`;
+
+            const woy = document.querySelector("#woy");
+            woy.href = `https://www.youtube.com/watch?v=${song.VideoID}`;
+
+            if ("mediaSession" in navigator) {
+                // Setup navigator.mediaSession.metadata
+                navigator.mediaSession.metadata = new MediaMetadata({
+                    title: song.SongName,
+                    artist: song.ArtistName,
+                    album: song.AlbumName,
+                    artwork: [{ src: `/Database/RawThumbnails/${song.VideoID}.png`, type: "image/png" }]
+                });
+
+                // Register the navigator.mediaSession.ActionHandlers
+                navigator.mediaSession.setActionHandler("hangup", null);
+                navigator.mediaSession.setActionHandler("nextslide", null);
+                navigator.mediaSession.setActionHandler("nexttrack", (event) => {
+                    PlayRandomSong();
+                    console.log(`nexttrack`);
+                });
+                navigator.mediaSession.setActionHandler("pause", (event) => {
+                    player.pause();
+                    console.log(`pause`);
+                });
+                navigator.mediaSession.setActionHandler("play", (event) => {
+                    player.play();
+                    console.log(`play`);
+                });
+                navigator.mediaSession.setActionHandler("previousslide", null);
+                navigator.mediaSession.setActionHandler("previoustrack", (event) => {
+                    PlayRandomSong();
+                    console.log(`previoustrack`);
+                });
+                navigator.mediaSession.setActionHandler("seekbackward", (event) => {
+                    if (event.seekOffset) {
+                        player.currentTime = Math.max(0, player.currentTime - seekOffset);
+                    } else {
+                        player.currentTime = Math.max(0, player.currentTime - 5);
+                    }
+                    console.log(`seekbackwards seekOffset=${event.seekOffset}`);
+                });
+                navigator.mediaSession.setActionHandler("seekforward", (event) => {
+                    if (event.seekOffset) {
+                        player.currentTime = Math.min(player.duration, player.currentTime + seekOffset);
+                    } else {
+                        player.currentTime = Math.min(player.duration, player.currentTime + 5);
+                    }
+                    console.log(`seekforward seekOffset=${event.seekOffset}`);
+                });
+                navigator.mediaSession.setActionHandler("seekto", (event) => {
+                    if (event.fastSeek && "fastSeek" in audio) {
+                        player.fastSeek(event.seekTime);
+                    } else {
+                        player.currentTime = event.seekTime;
+                    }
+                    console.log(`seekto seekTime=${event.seekTime} fastSeek=${event.fastSeek}`);
+                });
+                navigator.mediaSession.setActionHandler("skipad", null);
+                navigator.mediaSession.setActionHandler("stop", (event) => {
+                    player.pause();
+                    player.currentTime = 0;
+                    console.log(`stop`);
+                });
+                navigator.mediaSession.setActionHandler("togglecamera", null);
+                navigator.mediaSession.setActionHandler("togglemicrophone", null);
+
+                // Mark that the camera and microphone are not used by this site
+                navigator.mediaSession.setCameraActive(false);
+                navigator.mediaSession.setMicrophoneActive(false);
+
+                // Setup event handler to ensure navigator.mediaSession.playbackState stays accurate
+                player.onpause = () => {
+                    navigator.mediaSession.playbackState = "paused";
+                    console.log(`onpause`);
+                };
+                player.onplay = () => {
+                    navigator.mediaSession.playbackState = "playing";
+                    console.log(`onplay`);
+                };
+
+                // Setup event hander to ensure navigator.mediaSession.PositionState stays accurate
+                player.addEventListener("timeupdate", function () {
+                    if (!isNaN(player.duration)) {
+                        navigator.mediaSession.setPositionState({ duration: player.duration, playbackRate: player.playbackRate, position: player.currentTime });
+                    }
+                    console.log(`timeupdate duration=${player.duration} playbackRate=${player.playbackRate} position=${player.currentTime}`);
+                });
+            }
+        }
+    </script>
+    <audio id="player" style="width: 90vw;" controls loop></audio>
+    <br />
+    <button onclick="PlayRandomSong()">Play Random Song!</button>
+    <br />
+    <p id="status"></p>
+    <br />
+    <image style="width: 100px; height: 100px;" id="thumbnail"></image>
+    <br />
+    <p><a id="woy" href="" target="_blank">Watch on YouTube...</a></p>
+    <br />
+    <div class="songListElement"></div>
+</body>
+
+</html>
