@@ -1,4 +1,4 @@
-function Init() {
+async function Init() {
     window.NowPlaying = null;
     window.Player = document.querySelector("#player");
 
@@ -13,6 +13,7 @@ function Init() {
         navigator.mediaSession.setActionHandler("skipad", null);
         navigator.mediaSession.setActionHandler("togglecamera", null);
         navigator.mediaSession.setActionHandler("togglemicrophone", null);
+
         navigator.mediaSession.setActionHandler("nexttrack", (event) => {
             PlayRandomSong();
         });
@@ -33,12 +34,8 @@ function Init() {
                 newTime = window.Player.currentTime - seekOffset;
             }
             newTime = Math.max(0, newTime)
-            if ("fastSeek" in audio) {
-                window.Player.fastSeek(newTime);
-            } else {
-                window.Player.currentTime = newTime;
-            }
-            navigator.mediaSession.setPositionState({ duration: player.duration, playbackRate: 1, position: newTime });
+            SeekTo(newTime);
+            UpdatePosition(newTime);
         });
         navigator.mediaSession.setActionHandler("seekforward", (event) => {
             const newTime = window.Player.currentTime + 5;
@@ -46,31 +43,19 @@ function Init() {
                 newTime = window.Player.currentTime + seekOffset;
             }
             newTime = Math.min(window.Player.duration, newTime)
-            if ("fastSeek" in audio) {
-                window.Player.fastSeek(newTime);
-            } else {
-                window.Player.currentTime = newTime;
-            }
-            navigator.mediaSession.setPositionState({ duration: player.duration, playbackRate: 1, position: newTime });
+            SeekTo(newTime);
+            UpdatePosition(newTime);
         });
         navigator.mediaSession.setActionHandler("seekto", (event) => {
             const newTime = event.seekTime;
-            if ("fastSeek" in audio) {
-                window.Player.fastSeek(newTime);
-            } else {
-                window.Player.currentTime = newTime;
-            }
-            navigator.mediaSession.setPositionState({ duration: player.duration, playbackRate: 1, position: newTime });
+            SeekTo(newTime);
+            UpdatePosition(newTime);
         });
         navigator.mediaSession.setActionHandler("stop", (event) => {
             window.Player.pause();
             const newTime = 0;
-            if ("fastSeek" in audio) {
-                window.Player.fastSeek(newTime);
-            } else {
-                window.Player.currentTime = newTime;
-            }
-            navigator.mediaSession.setPositionState({ duration: player.duration, playbackRate: 1, position: newTime });
+            SeekTo(newTime);
+            UpdatePosition(-1);
         });
 
         window.Player.onpause = () => {
@@ -80,20 +65,38 @@ function Init() {
             navigator.mediaSession.playbackState = "playing";
         };
         window.Player.addEventListener("timeupdate", function () {
-            navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: window.Player.playbackRate, position: window.Player.currentTime });
+            UpdatePosition();
         });
 
         navigator.mediaSession.playbackState = "paused";
-        navigator.mediaSession.setPositionState({ duration: 1, playbackRate: 1, position: 0 });
+        UpdatePosition(-1);
     }
 }
-Init();
-
-function PlayRandomSong() {
+async function SeekTo(newTime) {
+    if ("fastSeek" in window.Player) {
+        window.Player.fastSeek(newTime);
+    } else {
+        window.Player.currentTime = newTime;
+    }
+}
+async function UpdatePosition(newTime) {
+    if ("mediaSession" in navigator) {
+        if (newTime != -1 && window.Player.duration > 0) {
+            if (newTime == undefined || newTime == null) {
+                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: window.Player.playbackRate, position: window.Player.currentTime });
+            } else {
+                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: window.Player.playbackRate, position: newTime });
+            }
+        } else {
+            navigator.mediaSession.setPositionState({ duration: 500, playbackRate: 1, position: 0 });
+        }
+    }
+}
+async function PlayRandomSong() {
     const index = Math.floor(Math.random() * window.Songs.length);
     Play(window.Songs[index]);
 }
-function SongByVideoID(videoID) {
+async function SongByVideoID(videoID) {
     for (let i = 0; i < window.Songs.length; i++) {
         if (window.Songs[i].VideoID == videoID) {
             return Songs[i];
@@ -101,19 +104,20 @@ function SongByVideoID(videoID) {
     }
     return null;
 }
-function Play(song) {
+async function Play(song) {
     window.NowPlaying = song;
 
     window.Player.pause();
     window.Player.src = `/Database/RawSongs/${window.NowPlaying.VideoID}.webm`;
     window.Player.currentTime = 0;
-    window.Player.play();
+    await window.Player.play();
 
     UpdateSongInfo();
 
     ReInitMediaSession();
 }
-function UpdateSongInfo() {
+// Updates all the non-audio elements which show song data like the thumbnail and status.
+async function UpdateSongInfo() {
     const status = document.querySelector("#status");
     const releaseDate = new Date(window.NowPlaying.ReleaseDate);
     const releaseDateFormatted = releaseDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
@@ -134,7 +138,7 @@ function UpdateSongInfo() {
     const woy = document.querySelector("#woy");
     woy.href = `https://www.youtube.com/watch?v=${window.NowPlaying.VideoID}`;
 }
-function ReInitMediaSession() {
+async function ReInitMediaSession() {
     if (!("mediaSession" in navigator)) {
         return;
     }
@@ -149,3 +153,4 @@ function ReInitMediaSession() {
     navigator.mediaSession.playbackState = "playing";
     navigator.mediaSession.setPositionState({ duration: 1, playbackRate: 1, position: 0 });
 }
+document.addEventListener("DOMContentLoaded", async () => { await Init(); });
