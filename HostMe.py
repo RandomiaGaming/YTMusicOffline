@@ -7,7 +7,7 @@ host = "localhost"
 port = 8080
 url = f"http://{host}:{port}/"
 root = os.getcwd()
-app = Flask(__name__)
+app = Flask("HostMe")
 
 
 @app.route("/")
@@ -22,6 +22,8 @@ def serve_file(filename):
 
 print(f"Hosting {root} at {url}...")
 if not webbrowser.open(url):
-    os.system(f"xdg-open {url}")
+    if (os.system(f"start {url}") != 0):
+        if (os.system(f"xdg-open {url}") != 0):
+            print(f"Failed to launch {url} please open manually.")
 
 app.run(host="localhost", port=8080)

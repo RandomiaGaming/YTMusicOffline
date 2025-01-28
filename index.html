@@ -2,18 +2,19 @@
 <html>
 
 <head>
+    <title>EzMusic</title>
     <link rel="icon" type="image/png" sizes="16x16" href="/EzMusic/Icons/icon16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/EzMusic/Icons/icon32x32.png">
     <link rel="icon" type="image/png" sizes="48x48" href="/EzMusic/Icons/icon48x48.png">
     <link rel="icon" type="image/png" sizes="64x64" href="/EzMusic/Icons/icon64x64.png">
     <link rel="icon" type="image/png" sizes="128x128" href="/EzMusic/Icons/icon128x128.png">
     <link rel="icon" type="image/png" sizes="256x256" href="/EzMusic/Icons/icon256x256.png">
-    <title>EzMusic</title>
+    <link rel="stylesheet" href="/EzMusic/styles.css">
+    <script src="/EzMusic/SongsLoader.js"></script>
+    <script src="/EzMusic/app.js"></script>
 </head>
 
 <body>
-    <script src="/EzMusic/SongsLoader.js"></script>
-    <script src="/EzMusic/app.js"></script>
     <audio id="player" style="width: 90vw;" controls loop></audio>
     <br />
     <button onclick="PlayRandomSong()">Play Random Song!</button>
@@ -23,6 +24,13 @@
     <image style="width: 100px; height: 100px;" id="thumbnail"></image>
     <br />
     <p><a id="woy" href="" target="_blank">Watch on YouTube...</a></p>
+    <br />
+    <div class="song">
+        <image class="thumbnail">
+            <source src="/EzMusic/Resources/DefaultThumbnail.png" type="image/png">
+        </image>
+        <p class="description">SongName from Song Album by Song Artist released on Release Date.</p>
+    </div>
 </body>
 
 </html>

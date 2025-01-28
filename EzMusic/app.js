@@ -81,14 +81,15 @@ async function SeekTo(newTime) {
 }
 async function UpdatePosition(newTime) {
     if ("mediaSession" in navigator) {
+        const overridePlaybackRate = 0.0001; // window.Player.playbackRate breaks on chrome for android.
         if (newTime != -1 && window.Player.duration > 0) {
             if (newTime == undefined || newTime == null) {
-                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: window.Player.playbackRate, position: window.Player.currentTime });
+                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: overridePlaybackRate, position: window.Player.currentTime });
             } else {
-                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: window.Player.playbackRate, position: newTime });
+                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: overridePlaybackRate, position: newTime });
             }
         } else {
-            navigator.mediaSession.setPositionState({ duration: 500, playbackRate: 1, position: 0 });
+            navigator.mediaSession.setPositionState({ duration: 500, playbackRate: overridePlaybackRate, position: 0 });
         }
     }
 }

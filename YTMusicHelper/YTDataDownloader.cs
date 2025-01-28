@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -59,12 +60,6 @@ public static class YTDataDownloader
     public static void Run(string clientID, string clientSecret, string databaseFolderPath)
     {
         YouTubeService ytService = null;
-
-        if (ytService == null)
-        {
-            Console.WriteLine("Authenticating with YouTube API...");
-            ytService = AuthYTService(clientID, clientSecret, false);
-        }
 
         #region Load playlists from json file or YouTube API if file does not exist
         List<Playlist> playlists = new List<Playlist>();
@@ -422,6 +417,37 @@ public static class YTDataDownloader
         // Convert Thumbnails
         // Convert Videos
         // Auto Generate SongsLoader.js
+
+        foreach (string thumb in Directory.GetFiles(Path.Combine(databaseFolderPath, "RawThumbnails")))
+        {
+            using (Bitmap thumbnail = new Bitmap(thumb))
+            {
+                bool colored = false;
+                for (int x = 0; x < thumbnail.Width; x += 5)
+                {
+                    for (int y = 0; y < thumbnail.Height; y += 5)
+                    {
+                        Color color = thumbnail.GetPixel(x, y);
+                        if (!(color.R - color.G < 10 && color.R - color.G > -10
+                            && color.G - color.B < 10 && color.G - color.B > -10
+                            && color.R - color.B < 10 && color.R - color.B > -10))
+                        {
+                            colored = true;
+                            break;
+                        }
+                    }
+                    if (colored)
+                    {
+                        break;
+                    }
+                }
+                if (colored)
+                {
+                    continue;
+                }
+                Process.Start(thumb);
+            }
+        }
     }
     public static bool VideoUnavailible(Video video)
     {

@@ -10,7 +10,7 @@ public static class Program
         {
             string clientID = "";
             string clientSecret = "";
-            string databaseFolderPath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\";
+            string databaseFolderPath = "D:\\ImportantData\\Coding\\EzMusic\\Database\\";
             YTDataDownloader.Run(clientID, clientSecret, databaseFolderPath);
 
             //string ytMusicSongsFilePath = "D:\\ImportantData\\Coding\\YTMusicHelper\\Database - IMPORTANT\\Songs.json";
