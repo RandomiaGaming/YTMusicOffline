@@ -17,7 +17,7 @@ public sealed class Song
     public string SongName = null;
     public string AlbumName = null;
     public string ArtistName = null;
-    public string[] FeaturedArtistNames = null;
+    public List<string> FeaturedArtistNames = null;
     public DateTime ReleaseDate = new DateTime();
 }
 public sealed class MusicDescription

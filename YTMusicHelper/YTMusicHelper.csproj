@@ -65,10 +65,11 @@
   <ItemGroup>
     <Compile Include="GeneralHelper.cs" />
     <Compile Include="YTAPIHelper.cs" />
-    <Compile Include="YTDataDownloader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="YTDataTypes.cs" />
     <Compile Include="YTParsingHelper.cs" />
+    <Compile Include="YTScrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -77,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -12,6 +12,8 @@ public static class Program
     private const string _clientID = "";
     private const string _clientSecret = "";
     private const string _databaseFolderPath = "D:\\ImportantData\\Coding\\EzMusic\\Database\\";
+    private static List<Playlist> _playlists = null;
+    private static List<PlaylistItem> _playlistItems = null;
     [STAThread]
     public static void Main()
     {
@@ -34,48 +36,9 @@ public static class Program
     {
         YTAPIHelper.Init(_clientID, _clientSecret);
 
-        #region Load playlists from json file or YouTube API if file does not exist
-        List<Playlist> playlists = new List<Playlist>();
-        {
-            string playlistsJsonFilePath = Path.Combine(__databaseFolderPath, "Playlists.json");
-            if (File.Exists(playlistsJsonFilePath))
-            {
-                Console.WriteLine($"Loading playlists from \"{playlistsJsonFilePath}\"...");
-                playlists = GeneralHelper.LoadJson<List<Playlist>>(playlistsJsonFilePath);
-            }
-            else
-            {
-                Console.WriteLine("Enumerating playlists...");
-                playlists = YTAPIHelper.EnumPlaylists(false, true);
-                Console.WriteLine($"Saving playlists to \"{playlistsJsonFilePath}\"...");
-                GeneralHelper.SaveJson(playlists, playlistsJsonFilePath);
-            }
-        }
-        #endregion
+        Phase1();
 
-        #region Load playlist items from json file or YouTube API if file does not exist
-        List<PlaylistItem> playlistItems = new List<PlaylistItem>();
-        {
-            string playlistItemsJsonFilePath = Path.Combine(_databaseFolderPath, "PlaylistItems.json");
-            if (File.Exists(playlistItemsJsonFilePath))
-            {
-                Console.WriteLine($"Loading playlist items from \"{playlistItemsJsonFilePath}\"...");
-                playlistItems = GeneralHelper.LoadJson<List<PlaylistItem>>(playlistItemsJsonFilePath);
-            }
-            else
-            {
-                Console.WriteLine("Enumerating playlist items...");
-                playlistItems = new List<PlaylistItem>();
-                for (int i = 0; i < playlists.Count; i++)
-                {
-                    List<PlaylistItem> newPlaylistItems = YTAPIHelper.EnumPlaylistItems(playlists[i].Id);
-                    playlistItems.AddRange(newPlaylistItems);
-                }
-                Console.WriteLine($"Saving playlist items to \"{playlistItemsJsonFilePath}\"...");
-                GeneralHelper.SaveJson(playlistItems, playlistItemsJsonFilePath);
-            }
-        }
-        #endregion
+
 
         List<Video> videos = new List<Video>();
         List<VideoRelocation> videoRelocations = new List<VideoRelocation>();
@@ -176,7 +139,7 @@ public static class Program
                 {
                     foreach (string originalVideoID in relocationNeededVideoIDs)
                     {
-                        string newVideoID = GetRelocatedVideoID(originalVideoID);
+                        string newVideoID = YTScrapper.GetRelocatedVideoID(originalVideoID);
                         if (originalVideoID != newVideoID)
                         {
                             VideoRelocation newVideoRelocation = new VideoRelocation();
@@ -277,8 +240,8 @@ public static class Program
                     {
                         newSong.ArtistName = video.Snippet.ChannelTitle;
                     }
-                    newSong.FeaturedArtistNames = new string[0];
-                    newSong.ReleaseDate = (DateTime)ParseYTDate(video.Snippet.PublishedAtRaw);
+                    newSong.FeaturedArtistNames = new List<string>();
+                    newSong.ReleaseDate = YTParsingHelper.ParseDate(video.Snippet.PublishedAtRaw);
                     foreach (MusicDescription musicDescription in musicDescriptions)
                     {
                         if (musicDescription.VideoID == video.Id)
@@ -291,11 +254,14 @@ public static class Program
                             {
                                 newSong.AlbumName = musicDescription.AlbumName;
                             }
-                            if (musicDescription.ArtistNames != null && musicDescription.ArtistNames.Length > 0)
+                            if (musicDescription.ArtistNames != null && musicDescription.ArtistNames.Count > 0)
                             {
                                 newSong.ArtistName = musicDescription.ArtistNames[0];
-                                newSong.FeaturedArtistNames = new string[musicDescription.ArtistNames.Length - 1];
-                                Array.Copy(musicDescription.ArtistNames, 1, newSong.FeaturedArtistNames, 0, newSong.FeaturedArtistNames.Length);
+                                newSong.FeaturedArtistNames = new List<string>();
+                                for (int i = 1; i < musicDescription.ArtistNames.Count; i++)
+                                {
+                                    newSong.FeaturedArtistNames.Add(musicDescription.ArtistNames[i]);
+                                }
                             }
                             if (musicDescription.ReleasedOn != null)
                             {
@@ -338,7 +304,7 @@ public static class Program
                         break;
                     }
                 }
-                DownloadThumbnail(thumbnailsFolderPath, matchingVideo);
+                YTScrapper.DownloadThumbnail(thumbnailsFolderPath, matchingVideo);
             }
         }
         #endregion
@@ -394,8 +360,8 @@ public static class Program
                 else
                 {
                     Console.WriteLine($"Progress {i + 1} of {songs.Count} at {DateTime.Now}...");
-                    YTDLPDownload(song.VideoID, workingFolderPath, songsFolderPath);
-                    Thread.Sleep(1000 * RNG.Next(0, 15));
+                    YTScrapper.YTDLPDownload(song.VideoID, workingFolderPath, songsFolderPath);
+                    GeneralHelper.RandomSleep(0, 15);
                 }
             }
         }
@@ -405,6 +371,53 @@ public static class Program
         // Convert Thumbnails
         // Convert Videos
         // Auto Generate SongsLoader.js
+    }
+    public static void Phase1(bool refreshCache = false)
+    {
+        // NOTE:
+        // Phase 1 is responsible for the following:
+        // Loading playlists
+        // Loading playlist items
+        // Loading any other data which may change like the contents of a playlist
+
+        string playlistsJsonFilePath = Path.Combine(_databaseFolderPath, "Playlists.json");
+        if (File.Exists(playlistsJsonFilePath) && !refreshCache)
+        {
+            Console.WriteLine($"Loading playlists from \"{playlistsJsonFilePath}\"...");
+            _playlists = GeneralHelper.LoadJson<List<Playlist>>(playlistsJsonFilePath);
+        }
+        else
+        {
+            Console.WriteLine("Enumerating playlists...");
+            _playlists = YTAPIHelper.EnumPlaylists(false, true);
+            Console.WriteLine($"Saving playlists to \"{playlistsJsonFilePath}\"...");
+            GeneralHelper.SaveJson(_playlists, playlistsJsonFilePath);
+        }
+
+        string playlistItemsJsonFilePath = Path.Combine(_databaseFolderPath, "PlaylistItems.json");
+        if (File.Exists(playlistItemsJsonFilePath) && !refreshCache)
+        {
+            Console.WriteLine($"Loading playlist items from \"{playlistItemsJsonFilePath}\"...");
+            _playlistItems = GeneralHelper.LoadJson<List<PlaylistItem>>(playlistItemsJsonFilePath);
+        }
+        else
+        {
+            Console.WriteLine("Enumerating playlist items...");
+            _playlistItems = new List<PlaylistItem>();
+            foreach (Playlist playlist in _playlists)
+            {
+                List<PlaylistItem> newPlaylistItems = YTAPIHelper.EnumPlaylistItems(playlist.Id);
+                _playlistItems.AddRange(newPlaylistItems);
+            }
+            Console.WriteLine($"Saving playlist items to \"{playlistItemsJsonFilePath}\"...");
+            GeneralHelper.SaveJson(_playlistItems, playlistItemsJsonFilePath);
+        }
+    }
+    public static void Phase2()
+    {
+        // NOTE:
+        // Phase 2 is responsible for the following:
+        // 
     }
     public static void PressAnyKeyToExit()
     {

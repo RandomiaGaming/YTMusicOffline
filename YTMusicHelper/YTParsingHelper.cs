@@ -318,9 +318,9 @@ public static class YTParsingHelper
         {
             return false;
         }
-        string[] roleNamePairs = Split(section, "\n");
-        Tuple<string, string>[] roleNamePairsParsed = new Tuple<string, string>[roleNamePairs.Length];
-        for (int i = 0; i < roleNamePairs.Length; i++)
+        List<string> roleNamePairs = GeneralHelper.Split(section, "\n");
+        List<Tuple<string, string>> roleNamePairsParsed = new List<Tuple<string, string>>();
+        for (int i = 0; i < roleNamePairs.Count; i++)
         {
             string roleNamePair = roleNamePairs[i];
             int index = roleNamePair.IndexOf(": ");
@@ -347,7 +347,7 @@ public static class YTParsingHelper
                 return false;
             }
             Tuple<string, string> roleNamePairParsed = new Tuple<string, string>(role, name);
-            roleNamePairsParsed[i] = roleNamePairParsed;
+            roleNamePairsParsed.Add(roleNamePairParsed);
         }
         musicDescription.RoleNamePairs = roleNamePairsParsed;
         return true;

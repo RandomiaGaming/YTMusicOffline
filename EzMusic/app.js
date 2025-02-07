@@ -1,6 +1,32 @@
 async function Init() {
     window.NowPlaying = null;
     window.Player = document.querySelector("#player");
+    window.SongList = document.querySelector("#song_list_container");
+    for (let i = 0; i < window.Songs.length; i++) {
+        const releaseDate = new Date(window.Songs[i].ReleaseDate);
+        const releaseDateFormatted = releaseDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+        let featuringStatement = "";
+        for (let j = 0; j < window.Songs[i].FeaturedArtistNames.length; j++) {
+            if (j == 0) {
+                featuringStatement += " featuring ";
+            } else {
+                featuringStatement += ", ";
+            }
+            featuringStatement += window.Songs[i].FeaturedArtistNames[j];
+        }
+        const statusText = `Now playing ${window.Songs[i].SongName} by ${window.Songs[i].ArtistName} from ${window.Songs[i].AlbumName} released on ${releaseDateFormatted}${featuringStatement}.`;
+        const thumbnailUrl = `/Database/RawThumbnails/${window.Songs[i].VideoID}.png`;
+
+        const htmlString = `<div class="song_list_element_container" onclick="PlaySongByVideoID('${window.Songs[i].VideoID}')">
+            <image class="song_list_element_thumbnail" src="${thumbnailUrl}" type="image/png" loading="lazy" alt="Thumbnail image."></image>
+            <div class="song_list_element_spacer" style="width: 25px; height: 100%;"></div>
+            <p class="song_list_element_description">${statusText}</p>
+        </div>`;
+
+        const template = document.createElement("template");
+        template.innerHTML = htmlString.trim();
+        window.SongList.appendChild(template.content);
+    }
 
     if ("mediaSession" in navigator) {
         navigator.mediaSession.metadata = null;
@@ -95,9 +121,12 @@ async function UpdatePosition(newTime) {
 }
 async function PlayRandomSong() {
     const index = Math.floor(Math.random() * window.Songs.length);
-    Play(window.Songs[index]);
+    PlaySong(window.Songs[index]);
 }
-async function SongByVideoID(videoID) {
+async function PlaySongByVideoID(videoID) {
+    await PlaySong(await GetSongByVideoID(videoID));
+}
+async function GetSongByVideoID(videoID) {
     for (let i = 0; i < window.Songs.length; i++) {
         if (window.Songs[i].VideoID == videoID) {
             return Songs[i];
@@ -105,7 +134,7 @@ async function SongByVideoID(videoID) {
     }
     return null;
 }
-async function Play(song) {
+async function PlaySong(song) {
     window.NowPlaying = song;
 
     window.Player.pause();
