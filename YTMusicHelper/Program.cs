@@ -6,6 +6,8 @@ using System.Drawing;
 using System.IO;
 using System.Threading;
 using System.Linq;
+using System.Text;
+using Newtonsoft.Json;
 
 public static class Program
 {
@@ -78,7 +80,7 @@ public static class Program
                 #region Download videos from the YouTube API which haven't been downloaded already 
                 // Compute a list of video IDs we need videos for
                 List<string> videoNeededVideoIDs = new List<string>();
-                foreach (PlaylistItem playlistItem in playlistItems)
+                foreach (PlaylistItem playlistItem in _playlistItems)
                 {
                     videoNeededVideoIDs.Add(playlistItem.ContentDetails.VideoId);
                 }
@@ -364,6 +366,29 @@ public static class Program
                     GeneralHelper.RandomSleep(0, 15);
                 }
             }
+        }
+        #endregion
+
+        #region Create SongLoader.js from songs list
+        {
+            string songLoaderJsFilePath = Path.Combine(_databaseFolderPath, "SongLoader.js");
+            Console.WriteLine($"Creating \"{songLoaderJsFilePath}\"...");
+            StringBuilder songLoader = new StringBuilder();
+            songLoader.AppendLine("window.Songs = {};");
+            songLoader.AppendLine("window.Songs.ByID = {");
+            foreach (Song song in songs)
+            {
+                songLoader.Append("\"");
+                songLoader.Append(song.VideoID);
+                songLoader.Append("\": ");
+                songLoader.Append(JsonConvert.SerializeObject(song));
+                songLoader.AppendLine(",");
+            }
+            songLoader.AppendLine("};");
+            songLoader.AppendLine("window.Songs.List = Object.values(window.Songs.ByID);");
+            Console.WriteLine($"Created \"{songLoaderJsFilePath}\"...");
+            string songLoaderString = songLoader.ToString();
+            File.WriteAllText(songLoaderJsFilePath, songLoader.ToString());
         }
         #endregion
 

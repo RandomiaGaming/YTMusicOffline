@@ -10,29 +10,13 @@
     <link rel="icon" type="image/png" sizes="128x128" href="/EzMusic/Icons/icon128x128.png">
     <link rel="icon" type="image/png" sizes="256x256" href="/EzMusic/Icons/icon256x256.png">
     <link rel="stylesheet" href="/EzMusic/styles.css">
-    <script src="/EzMusic/SongsLoader.js"></script>
+    <script src="/EzMusic/scrollbars.js"></script>
+    <script src="/Database/SongLoader.js"></script>
     <script src="/EzMusic/app.js"></script>
 </head>
 
 <body>
-    <div id="song_list_container">
-    </div>
-    <audio id="player" style="width: 90vw;" controls loop></audio>
-    <br />
-    <button onclick="PlayRandomSong()">Play Random Song!</button>
-    <br />
-    <p id="status"></p>
-    <br />
-    <image style="width: 100px; height: 100px;" id="thumbnail"></image>
-    <br />
-    <p><a id="woy" href="" target="_blank">Watch on YouTube...</a></p>
-    <br />
-    <div class="song">
-        <image class="thumbnail">
-            <source src="/EzMusic/Resources/DefaultThumbnail.png" type="image/png">
-        </image>
-        <p class="description">SongName from Song Album by Song Artist released on Release Date.</p>
-    </div>
+    <audio id="player" style="display: none;" controls loop></audio>
 </body>
 
 </html>

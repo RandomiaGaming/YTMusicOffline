@@ -1,32 +1,60 @@
 async function Init() {
     window.NowPlaying = null;
     window.Player = document.querySelector("#player");
-    window.SongList = document.querySelector("#song_list_container");
-    for (let i = 0; i < window.Songs.length; i++) {
-        const releaseDate = new Date(window.Songs[i].ReleaseDate);
-        const releaseDateFormatted = releaseDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    for (let i = 0; i < window.Songs.List.length; i++) {
+        const song = window.Songs.List[i];
+        song.thumbnailLoaded = false;
+
+        const releaseDate = new Date(song.ReleaseDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
         let featuringStatement = "";
-        for (let j = 0; j < window.Songs[i].FeaturedArtistNames.length; j++) {
+        for (let j = 0; j < song.FeaturedArtistNames.length; j++) {
+            const featuredAristName = song.FeaturedArtistNames[j];
             if (j == 0) {
                 featuringStatement += " featuring ";
             } else {
                 featuringStatement += ", ";
             }
-            featuringStatement += window.Songs[i].FeaturedArtistNames[j];
+            featuringStatement += featuredAristName;
         }
-        const statusText = `Now playing ${window.Songs[i].SongName} by ${window.Songs[i].ArtistName} from ${window.Songs[i].AlbumName} released on ${releaseDateFormatted}${featuringStatement}.`;
-        const thumbnailUrl = `/Database/RawThumbnails/${window.Songs[i].VideoID}.png`;
+        const statusText = `${song.SongName} by ${song.ArtistName} from ${song.AlbumName} released on ${releaseDate}${featuringStatement}. ${i}`;
 
-        const htmlString = `<div class="song_list_element_container" onclick="PlaySongByVideoID('${window.Songs[i].VideoID}')">
-            <image class="song_list_element_thumbnail" src="${thumbnailUrl}" type="image/png" loading="lazy" alt="Thumbnail image."></image>
-            <div class="song_list_element_spacer" style="width: 25px; height: 100%;"></div>
-            <p class="song_list_element_description">${statusText}</p>
+        const htmlString = `<div class="song_list_container" onclick="PlaySong(window.Songs.ByID['${song.VideoID}'])">
+            <img class="song_list_thumbnail" type="image/png" alt="Thumbnail image." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII="></img>
+            <div class="song_list_spacer"></div>
+            <p class="song_list_description">${statusText}</p>
         </div>`;
 
         const template = document.createElement("template");
-        template.innerHTML = htmlString.trim();
-        window.SongList.appendChild(template.content);
+        template.innerHTML = htmlString;
+        song.Element = document.body.appendChild(template.content.firstChild);
     }
+
+    let thumbnailTimer = null;
+    let loadedThumbs = 0;
+    function UpdateThumbnails() {
+        clearTimeout(thumbnailTimer);
+        thumbnailTimer = setTimeout(() => {
+            const scrollTop = document.documentElement.scrollTop / document.documentElement.scrollHeight;
+            const scrollBottom = (document.documentElement.scrollTop + document.documentElement.clientHeight) / document.documentElement.scrollHeight;
+            const songCount = window.Songs.List.length;
+            const startIndex = Math.max(Math.floor(scrollTop * songCount), 0);
+            const endIndex = Math.min(Math.floor(scrollBottom * songCount), songCount - 1);
+            for (let i = startIndex; i <= endIndex; i++) {
+                const song = window.Songs.List[i];
+                if (!song.thumbnailLoaded) {
+                    loadedThumbs++;
+                    const thumbnailUrl = `/Database/RawThumbnails/${song.VideoID}.jpg`;
+                    song.Element.querySelector("img").src = thumbnailUrl;
+                    song.thumbnailLoaded = true;
+                }
+            }
+        }, 100);
+    }
+    document.addEventListener("scroll", (event) => {
+        UpdateThumbnails();
+        console.log(loadedThumbs);
+    });
+    UpdateThumbnails();
 
     if ("mediaSession" in navigator) {
         navigator.mediaSession.metadata = null;
@@ -120,19 +148,8 @@ async function UpdatePosition(newTime) {
     }
 }
 async function PlayRandomSong() {
-    const index = Math.floor(Math.random() * window.Songs.length);
-    PlaySong(window.Songs[index]);
-}
-async function PlaySongByVideoID(videoID) {
-    await PlaySong(await GetSongByVideoID(videoID));
-}
-async function GetSongByVideoID(videoID) {
-    for (let i = 0; i < window.Songs.length; i++) {
-        if (window.Songs[i].VideoID == videoID) {
-            return Songs[i];
-        }
-    }
-    return null;
+    const index = Math.floor(Math.random() * window.Songs.List.length);
+    PlaySong(window.Songs.List[index]);
 }
 async function PlaySong(song) {
     window.NowPlaying = song;
@@ -142,31 +159,7 @@ async function PlaySong(song) {
     window.Player.currentTime = 0;
     await window.Player.play();
 
-    UpdateSongInfo();
-
     ReInitMediaSession();
-}
-// Updates all the non-audio elements which show song data like the thumbnail and status.
-async function UpdateSongInfo() {
-    const status = document.querySelector("#status");
-    const releaseDate = new Date(window.NowPlaying.ReleaseDate);
-    const releaseDateFormatted = releaseDate.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-    let featuringStatement = "";
-    for (let i = 0; i < window.NowPlaying.FeaturedArtistNames.length; i++) {
-        if (i == 0) {
-            featuringStatement += " featuring ";
-        } else {
-            featuringStatement += ", ";
-        }
-        featuringStatement += window.NowPlaying.FeaturedArtistNames[i];
-    }
-    status.innerHTML = `Now playing ${window.NowPlaying.SongName} by ${window.NowPlaying.ArtistName} from ${window.NowPlaying.AlbumName} released on ${releaseDateFormatted}${featuringStatement}.`;
-
-    const thumbnail = document.querySelector("#thumbnail");
-    thumbnail.src = `/Database/RawThumbnails/${window.NowPlaying.VideoID}.png`;
-
-    const woy = document.querySelector("#woy");
-    woy.href = `https://www.youtube.com/watch?v=${window.NowPlaying.VideoID}`;
 }
 async function ReInitMediaSession() {
     if (!("mediaSession" in navigator)) {
