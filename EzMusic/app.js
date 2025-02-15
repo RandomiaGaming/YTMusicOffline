@@ -1,6 +1,10 @@
 async function Init() {
     window.NowPlaying = null;
-    window.Player = document.querySelector("#player");
+    window.Player = {};
+    window.Player.ContainerElement = document.querySelector("#player_container");
+    window.Player.FloatElement = document.querySelector("#player_float");
+    window.Player.AudioElement = document.querySelector("#player_audio");
+    window.Player.StickyState = 1;
     for (let i = 0; i < window.Songs.List.length; i++) {
         const song = window.Songs.List[i];
         song.thumbnailLoaded = false;
@@ -18,10 +22,12 @@ async function Init() {
         }
         const statusText = `${song.SongName} by ${song.ArtistName} from ${song.AlbumName} released on ${releaseDate}${featuringStatement}. ${i}`;
 
-        const htmlString = `<div class="song_list_container" onclick="PlaySong(window.Songs.ByID['${song.VideoID}'])">
-            <img class="song_list_thumbnail" type="image/png" alt="Thumbnail image." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII="></img>
-            <div class="song_list_spacer"></div>
-            <p class="song_list_description">${statusText}</p>
+        const htmlString = `<div class="song_container" onclick="PlaySong(window.Songs.ByID['${song.VideoID}'])">
+            <img class="song_thumbnail" type="image/png" alt="Thumbnail image." src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII="></img>
+            <div class="song_spacer"></div>
+            <p class="song_description">${statusText}</p>
+            <div class="song_spacer"></div>
+            <p class="song_woy" onclick="event.stopPropagation(); window.open('https://youtu.be/${song.VideoID}', '_blank')">Watch on YouTube...</p>
         </div>`;
 
         const template = document.createElement("template");
@@ -30,7 +36,6 @@ async function Init() {
     }
 
     let thumbnailTimer = null;
-    let loadedThumbs = 0;
     function UpdateThumbnails() {
         clearTimeout(thumbnailTimer);
         thumbnailTimer = setTimeout(() => {
@@ -42,7 +47,6 @@ async function Init() {
             for (let i = startIndex; i <= endIndex; i++) {
                 const song = window.Songs.List[i];
                 if (!song.thumbnailLoaded) {
-                    loadedThumbs++;
                     const thumbnailUrl = `/Database/RawThumbnails/${song.VideoID}.jpg`;
                     song.Element.querySelector("img").src = thumbnailUrl;
                     song.thumbnailLoaded = true;
@@ -50,9 +54,34 @@ async function Init() {
             }
         }, 100);
     }
+    function UpdatePlayerPosition() {
+        const clientRect = window.Player.ContainerElement.getBoundingClientRect();
+        if (clientRect.top < 0) {
+            if (window.Player.StickyState != 0) {
+                window.Player.FloatElement.style.removeProperty("bottom");
+                window.Player.FloatElement.style.top = "0px";
+                window.Player.FloatElement.style.position = "fixed";
+                window.Player.StickyState = 0;
+            }
+        } else if (clientRect.bottom > window.innerHeight) {
+            if (window.Player.StickyState != 2) {
+                window.Player.FloatElement.style.removeProperty("top");
+                window.Player.FloatElement.style.bottom = "0px";
+                window.Player.FloatElement.style.position = "fixed";
+                window.Player.StickyState = 2;
+            }
+        } else {
+            if (window.Player.StickyState != 1) {
+                window.Player.FloatElement.style.removeProperty("top");
+                window.Player.FloatElement.style.removeProperty("bottom");
+                window.Player.FloatElement.style.removeProperty("position");
+                window.Player.StickyState = 1;
+            }
+        }
+    }
     document.addEventListener("scroll", (event) => {
         UpdateThumbnails();
-        console.log(loadedThumbs);
+        UpdatePlayerPosition();
     });
     UpdateThumbnails();
 
@@ -73,30 +102,30 @@ async function Init() {
         });
         navigator.mediaSession.setActionHandler("pause", (event) => {
             navigator.mediaSession.playbackState = "paused";
-            window.Player.pause();
+            window.Player.AudioElement.pause();
         });
         navigator.mediaSession.setActionHandler("play", (event) => {
             navigator.mediaSession.playbackState = "playing";
-            window.Player.play();
+            window.Player.AudioElement.play();
         });
         navigator.mediaSession.setActionHandler("previoustrack", (event) => {
             PlayRandomSong();
         });
         navigator.mediaSession.setActionHandler("seekbackward", (event) => {
-            const newTime = window.Player.currentTime - 5;
+            const newTime = window.Player.AudioElement.currentTime - 5;
             if (event.seekOffset) {
-                newTime = window.Player.currentTime - seekOffset;
+                newTime = window.Player.AudioElement.currentTime - seekOffset;
             }
             newTime = Math.max(0, newTime)
             SeekTo(newTime);
             UpdatePosition(newTime);
         });
         navigator.mediaSession.setActionHandler("seekforward", (event) => {
-            const newTime = window.Player.currentTime + 5;
+            const newTime = window.Player.AudioElement.currentTime + 5;
             if (event.seekOffset) {
-                newTime = window.Player.currentTime + seekOffset;
+                newTime = window.Player.AudioElement.currentTime + seekOffset;
             }
-            newTime = Math.min(window.Player.duration, newTime)
+            newTime = Math.min(window.Player.AudioElement.duration, newTime)
             SeekTo(newTime);
             UpdatePosition(newTime);
         });
@@ -106,19 +135,19 @@ async function Init() {
             UpdatePosition(newTime);
         });
         navigator.mediaSession.setActionHandler("stop", (event) => {
-            window.Player.pause();
+            window.Player.AudioElement.pause();
             const newTime = 0;
             SeekTo(newTime);
             UpdatePosition(-1);
         });
 
-        window.Player.onpause = () => {
+        window.Player.AudioElement.onpause = () => {
             navigator.mediaSession.playbackState = "paused";
         };
-        window.Player.onplay = () => {
+        window.Player.AudioElement.onplay = () => {
             navigator.mediaSession.playbackState = "playing";
         };
-        window.Player.addEventListener("timeupdate", function () {
+        window.Player.AudioElement.addEventListener("timeupdate", function () {
             UpdatePosition();
         });
 
@@ -127,20 +156,20 @@ async function Init() {
     }
 }
 async function SeekTo(newTime) {
-    if ("fastSeek" in window.Player) {
-        window.Player.fastSeek(newTime);
+    if ("fastSeek" in window.Player.AudioElement) {
+        window.Player.AudioElement.fastSeek(newTime);
     } else {
-        window.Player.currentTime = newTime;
+        window.Player.AudioElement.currentTime = newTime;
     }
 }
 async function UpdatePosition(newTime) {
     if ("mediaSession" in navigator) {
-        const overridePlaybackRate = 0.0001; // window.Player.playbackRate breaks on chrome for android.
-        if (newTime != -1 && window.Player.duration > 0) {
+        const overridePlaybackRate = 0.0001; // window.Player.AudioElement.playbackRate breaks on chrome for android.
+        if (newTime != -1 && window.Player.AudioElement.duration > 0) {
             if (newTime == undefined || newTime == null) {
-                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: overridePlaybackRate, position: window.Player.currentTime });
+                navigator.mediaSession.setPositionState({ duration: window.Player.AudioElement.duration, playbackRate: overridePlaybackRate, position: window.Player.AudioElement.currentTime });
             } else {
-                navigator.mediaSession.setPositionState({ duration: window.Player.duration, playbackRate: overridePlaybackRate, position: newTime });
+                navigator.mediaSession.setPositionState({ duration: window.Player.AudioElement.duration, playbackRate: overridePlaybackRate, position: newTime });
             }
         } else {
             navigator.mediaSession.setPositionState({ duration: 500, playbackRate: overridePlaybackRate, position: 0 });
@@ -152,12 +181,19 @@ async function PlayRandomSong() {
     PlaySong(window.Songs.List[index]);
 }
 async function PlaySong(song) {
+    if (window.NowPlaying != null) {
+        window.NowPlaying.Element.style.removeProperty("display");
+    }
     window.NowPlaying = song;
+    window.NowPlaying.Element.style.display = "none";
 
-    window.Player.pause();
-    window.Player.src = `/Database/RawSongs/${window.NowPlaying.VideoID}.webm`;
-    window.Player.currentTime = 0;
-    await window.Player.play();
+    window.Player.ContainerElement.style.removeProperty("display");
+    document.body.insertBefore(window.Player.ContainerElement, window.NowPlaying.Element.nextSibling);
+
+    window.Player.AudioElement.pause();
+    window.Player.AudioElement.src = `/Database/RawSongs/${song.VideoID}.webm`;
+    window.Player.AudioElement.currentTime = 0;
+    await window.Player.AudioElement.play();
 
     ReInitMediaSession();
 }
