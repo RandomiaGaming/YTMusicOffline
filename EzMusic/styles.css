@@ -22,7 +22,7 @@ body {
 
 .song_container {
     width: 100%;
-    height: 75px;
+    height: 50px;
     border: 1px solid white;
     display: flex;
     flex-direction: row;
@@ -56,19 +56,79 @@ body {
     color: skyblue;
 }
 
-#player_container {
+.player_container {
     width: 100%;
     height: 150px;
 }
 
-#player_float {
+.player_float {
     z-index: 1;
     width: 100%;
     height: 150px;
     border: 1px solid white;
     background-color: rgb(60, 60, 60);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-#player_audio {
+.player_thumbnail {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1/1;
+}
+
+.player_main_spacer {
+    width: 30px;
+    height: 100%;
+}
+
+.player_flex_container {
+    height: 100%;
+    flex-grow: 1;
+}
+
+.player_flex_upper {
+    height: calc(100% / 3);
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.player_text_spacer {
+    width: 25px;
+    height: 100%;
+}
+
+.player_description {
+    font-size: 14pt;
+}
+
+.player_woy {
+    font-size: 14pt;
+    color: cornflowerblue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.player_woy:hover {
+    color: skyblue;
+}
+
+.player_flex_middle {
+    height: calc(100% / 3);
+    width: 100%;
+}
+
+.player_flex_lower {
+    height: calc(100% / 3);
+    width: 100%;
+}
+
+.player_audio {
+    width: 100%;
+    height: 100%;
 }
