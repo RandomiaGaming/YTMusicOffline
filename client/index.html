@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 
+
 <head>
     <title>EzMusic</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="/EzMusic/Icons/icon16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/EzMusic/Icons/icon32x32.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="/EzMusic/Icons/icon48x48.png">
-    <link rel="icon" type="image/png" sizes="64x64" href="/EzMusic/Icons/icon64x64.png">
-    <link rel="icon" type="image/png" sizes="128x128" href="/EzMusic/Icons/icon128x128.png">
-    <link rel="icon" type="image/png" sizes="256x256" href="/EzMusic/Icons/icon256x256.png">
-    <link rel="stylesheet" href="/EzMusic/styles.css">
-    <script src="/EzMusic/scrollbars.js"></script>
-    <script src="/Database/SongLoader.js"></script>
-    <script src="/EzMusic/app.js"></script>
+    <link rel="icon" sizes="16x16" href="/icons/icon16x16.png">
+    <link rel="icon" sizes="32x32" href="/icons/icon32x32.png">
+    <link rel="icon" sizes="48x48" href="/icons/icon48x48.png">
+    <link rel="icon" sizes="64x64" href="/icons/icon64x64.png">
+    <link rel="icon" sizes="128x128" href="/icons/icon128x128.png">
+    <link rel="icon" sizes="256x256" href="/icons/icon256x256.png">
+    <link rel="preload" href="/styles.css" as="style">
+    <script>console.time("PageLoad")</script>
+    <link rel="stylesheet" href="/styles.css">
+    <script>console.timeEnd("PageLoad")</script>
+    <script src="/scrollbars.js"></script>
+    <script src="/app.js"></script>
 </head>
 
 <body>
     <div class="player_container" style="display: none;">
         <div class="player_float">
-            <img class="player_thumbnail" type="image/png" alt="Thumbnail image."
+            <img class="player_thumbnail" alt="Thumbnail image."
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
             <div class="player_main_spacer"></div>
             <div class="player_flex_container">
@@ -36,5 +39,6 @@
         </div>
     </div>
 </body>
+
 
 </html>

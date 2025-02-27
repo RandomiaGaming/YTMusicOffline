@@ -1,7 +1,6 @@
-Database/RawSongs
-Database/RawThumbnails
-Database/Songs
-Database/Thumbnails
+database/songs
+database/thumbnails
+server/secrets.json
 
 ##TEMPLATE##
 
