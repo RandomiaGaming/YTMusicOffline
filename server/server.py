@@ -58,9 +58,9 @@ def compute_etag(filepath):
 
 @app.route("/api/save_database", methods=["POST"])
 def update_database():
-    database_path = os.path.join(root, "database", "database2.json")
+    database_path = os.path.join(root, "database", "database.json")
     database_json = request.data.decode("utf-8")
-    with open(database_path, "w") as file:
+    with open(database_path, "w", encoding="utf-8") as file:
         file.write(database_json)
     return make_response("", 200)
 
@@ -82,7 +82,6 @@ def serve_slash_database_slash_filename(file_name):
     return serve_file(file_path)
 
 def serve_file(file_path):
-    print("Got request for " + file_path)
     response = send_from_directory(os.path.dirname(file_path), os.path.basename(file_path))
     response.headers.pop("Content-Disposition", None)
     response.headers.pop("Date", None)

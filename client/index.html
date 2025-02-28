@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-
 <head>
+    <script>console.time("PageLoad")</script>
     <title>EzMusic</title>
     <link rel="icon" sizes="16x16" href="/icons/icon16x16.png">
     <link rel="icon" sizes="32x32" href="/icons/icon32x32.png">
@@ -11,32 +11,41 @@
     <link rel="icon" sizes="128x128" href="/icons/icon128x128.png">
     <link rel="icon" sizes="256x256" href="/icons/icon256x256.png">
     <link rel="preload" href="/styles.css" as="style">
-    <script>console.time("PageLoad")</script>
     <link rel="stylesheet" href="/styles.css">
-    <script>console.timeEnd("PageLoad")</script>
     <script src="/scrollbars.js"></script>
     <script src="/app.js"></script>
 </head>
 
 <body>
-    <div class="player_container" style="display: none;">
-        <div class="player_float">
-            <img class="player_thumbnail" alt="Thumbnail image."
+    <div id="player_container" style="display: none;">
+        <div id="player_float">
+            <img id="player_thumbnail" class="square" alt="Thumbnail image."
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
-            <div class="player_main_spacer"></div>
-            <div class="player_flex_container">
-                <div class="player_flex_upper">
-                    <p class="player_description">${statusText}</p>
-                    <div class="player_text_spacer"></div>
-                    <p class="player_woy"
-                        onclick="event.stopPropagation(); window.open(`https\:\/\/youtu.be/${Player.NowPlaying.VideoID}/`, '_blank')">
-                        Watch on YouTube...</p>
+            <div id="player_main_right_spacer" class="horizontal_spacer"></div>
+            <div id="player_flex_container">
+                <div id="player_top_layer" class="player_flex_layer">
+                    <p id="player_description"></p>
+                    <div id="player_description_spacer" class="horizontal_spacer"></div>
+                    <a id="player_watch_original" href="#" target="_blank">Watch original...</a>
                 </div>
-                <div class="player_flex_middle"></div>
-                <div class="player_flex_lower"><audio class="player_audio" controls loop></audio></div>
+                <div id="player_middle_layer" class="player_flex_layer">
+                </div>
+                <div id="player_bottom_layer" class="player_flex_layer">
+                    <audio id="player_audio" controls></audio>
+                </div>
             </div>
-            <div class="player_main_spacer"></div>
+            <div id="player_main_left_spacer" class="horizontal_spacer"></div>
         </div>
+    </div>
+
+    <div class="element_container" data-index="0" onclick="ListElementClicked()">
+        <img class="element_thumbnail" class="square" alt="Thumbnail image."
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
+        <div class="element_first_spacer horizontal_spacer"></div>
+        <p class="element_text"></p>
+        <div class="element_second_spacer horizontal_spacer"></div>
+        <a class="element_source" href="" target="_blank" onclick="event.stopPropagation()">Watch
+            original...</a>
     </div>
 </body>
 

@@ -1,12 +1,11 @@
 [
   {
-    "src": "songs/4De_ERjvuUI.mp4",
-    "thumbnail": "thumbnails/4De_ERjvuUI.jpg",
-    "source_url": "https://www.youtube.com/watch?v=4De_ERjvuUI",
-    "song_name": "SLOW DANCING IN THE DARK",
-    "album_name": "BALLADS 1",
-    "artist_names": [
-      "Joji",
+    "VideoID": "4De_ERjvuUI",
+    "ThumbnailUrl": "https://i.ytimg.com/vi/4De_ERjvuUI/maxresdefault.jpg",
+    "SongName": "SLOW DANCING IN THE DARK",
+    "AlbumName": "BALLADS 1",
+    "ArtistName": "Joji",
+    "FeaturedArtistNames": [
       "George Miller",
       "Patrick Wimberly"
     ],

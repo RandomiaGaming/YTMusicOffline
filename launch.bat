@@ -2,7 +2,8 @@
 where python >nul 2>&1
 
 if %errorlevel% neq 0 (
-    echo ERROR: Python is not installed or not added to PATH.
+    echo "ERROR: Python is not installed or is not added to PATH."
+    pause
     exit /b 1
 )
 
