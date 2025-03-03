@@ -16,6 +16,7 @@
 #vslib_scroll_rect {
     width: 100%;
     position: relative;
+    will-change: height;
 }
 
 #vslib_element_template {
@@ -25,4 +26,5 @@
 .vslib_element {
     position: absolute;
     width: 100%;
+    will-change: transform, height;
 }
