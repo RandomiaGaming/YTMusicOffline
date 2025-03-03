@@ -10,42 +10,40 @@
     <link rel="icon" sizes="64x64" href="/icons/icon64x64.png">
     <link rel="icon" sizes="128x128" href="/icons/icon128x128.png">
     <link rel="icon" sizes="256x256" href="/icons/icon256x256.png">
-    <link rel="preload" href="/styles.css" as="style">
     <link rel="stylesheet" href="/styles.css">
-    <script src="/scrollbars.js"></script>
     <script src="/app.js"></script>
 </head>
 
 <body>
-    <div id="player_container" style="display: none;">
-        <div id="player_float">
-            <img id="player_thumbnail" class="square" alt="Thumbnail image."
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
-            <div id="player_main_right_spacer" class="horizontal_spacer"></div>
-            <div id="player_flex_container">
-                <div id="player_top_layer" class="player_flex_layer">
-                    <p id="player_description"></p>
-                    <div id="player_description_spacer" class="horizontal_spacer"></div>
-                    <a id="player_watch_original" href="#" target="_blank">Watch original...</a>
-                </div>
-                <div id="player_middle_layer" class="player_flex_layer">
-                </div>
-                <div id="player_bottom_layer" class="player_flex_layer">
-                    <audio id="player_audio" controls></audio>
-                </div>
-            </div>
-            <div id="player_main_left_spacer" class="horizontal_spacer"></div>
-        </div>
+    <div id="scroll_container">
+        <div id="scroll_bar"></div>
     </div>
 
-    <div class="element_container" data-index="0" onclick="ListElementClicked()">
-        <img class="element_thumbnail" class="square" alt="Thumbnail image."
+    <div id="search_container">
+        <input id="search_bar" style="background-color: rgb(60, 60, 60);" placeholder="Search...">
+    </div>
+
+    <div id="list_container">
+
+    </div>
+
+    <div id="player_container">
+        <img id="player_thumbnail" class="square_image" alt="Thumbnail image."
             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
-        <div class="element_first_spacer horizontal_spacer"></div>
-        <p class="element_text"></p>
-        <div class="element_second_spacer horizontal_spacer"></div>
-        <a class="element_source" href="" target="_blank" onclick="event.stopPropagation()">Watch
-            original...</a>
+        <div id="player_main_spacer_1" class="horizontal_spacer"></div>
+        <div id="player_flex_container">
+            <div id="player_top_layer" class="player_flex_layer">
+                <p id="player_description"></p>
+                <div id="player_description_spacer" class="horizontal_spacer"></div>
+                <a id="player_watch_original" href="#" target="_blank">Watch original...</a>
+            </div>
+            <div id="player_middle_layer" class="player_flex_layer">
+            </div>
+            <div id="player_bottom_layer" class="player_flex_layer">
+                <audio id="player_audio" controls></audio>
+            </div>
+        </div>
+        <div id="player_main_spacer_2" class="horizontal_spacer"></div>
     </div>
 </body>
 

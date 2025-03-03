@@ -35,12 +35,10 @@ async function WaitForDomLoad() {
 
 Player = {};
 Player.containerElement = null;
-Player.floatElement = null;
 Player.audioElement = null;
 Player.thumbnailElement = null;
 Player.descriptionElement = null;
 Player.watchOriginalElement = null;
-Player.floatState = "hidden"; // hidden, top, middle, bottom
 Player.nowPlaying = null;
 
 async function Init() {
@@ -51,7 +49,6 @@ async function Init() {
     await Promise.all(promises);
 
     Player.containerElement = document.querySelector("#player_container");
-    Player.floatElement = document.querySelector("#player_float");
     Player.thumbnailElement = document.querySelector("#player_thumbnail");
     Player.descriptionElement = document.querySelector("#player_description");
     Player.watchOriginalElement = document.querySelector("#player_watch_original");

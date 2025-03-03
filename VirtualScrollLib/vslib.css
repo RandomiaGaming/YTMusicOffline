@@ -1,0 +1,28 @@
+.vslib_global {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    box-sizing: border-box;
+}
+
+#vslib_container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#vslib_scroll_rect {
+    width: 100%;
+    position: relative;
+}
+
+#vslib_element_template {
+    display: none;
+}
+
+.vslib_element {
+    position: absolute;
+    width: 100%;
+}

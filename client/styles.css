@@ -1,3 +1,4 @@
+/* General Styles */
 * {
     padding: 0px;
     margin: 0px;
@@ -7,21 +8,67 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14pt;
     color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 :root {
-    --scrollbar-width: 17px;
     --list-element-height-landscape: 7%;
     --list-element-height-portrait: 5%;
     --list-element-height: var(--list-element-height-landscape);
 }
 
 body {
-    width: calc(100vw - var(--scrollbar-width));
+    width: 100vw;
     height: 100vh;
     background-color: rgb(60, 60, 60);
-    overflow-y: auto;
-    overflow-x: hidden;
+}
+
+#scroll_container {
+    z-index: 1;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    pointer-events: none;
+}
+
+#scroll_bar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 10000%;
+    pointer-events: none;
+}
+
+/*
+#scroll_bar {
+    position: absolute;
+    width: 100%;
+    height: 500%;
+    overflow-y: scroll;
+    pointer-events: none;
+}
+
+#search_container {
+    height: 10%;
+    width: 100%;
+    background: lightgray;
+}
+
+#list_container {
+    flex-grow: 1;
+    width: 100%;
+    background: white;
+}
+
+#player_container {
+    height: 10%;
+    width: 100%;
+    background: lightgray;
 }
 
 a {
@@ -34,7 +81,7 @@ a:hover {
     color: skyblue;
 }
 
-.square {
+.square_image {
     height: 100%;
     width: auto;
     aspect-ratio: 1 / 1;
@@ -50,7 +97,37 @@ a:hover {
     height: 25px;
 }
 
-.list_element {
+#search_container {
+    border: 1px solid white;
+    z-index: 1;
+    width: 100%;
+    height: calc(var(--list-element-height) * 0.75);
+    position: fixed;
+    top: 0px;
+}
+
+#search_bar {
+    width: 100%;
+    height: 100%;
+}
+
+#list_container {
+    width: 100%;
+    height: 90%;
+    flex-grow: 1;
+}
+
+#list_top_spacer {
+    width: 100%;
+    height: calc(var(--list-element-height) * 0.75);
+}
+
+#list_bottom_spacer {
+    width: 100%;
+    height: calc(var(--list-element-height) * 10);
+}
+
+.element_container {
     width: 100%;
     height: var(--list-element-height);
     border: 1px solid white;
@@ -63,11 +140,8 @@ a:hover {
 #player_container {
     width: 100%;
     height: calc(var(--list-element-height) * 1.75);
-}
-
-#player_float {
-    z-index: 1;
-    width: 100%;
+    position: fixed;
+    bottom: 0px;
     border: 1px solid white;
     background-color: rgb(60, 60, 60);
     display: flex;
@@ -94,3 +168,4 @@ a:hover {
     width: 100%;
     height: 100%;
 }
+    */
