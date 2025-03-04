@@ -3,51 +3,91 @@
 
 <head>
     <script>console.time("PageLoad")</script>
-    <title>EzMusic</title>
     <link rel="stylesheet" href="/vslib.css">
     <script src="/vslib.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app2.js"></script>
+    <title>EzMusic</title>
     <link rel="icon" sizes="16x16" href="/icons/icon16x16.png">
     <link rel="icon" sizes="32x32" href="/icons/icon32x32.png">
     <link rel="icon" sizes="48x48" href="/icons/icon48x48.png">
     <link rel="icon" sizes="64x64" href="/icons/icon64x64.png">
     <link rel="icon" sizes="128x128" href="/icons/icon128x128.png">
     <link rel="icon" sizes="256x256" href="/icons/icon256x256.png">
-    <link rel="stylesheet" href="/styles.css">
-    <script src="/app.js"></script>
 </head>
 
 <body>
-    <div id="scroll_container">
-        <div id="scroll_bar"></div>
-    </div>
-
     <div id="search_container">
-        <input id="search_bar" style="background-color: rgb(60, 60, 60);" placeholder="Search...">
+        <input type="text" id="search_bar" placeholder="Search...">
+        <button id="search_button">Search &#x1F50E;&#xFE0E;</button>
     </div>
 
     <div id="list_container">
-
+        <div id="vslib_scale_container" class="vslib_global">
+            <div id="vslib_fixed_container" class="vslib_global">
+                <div id="vslib_scroll_rect" class="vslib_global">
+                    <div id="vslib_element_template" class="vslib_element vslib_global">
+                        <div class="element_container" onclick="alert('todo')">
+                            <img class="element_thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
+                            <p class="element_description"><a
+                                class="element_title element_link">SLOW DANCING IN THE DARK</a><span
+                                class="element_from"> from </span><a
+                                class="element_album element_link">BALLADS 1</a><span
+                                class="element_by"> by </span><a
+                                class="element_artist_0 element_link">Joji</a><span
+                                class="element_conjunction_0">, </span><a
+                                class="element_artist_1 element_link">George Miller</a><span
+                                class="element_conjunction_1">, </span><a
+                                class="element_artist_2 element_link">Patrick Wimberly</a><span
+                                class="element_conjunction_2">, and </span><span
+                                class="element_artist_more"> More... </span><span
+                                class="element_released_on"> released on </span><a
+                                class="element_release_date element_link">10/26/2018</a><span
+                                class="element_period">.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="player_container">
-        <img id="player_thumbnail" class="square_image" alt="Thumbnail image."
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
-        <div id="player_main_spacer_1" class="horizontal_spacer"></div>
+        <img id="player_thumbnail" src="/database/thumbnails/4De_ERjvuUI.jpg">
         <div id="player_flex_container">
-            <div id="player_top_layer" class="player_flex_layer">
-                <p id="player_description"></p>
-                <div id="player_description_spacer" class="horizontal_spacer"></div>
-                <a id="player_watch_original" href="#" target="_blank">Watch original...</a>
+            <div id="player_layer_top" class="player_flex_layer">
+                <p class="player_description"><span
+                    class="player_text_nowPlaying">Now playing </span><a
+                    class="player_text_title player_link">SLOW DANCING IN THE DARK</a><span
+                    class="player_text_from"> from </span><a
+                    class="player_text_album player_link">BALLADS 1</a><span
+                    class="player_text_by"> by </span><a
+                    class="player_text_artist1 player_link">Joji</a><span
+                    class="player_text_spacer1">, </span><a
+                    class="player_text_artist2 player_link">George Miller</a><span
+                    class="player_text_spacer2">, and </span><a
+                    class="player_text_artist3 player_link">Patrick Wimberly</a><span
+                    class="player_text_spacer3"></span><a
+                    class="player_text_artist4 player_link"></a><span
+                    class="player_text_spacer4"></span><a
+                    class="player_text_artist5 player_link"></a><span
+                    class="player_text_releasedOn"> released on </span><a
+                    class="player_text_releaseDate player_link">10/26/2018</a><span
+                    class="player_text_period">.</span>
+                </p>
             </div>
-            <div id="player_middle_layer" class="player_flex_layer">
+            <div id="player_layer_middle" class="player_flex_layer">
+                <p id="player_options">
+                    <a class="player_link">Shuffle</a>
+                    <a class="player_link">Loop</a>
+                    <a class="player_link" href="https://www.youtube.com/watch?v=4De_ERjvuUI" target="_blank">Watch original</a>
+                </p>
             </div>
-            <div id="player_bottom_layer" class="player_flex_layer">
-                <audio id="player_audio" controls></audio>
+            <div id="player_layer_bottom" class="player_flex_layer">
+                <audio id="player_audio" src="/database/songs/4De_ERjvuUI.webm" controls loop></audio>
             </div>
         </div>
-        <div id="player_main_spacer_2" class="horizontal_spacer"></div>
     </div>
 </body>
-
 
 </html>

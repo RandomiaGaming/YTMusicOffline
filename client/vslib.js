@@ -6,11 +6,12 @@ VSLib.Internals.RelativeElementHeight = true;
 VSLib.Internals.ElementHeight = 0.1;
 VSLib.Internals.Dataset = [];
 VSLib.Internals.VirtualElements = [];
-// userdata function(element, index, data, userdata);
+// userdata function(element, index, userdata);
 VSLib.Internals.ElementDataUpdateCallback = null;
 
 // Element refrences
-VSLib.Internals.ContainerElement = null;
+VSLib.Internals.ScaleContainerElement = null;
+VSLib.Internals.FixedContainerElement = null;
 VSLib.Internals.ScrollRectElement = null;
 VSLib.Internals.ElementTemplateElement = null;
 
@@ -18,6 +19,8 @@ VSLib.Internals.ElementTemplateElement = null;
 VSLib.Internals.UpdateQueued = false;
 VSLib.Internals.ElementRefrencesNull = true;
 VSLib.Internals.DatasetChanged = false;
+VSLib.Internals.PreviousScrollRectHeightInPx = 0;
+VSLib.Internals.PreviousElementHeightInPx = 0;
 
 // Other
 VSLib.Internals.ResizeObserver = null;
@@ -105,6 +108,55 @@ VSLib.Internals.QueueUpdate = () => {
     }
 }
 
+// The heart of the rebinding algorithem.
+// Returns a list of transformations.
+// Integers mean change the original binding to this new int.
+// Null means don't change it at all.
+VSLib.Internals.MinTransformations = (currentBindings, startIndex, datasetLength) => {
+    todoNulls = 0;
+    todo = [];
+    for (let i = 0; i < currentBindings.length; i++) {
+        const index = startIndex + i;
+        if (index < datasetLength) {
+            todo.push(index);
+        } else {
+            todoNulls++;
+        }
+    }
+    output = [];
+    for (let i = 0; i < currentBindings.length; i++) {
+        output.push(null);
+    }
+    rebindList = [];
+    for (let i = 0; i < currentBindings.length; i++) {
+        if (currentBindings[i] == -1) {
+            if (todoNulls > 0) {
+                todoNulls--;
+            } else {
+                rebindList.push(i);
+            }
+        } else {
+            index = todo.indexOf(currentBindings[i]);
+            if (index == -1) {
+                rebindList.push(i);
+            } else {
+                todo.splice(index, 1);
+            }
+        }
+    }
+    while (todo.length > 0) {
+        output[rebindList[0]] = todo[0];
+        rebindList.shift();
+        todo.shift();
+    }
+    while (todoNulls > 0) {
+        output[rebindList[0]] = -1;
+        rebindList.shift();
+        todoNulls--;
+    }
+    return output;
+}
+
 // This function runs once per frame right
 // before the graphics are renderred.
 VSLib.Internals.Update = () => {
@@ -116,96 +168,98 @@ VSLib.Internals.Update = () => {
 
     // Initialize element refrences if not done already.
     if (private.ElementRefrencesNull) {
-        private.ContainerElement = document.querySelector("#vslib_container");
-        private.ScrollRectElement = private.ContainerElement.querySelector("#vslib_scroll_rect");
+        private.ScaleContainerElement = document.querySelector("#vslib_scale_container");
+        private.FixedContainerElement = document.querySelector("#vslib_fixed_container");
+        private.ScrollRectElement = private.FixedContainerElement.querySelector("#vslib_scroll_rect");
         private.ElementTemplateElement = private.ScrollRectElement.querySelector("#vslib_element_template");
 
-        private.ContainerElement.addEventListener("scroll", () => {
+        private.FixedContainerElement.addEventListener("scroll", () => {
             private.QueueUpdate();
         });
 
         private.ResizeObserver = new ResizeObserver(entries => {
+            private.FixedContainerElement.style.width = `${private.ScaleContainerElement.clientWidth}px`;
+            private.FixedContainerElement.style.height = `${private.ScaleContainerElement.clientHeight}px`;
             private.QueueUpdate();
         });
-        private.ResizeObserver.observe(private.ContainerElement);
+        private.ResizeObserver.observe(private.ScaleContainerElement);
 
         private.ElementRefrencesNull = false;
     }
 
     // Basic computations
-    const containerHeightInPx = private.ContainerElement.clientHeight;
+    const containerHeightInPx = private.FixedContainerElement.clientHeight;
     let elementHeightInPx = private.ElementHeight;
     if (private.RelativeElementHeight) {
         elementHeightInPx = containerHeightInPx * private.ElementHeight;
     }
     const elementsPerScreen = containerHeightInPx / elementHeightInPx;
     const targetElementCount = elementsPerScreen + 1;
-    const scrollAmount = private.ContainerElement.scrollTop;
-    const startIndex = Math.min(Math.floor(scrollAmount / elementHeightInPx), private.Dataset.length - private.VirtualElements.length);
-    const endIndex = startIndex + (private.VirtualElements.length - 1);
+    const scrollAmount = private.FixedContainerElement.scrollTop;
+    const startIndex = Math.floor(scrollAmount / elementHeightInPx);
+    const endIndex = startIndex + (targetElementCount - 1);
 
     // Update the height of the scroll rect if it's wrong.
-    const scrollRectHeightInPx = private.Dataset.length * elementHeightInPx;
-    if (private.PreviousScrollRectHeight != scrollRectHeightInPx) {
+    const scrollRectHeightInPx = Math.max(private.Dataset.length * elementHeightInPx, containerHeightInPx);
+    if (private.PreviousScrollRectHeightInPx != scrollRectHeightInPx) {
         private.ScrollRectElement.style.height = `${scrollRectHeightInPx}px`;
-        private.PreviousScrollRectHeight = scrollRectHeightInPx;
+        private.PreviousScrollRectHeightInPx = scrollRectHeightInPx;
     }
 
     // Add or remove elements to ensure we have the correct number.
-    if (private.VirtualElements.length > targetElementCount + 2 || private.VirtualElements.length < targetElementCount - 2) {
-        while (private.VirtualElements.length > targetElementCount) {
-            const virtualElement = private.VirtualElements[private.VirtualElements.length - 1];
-            virtualElement.Element.remove();
-            private.VirtualElements.pop();
-        }
-        while (private.VirtualElements.length < targetElementCount) {
-            const element = private.ElementTemplateElement.cloneNode(true);
-            element.removeAttribute("id");
-            element.style.transform = `translateY(0px)`;
-            element.style.height = `${elementHeightInPx}px`;
-            const virtualElement = { Element: element, Index: -1, Data: null, UserData: null, Top: 0, Height: elementHeightInPx };
-            private.ScrollRectElement.appendChild(virtualElement.Element);
-            private.VirtualElements.push(virtualElement);
-        }
+    while (private.VirtualElements.length > targetElementCount) {
+        const virtualElement = private.VirtualElements[private.VirtualElements.length - 1];
+        virtualElement.Element.remove();
+        private.VirtualElements.pop();
+    }
+    while (private.VirtualElements.length < targetElementCount) {
+        const element = private.ElementTemplateElement.cloneNode(true);
+        element.removeAttribute("id");
+        element.style.transform = "translateY(0px)";
+        element.style.height = `${elementHeightInPx}px`;
+        element.style.display = "none";
+        const virtualElement = { Element: element, Index: -1, UserData: null };
+        private.ScrollRectElement.appendChild(virtualElement.Element);
+        private.VirtualElements.push(virtualElement);
     }
 
-    // Bind each virtual element to a dataset element
-    for (let index = startIndex; index <= endIndex; index++) {
-        let alreadyBound = false;
-        let freeVirtualElement = null;
+    // Ensure the each element is the correct height and top.
+    if (private.PreviousElementHeightInPx != elementHeightInPx) {
         for (let i = 0; i < private.VirtualElements.length; i++) {
             const virtualElement = private.VirtualElements[i];
-            if (virtualElement.Index == index) {
-                alreadyBound = true;
-                break;
+            virtualElement.Element.style.height = `${elementHeightInPx}px`;
+            if (virtualElement.Index == -1) {
+                virtualElement.Element.style.transform = "translateY(0px)";
+            } else {
+                virtualElement.Element.style.transform = `translateY(${virtualElement.Index * elementHeightInPx}px)`;
             }
-            if (virtualElement.Index < startIndex || virtualElement.Index > endIndex) {
-                freeVirtualElement = virtualElement;
-            }
-        }
-        if (alreadyBound) {
-            continue;
-        }
-
-        // Bind freeVirtualElement to index
-        freeVirtualElement.Index = index;
-        freeVirtualElement.Data = private.Dataset[index];
-        if (private.ElementDataUpdateCallback != null) {
-            freeVirtualElement.UserData = private.ElementDataUpdateCallback(freeVirtualElement.Element, freeVirtualElement.Index, freeVirtualElement.Data, freeVirtualElement.UserData);
         }
     }
+    private.PreviousElementHeightInPx = elementHeightInPx;
 
-    // Ensure the top and height of each virtual element is correct.
+    // Rebind elements
+    currentBindings = [];
     for (let i = 0; i < private.VirtualElements.length; i++) {
         const virtualElement = private.VirtualElements[i];
-        const targetTop = virtualElement.Index * elementHeightInPx;
-        if (virtualElement.Top != targetTop) {
-            virtualElement.Element.style.transform = `translateY(${targetTop}px)`;
-            virtualElement.Top = targetTop;
-        }
-        if (virtualElement.Height != elementHeightInPx) {
-            virtualElement.Height = elementHeightInPx;
-            virtualElement.Element.style.height = `${elementHeightInPx}px`;
+        currentBindings.push(virtualElement.Index);
+    }
+    rebindings = private.MinTransformations(currentBindings, startIndex, private.Dataset.length);
+    for (let i = 0; i < rebindings.length; i++) {
+        const index = rebindings[i];
+        if (index != null) {
+            const virtualElement = private.VirtualElements[i];
+            if (index == -1) {
+                // Bind to null
+                virtualElement.Index = -1;
+                virtualElement.Element.style.display = "none";
+                virtualElement.Element.style.transform = "translateY(0px)";
+            } else {
+                // Bind to index
+                virtualElement.Index = index;
+                virtualElement.Element.style.display = "inline";
+                virtualElement.Element.style.transform = `translateY(${index * elementHeightInPx}px)`;
+                virtualElement.UserData = private.ElementDataUpdateCallback(virtualElement.Element, virtualElement.Index, virtualElement.UserData);
+            }
         }
     }
 }

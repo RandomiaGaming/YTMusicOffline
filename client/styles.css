@@ -1,48 +1,187 @@
+/*
+Pallet
+Background: #2A2A2A
+Accent: cornflowerblue
+Text: white
+Dark Text: #c0c0c0
+*/
+
+:root {
+    --background-color: #2A2A2A;
+    --accent-color: cornflowerblue;
+    --text-color: white;
+    --dark-text-color: #c0c0c0;
+    --border-size: 3px;
+}
+
 /* General Styles */
 * {
     padding: 0px;
     margin: 0px;
-    border: 0px;
+    border: none;
+    outline: none;
     z-index: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14pt;
-    color: white;
+    color: var(--dark-text-color);
     overflow-x: hidden;
     overflow-y: hidden;
-}
-
-:root {
-    --list-element-height-landscape: 7%;
-    --list-element-height-portrait: 5%;
-    --list-element-height: var(--list-element-height-landscape);
+    color-scheme: dark;
+    background-color: transparent;
+    text-decoration: none;
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(60, 60, 60);
+    width: 100svw;
+    height: 100svh;
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-#scroll_container {
+/* Search */
+#search_container {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#search_bar {
+    flex-grow: 1;
+    height: 100%;
+    padding: 0px 20px;
+    color: var(--dark-text-color);
+    border: var(--border-size) solid var(--accent-color);
+}
+
+#search_bar::placeholder {
+    color: var(--dark-text-color);
+}
+
+#search_bar:focus {
+    border: var(--border-size) solid var(--text-color);
+    color: var(--text-color);
+}
+
+#search_button {
+    padding: 0px 20px;
+    height: 100%;
+    color: var(--dark-text-color);
+    border-top: var(--border-size) solid var(--accent-color);
+    border-bottom: var(--border-size) solid var(--accent-color);
+    border-right: var(--border-size) solid var(--accent-color);
+}
+
+#search_button:hover {
+    border-top: var(--border-size) solid var(--dark-text-color);
+    border-bottom: var(--border-size) solid var(--dark-text-color);
+    border-right: var(--border-size) solid var(--dark-text-color);
+    box-shadow: calc(var(--border-size) * -1) 0px 0px 0px var(--dark-text-color);
     z-index: 1;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+}
+
+#search_button:active {
+    color: var(--text-color);
+    border-top: var(--border-size) solid var(--text-color);
+    border-bottom: var(--border-size) solid var(--text-color);
+    border-right: var(--border-size) solid var(--text-color);
+    box-shadow: calc(var(--border-size) * -1) 0px 0px 0px var(--text-color);
+    z-index: 1;
+}
+
+/* List General */
+#list_container {
+    width: 100%;
+    flex-grow: 1;
+    border-left: var(--border-size) solid var(--accent-color);
+    border-right: var(--border-size) solid var(--accent-color);
+}
+
+/* List Elements */
+.element_container {
     width: 100%;
     height: 100%;
-    overflow-y: scroll;
-    pointer-events: none;
+    border: calc(var(--border-size) / 2) solid var(--text-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-#scroll_bar {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 10000%;
-    pointer-events: none;
+.element_thumbnail {
+    height: 100%;
+    aspect-ratio: 1 / 1;
 }
+
+.element_description {
+    padding: 0px 30px;
+    width: 100%;
+}
+
+.element_link {
+    color: white;
+    cursor: pointer;
+}
+
+.element_link:hover {
+    color: cornflowerblue;
+}
+
+/* Player */
+#player_container {
+    width: 100%;
+    height: 150px;
+    border: var(--border-size) solid var(--accent-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#player_thumbnail {
+    height: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+#player_flex_container {
+    flex-grow: 1;
+    height: 100%;
+    padding: 0px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.player_flex_layer {
+    width: 100%;
+    height: calc(100% / 3);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#player_audio {
+    width: 100%;
+    height: 100%;
+}
+
+.player_link {
+    color: white;
+    cursor: pointer;
+}
+
+.player_link:hover {
+    color: cornflowerblue;
+}
+
 
 /*
 #scroll_bar {
@@ -71,15 +210,7 @@ body {
     background: lightgray;
 }
 
-a {
-    color: cornflowerblue;
-    text-decoration: underline;
-    cursor: pointer;
-}
 
-a:hover {
-    color: skyblue;
-}
 
 .square_image {
     height: 100%;
