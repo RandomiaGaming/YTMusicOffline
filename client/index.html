@@ -3,10 +3,14 @@
 
 <head>
     <script>console.time("PageLoad")</script>
+    <script src="/helper.js"></script>
     <link rel="stylesheet" href="/vslib.css">
     <script src="/vslib.js"></script>
+    <script src="/dataLoader.js"></script>
+    <script src="/player.js"></script>
+    <script src="/searchEngine.js"></script>
+    <script src="/gui.js"></script>
     <link rel="stylesheet" href="/styles.css">
-    <script src="/app2.js"></script>
     <title>EzMusic</title>
     <link rel="icon" sizes="16x16" href="/icons/icon16x16.png">
     <link rel="icon" sizes="32x32" href="/icons/icon32x32.png">
@@ -19,7 +23,8 @@
 <body>
     <div id="search_container">
         <input type="text" id="search_bar" placeholder="Search...">
-        <button id="search_button">Search &#x1F50E;&#xFE0E;</button>
+        <script>document.querySelector("#search_bar").addEventListener("keypress", function (event) { if (event.key === "Enter") { SearchEngine.Search(); } });  </script>
+        <button id="search_button" onclick="SearchEngine.Search()">Search &#x1F50E;&#xFE0E;</button>
     </div>
 
     <div id="list_container">
@@ -27,23 +32,22 @@
             <div id="vslib_fixed_container" class="vslib_global">
                 <div id="vslib_scroll_rect" class="vslib_global">
                     <div id="vslib_element_template" class="vslib_element vslib_global">
-                        <div class="element_container" onclick="alert('todo')">
+                        <div class="element_container" onclick="PlaySong(Playlist[this.dataset.binding])">
                             <img class="element_thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=">
-                            <p class="element_description"><a
-                                class="element_title element_link">SLOW DANCING IN THE DARK</a><span
-                                class="element_from"> from </span><a
-                                class="element_album element_link">BALLADS 1</a><span
-                                class="element_by"> by </span><a
-                                class="element_artist_0 element_link">Joji</a><span
-                                class="element_conjunction_0">, </span><a
-                                class="element_artist_1 element_link">George Miller</a><span
-                                class="element_conjunction_1">, </span><a
-                                class="element_artist_2 element_link">Patrick Wimberly</a><span
-                                class="element_conjunction_2">, and </span><span
-                                class="element_artist_more"> More... </span><span
-                                class="element_released_on"> released on </span><a
-                                class="element_release_date element_link">10/26/2018</a><span
-                                class="element_period">.</span>
+                            <p class="element_text">
+                                   <a class="element_title element_link"></a><!--
+                                --><span class="element_from"></span><!--
+                                --><a class="element_album element_link"></a><!--
+                                --><span class="element_by"></span><!--
+                                --><a class="element_artist_1 element_link"></a><!--
+                                --><span class="element_conjunction_1"></span><!--
+                                --><a class="element_artist_2 element_link"></a><!--
+                                --><span class="element_conjunction_2"></span><!--
+                                --><a class="element_artist_3 element_link"></a><!--
+                                --><span class="element_and_others"></span><!--
+                                --><span class="element_released_on"></span><!--
+                                --><a class="element_release_date element_link"></a><!--
+                                --><span class="element_period"></span>
                             </p>
                         </div>
                     </div>
@@ -56,31 +60,26 @@
         <img id="player_thumbnail" src="/database/thumbnails/4De_ERjvuUI.jpg">
         <div id="player_flex_container">
             <div id="player_layer_top" class="player_flex_layer">
-                <p class="player_description"><span
-                    class="player_text_nowPlaying">Now playing </span><a
-                    class="player_text_title player_link">SLOW DANCING IN THE DARK</a><span
-                    class="player_text_from"> from </span><a
-                    class="player_text_album player_link">BALLADS 1</a><span
-                    class="player_text_by"> by </span><a
-                    class="player_text_artist1 player_link">Joji</a><span
-                    class="player_text_spacer1">, </span><a
-                    class="player_text_artist2 player_link">George Miller</a><span
-                    class="player_text_spacer2">, and </span><a
-                    class="player_text_artist3 player_link">Patrick Wimberly</a><span
-                    class="player_text_spacer3"></span><a
-                    class="player_text_artist4 player_link"></a><span
-                    class="player_text_spacer4"></span><a
-                    class="player_text_artist5 player_link"></a><span
-                    class="player_text_releasedOn"> released on </span><a
-                    class="player_text_releaseDate player_link">10/26/2018</a><span
-                    class="player_text_period">.</span>
+                <p class="player_description"><span class="player_text_nowPlaying">Now playing </span><a
+                        class="player_text_title player_link">SLOW DANCING IN THE DARK</a><span
+                        class="player_text_from"> from </span><a class="player_text_album player_link">BALLADS
+                        1</a><span class="player_text_by"> by </span><a
+                        class="player_text_artist1 player_link">Joji</a><span class="player_text_spacer1">, </span><a
+                        class="player_text_artist2 player_link">George Miller</a><span class="player_text_spacer2">, and
+                    </span><a class="player_text_artist3 player_link">Patrick Wimberly</a><span
+                        class="player_text_spacer3"></span><a class="player_text_artist4 player_link"></a><span
+                        class="player_text_spacer4"></span><a class="player_text_artist5 player_link"></a><span
+                        class="player_text_releasedOn"> released on </span><a
+                        class="player_text_releaseDate player_link">10/26/2018</a><span
+                        class="player_text_period">.</span>
                 </p>
             </div>
             <div id="player_layer_middle" class="player_flex_layer">
                 <p id="player_options">
                     <a class="player_link">Shuffle</a>
                     <a class="player_link">Loop</a>
-                    <a class="player_link" href="https://www.youtube.com/watch?v=4De_ERjvuUI" target="_blank">Watch original</a>
+                    <a class="player_link" href="https://www.youtube.com/watch?v=4De_ERjvuUI" target="_blank">Watch
+                        original</a>
                 </p>
             </div>
             <div id="player_layer_bottom" class="player_flex_layer">

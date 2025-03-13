@@ -1,267 +1,246 @@
-VSLib = {};
-VSLib.Internals = {};
+// Approved 3/12/2025
+"use strict";
+(() => {
+    const context = defModule("VSLib");
+    const internals = context.Internals;
 
-// Things the user can set.
-VSLib.Internals.RelativeElementHeight = true;
-VSLib.Internals.ElementHeight = 0.1;
-VSLib.Internals.Dataset = [];
-VSLib.Internals.VirtualElements = [];
-// userdata function(element, index, userdata);
-VSLib.Internals.ElementDataUpdateCallback = null;
+    // Things the user can set.
+    internals.RelativeElementHeight = true;
+    internals.ElementHeight = 0.1;
+    internals.RelativeOverscrollHeight = true;
+    internals.OverscrollHeight = 0.9;
+    internals.Dataset = [];
+    internals.VirtualElements = [];
+    internals.RebindCallback = (element, binding, userdata) => { return null; };
 
-// Element refrences
-VSLib.Internals.ScaleContainerElement = null;
-VSLib.Internals.FixedContainerElement = null;
-VSLib.Internals.ScrollRectElement = null;
-VSLib.Internals.ElementTemplateElement = null;
+    // Element refrences
+    internals.ScaleContainerElement = null;
+    internals.FixedContainerElement = null;
+    internals.ScrollRectElement = null;
+    internals.ElementTemplateElement = null;
 
-// Update flags
-VSLib.Internals.UpdateQueued = false;
-VSLib.Internals.ElementRefrencesNull = true;
-VSLib.Internals.DatasetChanged = false;
-VSLib.Internals.PreviousScrollRectHeightInPx = 0;
-VSLib.Internals.PreviousElementHeightInPx = 0;
+    // Update flags
+    internals.UpdateQueued = false;
+    internals.ElementRefrencesNull = true;
+    internals.DatasetChanged = false;
+    internals.PreviousScrollRectHeightInPx = 0;
+    internals.PreviousElementHeightInPx = 0;
 
-// Other
-VSLib.Internals.ResizeObserver = null;
+    // Other
+    internals.ResizeObserver = null;
 
-// Sets the height of a single element in pixels.
-// So val = 10 means 10 CSS pixels tall.
-VSLib.SetElementHeightInPixels = (val) => {
-    const public = VSLib;
-    const private = VSLib.Internals;
+    // Sets the height of a single element in pixels.
+    // So val = 10 means 10 CSS pixels tall.
+    setConst(context, "SetElementHeightInPixels", (val) => {
+        internals.RelativeElementHeight = false;
+        internals.ElementHeight = val;
 
-    private.RelativeElementHeight = false;
-    private.ElementHeight = val;
+        context.QueueUpdate();
+    });
 
-    private.QueueUpdate();
-}
+    // Sets the height of a single element in percent
+    // of the parent container. So val = 10 means a
+    // 10% of the parent element tall.
+    setConst(context, "SetElementHeightInPercent", (val) => {
+        internals.RelativeElementHeight = true;
+        internals.ElementHeight = val / 100;
 
-// Sets the height of a single element in percent
-// of the parent container. So val = 10 means a
-// 10% of the parent element tall.
-VSLib.SetElementHeightInPercent = (val) => {
-    const public = VSLib;
-    const private = VSLib.Internals;
+        context.QueueUpdate();
+    });
 
-    private.RelativeElementHeight = true;
-    private.ElementHeight = val / 100;
+    // Sets the height of the overscroll in pixels.
+    // So val = 10 means 10 CSS pixels tall.
+    setConst(context, "SetOverscrollHeightInPixels", (val) => {
+        internals.RelativeOverscrollHeight = false;
+        internals.OverscrollHeight = val;
 
-    private.QueueUpdate();
-}
+        context.QueueUpdate();
+    });
 
-// Sets the height of a single element based
-// upon how many elements should fit onto a
-// single screen. So val = 5 means 5 elements
-// should take up one screen and therefore each
-// element should be 20% of the parent.
-VSLib.SetElementsPerScreen = (val) => {
-    const public = VSLib;
-    const private = VSLib.Internals;
+    // Sets the height of the overscroll as a percent
+    // of the parent container. So val = 10 means a
+    // 10% of the parent element tall.
+    setConst(context, "SetOverscrollHeightInPercent", (val) => {
+        internals.RelativeOverscrollHeight = true;
+        internals.OverscrollHeight = val;
 
-    private.RelativeElementHeight = true;
-    private.ElementHeight = 1.0 / val;
+        context.QueueUpdate();
+    });
 
-    private.QueueUpdate();
-}
+    // Sets the height of a single element based
+    // upon how many elements should fit onto a
+    // single screen. So val = 5 means 5 elements
+    // should take up one screen and therefore each
+    // element should be 20% of the parent.
+    setConst(context, "SetElementsPerScreen", (val) => {
+        internals.RelativeElementHeight = true;
+        internals.ElementHeight = 1.0 / val;
 
-// Sets the dataset represented by this list.
-VSLib.SetDataset = (dataset) => {
-    const public = VSLib;
-    const private = VSLib.Internals;
+        context.QueueUpdate();
+    });
 
-    private.Dataset = dataset;
+    // Sets the dataset represented by this list.
+    setConst(context, "SetDataset", (dataset) => {
+        internals.Dataset = dataset;
 
-    private.DatasetChanged = true;
-    private.QueueUpdate();
-}
+        internals.DatasetChanged = true;
+        context.QueueUpdate();
+    });
 
-// Sets the callback function called when the
-// dataset element pointed to by a DOM element
-// changes.
-VSLib.SetElementDataUpdateCallback = (callback) => {
-    const public = VSLib;
-    const private = VSLib.Internals;
+    // Sets the callback function called when the
+    // dataset element pointed to by a DOM element
+    // changes.
+    setConst(context, "SetRebindCallback", (callback) => {
+        internals.RebindCallback = callback;
+    });
 
-    private.ElementDataUpdateCallback = callback;
-}
-
-// Sets the user data for all virtual elements to null.
-VSLib.ClearAllUserData = () => {
-    const public = VSLib;
-    const private = VSLib.Internals;
-
-    for (let i = 0; i < private.VirtualElements.length; i++) {
-        const virtualElement = private.VirtualElements[i];
-        virtualElement.UserData = null;
-    }
-}
-
-// Queues the Update function to run this frame.
-VSLib.Internals.QueueUpdate = () => {
-    const public = VSLib;
-    const private = VSLib.Internals;
-
-    if (!private.UpdateQueued) {
-        requestAnimationFrame(private.Update);
-        private.UpdateQueued = true;
-    }
-}
-
-// The heart of the rebinding algorithem.
-// Returns a list of transformations.
-// Integers mean change the original binding to this new int.
-// Null means don't change it at all.
-VSLib.Internals.MinTransformations = (currentBindings, startIndex, datasetLength) => {
-    todoNulls = 0;
-    todo = [];
-    for (let i = 0; i < currentBindings.length; i++) {
-        const index = startIndex + i;
-        if (index < datasetLength) {
-            todo.push(index);
-        } else {
-            todoNulls++;
+    // Sets the user data for all virtual elements to null.
+    setConst(context, "ClearAllUserData", () => {
+        for (let i = 0; i < internals.VirtualElements.length; i++) {
+            const virtualElement = internals.VirtualElements[i];
+            virtualElement.UserData = null;
         }
-    }
-    output = [];
-    for (let i = 0; i < currentBindings.length; i++) {
-        output.push(null);
-    }
-    rebindList = [];
-    for (let i = 0; i < currentBindings.length; i++) {
-        if (currentBindings[i] == -1) {
-            if (todoNulls > 0) {
-                todoNulls--;
-            } else {
-                rebindList.push(i);
-            }
-        } else {
-            index = todo.indexOf(currentBindings[i]);
+    });
+
+    // Queues an update which rebinds all elements.
+    setConst(context, "QueueForcedUpdate", () => {
+        internals.DatasetChanged = true;
+        context.QueueUpdate();
+    });
+
+    // Queues the Update function to run this frame.
+    setConst(context, "QueueUpdate", () => {
+        if (!internals.UpdateQueued) {
+            requestAnimationFrame(internals.Update);
+            internals.UpdateQueued = true;
+        }
+    });
+
+    // Initializes element refrences
+    setConst(internals, "InitElementRefrences", () => {
+        internals.ScaleContainerElement = document.querySelector("#vslib_scale_container");
+        internals.FixedContainerElement = document.querySelector("#vslib_fixed_container");
+        internals.ScrollRectElement = document.querySelector("#vslib_scroll_rect");
+        internals.ElementTemplateElement = document.querySelector("#vslib_element_template");
+
+        internals.FixedContainerElement.addEventListener("scroll", () => {
+            context.QueueUpdate();
+        });
+
+        internals.ResizeObserver = new ResizeObserver(entries => {
+            internals.FixedContainerElement.style.width = `${internals.ScaleContainerElement.clientWidth}px`;
+            internals.FixedContainerElement.style.height = `${internals.ScaleContainerElement.clientHeight}px`;
+            context.QueueUpdate();
+        });
+        internals.ResizeObserver.observe(internals.ScaleContainerElement);
+
+        internals.FixedContainerElement.style.width = `${internals.ScaleContainerElement.clientWidth}px`;
+        internals.FixedContainerElement.style.height = `${internals.ScaleContainerElement.clientHeight}px`;
+
+        internals.ElementRefrencesNull = false;
+    });
+
+    // The heart of the rebinding algorithem.
+    // Returns a list of transformations.
+    // -1 means do not transform.
+    setConst(internals, "MinRebindings", (startIndex) => {
+        const todo = Array.from({ length: internals.VirtualElements.length }, (_, i) => startIndex + i);
+        const output = Array.from({ length: internals.VirtualElements.length }, (_, i) => -1);
+        const rebindList = [];
+        for (let i = 0; i < internals.VirtualElements.length; i++) {
+            const index = todo.indexOf(internals.VirtualElements[i].Binding);
             if (index == -1) {
                 rebindList.push(i);
             } else {
                 todo.splice(index, 1);
             }
         }
-    }
-    while (todo.length > 0) {
-        output[rebindList[0]] = todo[0];
-        rebindList.shift();
-        todo.shift();
-    }
-    while (todoNulls > 0) {
-        output[rebindList[0]] = -1;
-        rebindList.shift();
-        todoNulls--;
-    }
-    return output;
-}
+        while (todo.length > 0) {
+            output[rebindList[0]] = todo[0];
+            rebindList.shift();
+            todo.shift();
+        }
+        return output;
+    });
 
-// This function runs once per frame right
-// before the graphics are renderred.
-VSLib.Internals.Update = () => {
-    const public = VSLib;
-    const private = VSLib.Internals;
+    // This function runs once per frame right
+    // before the graphics are renderred.
+    setConst(internals, "Update", () => {
+        // Mark the Update has run and is no longer queued.
+        internals.UpdateQueued = false;
 
-    // Mark the Update has run and is no longer queued.
-    private.UpdateQueued = false;
+        // In rare cases requestAnimationFrame will
+        // run before the dom has finished loading.
+        // This code accounts for that.
+        if (document.readyState == "loading") {
+            context.QueueUpdate();
+            return;
+        }
 
-    // Initialize element refrences if not done already.
-    if (private.ElementRefrencesNull) {
-        private.ScaleContainerElement = document.querySelector("#vslib_scale_container");
-        private.FixedContainerElement = document.querySelector("#vslib_fixed_container");
-        private.ScrollRectElement = private.FixedContainerElement.querySelector("#vslib_scroll_rect");
-        private.ElementTemplateElement = private.ScrollRectElement.querySelector("#vslib_element_template");
+        // Initialize element refrences if not done already.
+        if (internals.ElementRefrencesNull) {
+            internals.InitElementRefrences();
+        }
 
-        private.FixedContainerElement.addEventListener("scroll", () => {
-            private.QueueUpdate();
-        });
+        // Basic computations
+        const containerHeightInPx = internals.FixedContainerElement.clientHeight;
+        let elementHeightInPx = internals.ElementHeight;
+        if (internals.RelativeElementHeight) {
+            elementHeightInPx = containerHeightInPx * internals.ElementHeight;
+        }
+        let overscrollHeightInPx = internals.OverscrollHeight;
+        if (internals.RelativeOverscrollHeight) {
+            overscrollHeightInPx = containerHeightInPx * internals.OverscrollHeight;
+        }
+        const scrollRectHeightInPx = Math.max((internals.Dataset.length * elementHeightInPx) + overscrollHeightInPx, containerHeightInPx);
+        const targetElementCount = (containerHeightInPx / elementHeightInPx) + 1;
+        const startIndex = Math.floor(internals.FixedContainerElement.scrollTop / elementHeightInPx);
 
-        private.ResizeObserver = new ResizeObserver(entries => {
-            private.FixedContainerElement.style.width = `${private.ScaleContainerElement.clientWidth}px`;
-            private.FixedContainerElement.style.height = `${private.ScaleContainerElement.clientHeight}px`;
-            private.QueueUpdate();
-        });
-        private.ResizeObserver.observe(private.ScaleContainerElement);
+        // Update the height of the scroll rect if it's wrong.
+        if (internals.PreviousScrollRectHeightInPx != scrollRectHeightInPx) {
+            internals.ScrollRectElement.style.height = `${scrollRectHeightInPx}px`;
+            internals.PreviousScrollRectHeightInPx = scrollRectHeightInPx;
+        }
 
-        private.ElementRefrencesNull = false;
-    }
+        // Add elements if we don't have enough.
+        while (internals.VirtualElements.length < targetElementCount) {
+            const element = internals.ElementTemplateElement.cloneNode(true);
+            element.removeAttribute("id");
+            element.style.transform = "translateY(0px)";
+            element.style.height = `${elementHeightInPx}px`;
+            const virtualElement = { Element: element, Binding: -1, UserData: null };
+            internals.ScrollRectElement.appendChild(virtualElement.Element);
+            internals.VirtualElements.push(virtualElement);
+        }
 
-    // Basic computations
-    const containerHeightInPx = private.FixedContainerElement.clientHeight;
-    let elementHeightInPx = private.ElementHeight;
-    if (private.RelativeElementHeight) {
-        elementHeightInPx = containerHeightInPx * private.ElementHeight;
-    }
-    const elementsPerScreen = containerHeightInPx / elementHeightInPx;
-    const targetElementCount = elementsPerScreen + 1;
-    const scrollAmount = private.FixedContainerElement.scrollTop;
-    const startIndex = Math.floor(scrollAmount / elementHeightInPx);
-    const endIndex = startIndex + (targetElementCount - 1);
-
-    // Update the height of the scroll rect if it's wrong.
-    const scrollRectHeightInPx = Math.max(private.Dataset.length * elementHeightInPx, containerHeightInPx);
-    if (private.PreviousScrollRectHeightInPx != scrollRectHeightInPx) {
-        private.ScrollRectElement.style.height = `${scrollRectHeightInPx}px`;
-        private.PreviousScrollRectHeightInPx = scrollRectHeightInPx;
-    }
-
-    // Add or remove elements to ensure we have the correct number.
-    while (private.VirtualElements.length > targetElementCount) {
-        const virtualElement = private.VirtualElements[private.VirtualElements.length - 1];
-        virtualElement.Element.remove();
-        private.VirtualElements.pop();
-    }
-    while (private.VirtualElements.length < targetElementCount) {
-        const element = private.ElementTemplateElement.cloneNode(true);
-        element.removeAttribute("id");
-        element.style.transform = "translateY(0px)";
-        element.style.height = `${elementHeightInPx}px`;
-        element.style.display = "none";
-        const virtualElement = { Element: element, Index: -1, UserData: null };
-        private.ScrollRectElement.appendChild(virtualElement.Element);
-        private.VirtualElements.push(virtualElement);
-    }
-
-    // Ensure the each element is the correct height and top.
-    if (private.PreviousElementHeightInPx != elementHeightInPx) {
-        for (let i = 0; i < private.VirtualElements.length; i++) {
-            const virtualElement = private.VirtualElements[i];
-            virtualElement.Element.style.height = `${elementHeightInPx}px`;
-            if (virtualElement.Index == -1) {
-                virtualElement.Element.style.transform = "translateY(0px)";
-            } else {
-                virtualElement.Element.style.transform = `translateY(${virtualElement.Index * elementHeightInPx}px)`;
+        // Ensure the each element is the correct height and top.
+        if (internals.PreviousElementHeightInPx != elementHeightInPx) {
+            for (let i = 0; i < internals.VirtualElements.length; i++) {
+                const virtualElement = internals.VirtualElements[i];
+                virtualElement.Element.style.height = `${elementHeightInPx}px`;
+                virtualElement.Element.style.transform = `translateY(${virtualElement.Binding * elementHeightInPx}px)`;
             }
         }
-    }
-    private.PreviousElementHeightInPx = elementHeightInPx;
+        internals.PreviousElementHeightInPx = elementHeightInPx;
 
-    // Rebind elements
-    currentBindings = [];
-    for (let i = 0; i < private.VirtualElements.length; i++) {
-        const virtualElement = private.VirtualElements[i];
-        currentBindings.push(virtualElement.Index);
-    }
-    rebindings = private.MinTransformations(currentBindings, startIndex, private.Dataset.length);
-    for (let i = 0; i < rebindings.length; i++) {
-        const index = rebindings[i];
-        if (index != null) {
-            const virtualElement = private.VirtualElements[i];
-            if (index == -1) {
-                // Bind to null
-                virtualElement.Index = -1;
-                virtualElement.Element.style.display = "none";
-                virtualElement.Element.style.transform = "translateY(0px)";
-            } else {
-                // Bind to index
-                virtualElement.Index = index;
-                virtualElement.Element.style.display = "inline";
-                virtualElement.Element.style.transform = `translateY(${index * elementHeightInPx}px)`;
-                virtualElement.UserData = private.ElementDataUpdateCallback(virtualElement.Element, virtualElement.Index, virtualElement.UserData);
+        // Rebind elements
+        let rebindings = null;
+        if (internals.DatasetChanged) {
+            rebindings = Array.from({ length: internals.VirtualElements.length }, (_, i) => startIndex + i);
+            internals.DatasetChanged = false;
+        } else {
+            rebindings = internals.MinRebindings(startIndex);
+        }
+        for (let i = 0; i < rebindings.length; i++) {
+            const binding = rebindings[i];
+            if (binding != -1) {
+                const virtualElement = internals.VirtualElements[i];
+                virtualElement.Binding = binding;
+                virtualElement.Element.style.transform = `translateY(${binding * elementHeightInPx}px)`;
+                virtualElement.UserData = internals.RebindCallback(virtualElement.Element, virtualElement.Binding, virtualElement.UserData);
             }
         }
-    }
-}
+    });
 
-VSLib.Internals.QueueUpdate();
+    context.QueueUpdate();
+})();

@@ -1,37 +1,38 @@
-async function LoadDatabase() {
-    Songs = await (await fetch("/database/database.json")).json();
-    for (let i = 0; i < Songs.length; i++) {
-        const song = Songs[i];
-        song.index = i;
+"use strict";
 
-        song.releaseDateText = new Date(song.releaseDate * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-    
-        song.thumbnailState = "unloaded";
-        song.element = null;
-    }
-}
+let Playlist = [];
 
-async function WaitForDomLoad() {
-    return new Promise(resolve => {
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", resolve, { once: true });
-        } else {
-            resolve();
+function Search() {
+    const query = document.querySelector("#search_bar").value;
+
+    Playlist = [];
+    for (let i = 0; i < Database.length; i++) {
+        const song = Database[i];
+        if (song.title.startsWith(query)) {
+            Playlist.push(song);
         }
-    });
+    }
+
+    VSLib.SetDataset(Playlist);
 }
 
 async function Init() {
-    promises = [
-        LoadDatabase(),
-        WaitForDomLoad()
-    ];
-    await Promise.all(promises);
+    for (let i = 0; i < Database.length; i++) {
+        const song = Database[i];
+        song.index = i;
+
+        song.releaseDateText = new Date(song.releaseDate * 1000).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+        song.thumbnailState = "unloaded";
+        song.element = null;
+    }
+    Playlist = Database;
 
     VSLib.SetElementsPerScreen(10);
-    VSLib.SetDataset(Songs);
-    VSLib.SetElementDataUpdateCallback((element, index, userdata) => {
+    VSLib.SetDataset(Database);
+    VSLib.SetRebindCallback((element, binding, userdata) => {
         if (userdata == null) {
+            const boundToNull = false;
             const containerElement = element.querySelector(".element_container");
             const thumbnailElement = containerElement.querySelector(".element_thumbnail");
             const descriptionElement = containerElement.querySelector(".element_description");
@@ -50,6 +51,7 @@ async function Init() {
             const releaseDateElement = descriptionElement.querySelector(".element_release_date");
             const periodElement = descriptionElement.querySelector(".element_period");
             userdata = {
+                boundToNull: boundToNull,
                 containerElement: containerElement,
                 thumbnailElement: thumbnailElement,
                 descriptionElement: descriptionElement,
@@ -69,25 +71,37 @@ async function Init() {
                 periodElement: periodElement,
             };
         }
-        const song = Songs[index];
-        userdata.thumbnailElement.src = song.thumbnail;
-        userdata.titleElement.textContent = song.title;
-        userdata.fromElement.textContent = " from ";
-        userdata.albumElement.textContent = song.album;
-        userdata.byElement.textContent = " by ";
-        let artistIndex = 0;
-        userdata.artist0Element.textContent = artistIndex < song.artists.length ? song.artists[artistIndex] : "";
-        userdata.conjunction0Element.textContent = artistIndex + 2 == song.artists.length ? ", and " : (artistIndex + 2 < song.artists.length ? ", " : "");
-        artistIndex = 1;
-        userdata.artist1Element.textContent = artistIndex < song.artists.length ? song.artists[artistIndex] : "";
-        userdata.conjunction1Element.textContent = artistIndex + 2 == song.artists.length ? ", and " : (artistIndex + 2 < song.artists.length ? ", " : "");
-        artistIndex = 2;
-        userdata.artist2Element.textContent = artistIndex < song.artists.length ? song.artists[artistIndex] : "";
-        userdata.conjunction2Element.textContent = song.artists.length > 3 ? ", and " : (artistIndex + 2 < song.artists.length ? ", " : "");
-        userdata.artistMoreElement.textContent = song.artists.length > 3 ? "others" : "";
-        userdata.releasedOnElement.textContent = " released on ";
-        userdata.releaseDateElement.textContent = song.releaseDateText;
-        userdata.periodElement.textContent = ".";
+        if (binding < 0 || binding >= Playlist.length) {
+            if (!userdata.boundToNull) {
+                userdata.containerElement.style.display = "none";
+                userdata.boundToNull = true;
+            }
+        } else {
+            if (userdata.boundToNull) {
+                userdata.containerElement.style.removeProperty("display");
+                userdata.boundToNull = false;
+            }
+            const song = Playlist[binding];
+            userdata.containerElement.dataset.binding = binding;
+            userdata.thumbnailElement.src = song.thumbnail;
+            userdata.titleElement.textContent = song.title;
+            userdata.fromElement.textContent = " from ";
+            userdata.albumElement.textContent = song.album;
+            userdata.byElement.textContent = " by ";
+            let artistIndex = 0;
+            userdata.artist0Element.textContent = artistIndex < song.artists.length ? song.artists[artistIndex] : "";
+            userdata.conjunction0Element.textContent = artistIndex + 2 == song.artists.length ? ", and " : (artistIndex + 2 < song.artists.length ? ", " : "");
+            artistIndex = 1;
+            userdata.artist1Element.textContent = artistIndex < song.artists.length ? song.artists[artistIndex] : "";
+            userdata.conjunction1Element.textContent = artistIndex + 2 == song.artists.length ? ", and " : (artistIndex + 2 < song.artists.length ? ", " : "");
+            artistIndex = 2;
+            userdata.artist2Element.textContent = artistIndex < song.artists.length ? song.artists[artistIndex] : "";
+            userdata.conjunction2Element.textContent = song.artists.length > 3 ? ", and " : (artistIndex + 2 < song.artists.length ? ", " : "");
+            userdata.artistMoreElement.textContent = song.artists.length > 3 ? "others" : "";
+            userdata.releasedOnElement.textContent = " released on ";
+            userdata.releaseDateElement.textContent = song.releaseDateText;
+            userdata.periodElement.textContent = ".";
+        }
         return userdata;
     });
 
@@ -121,8 +135,8 @@ function LoadThumbnail(song, delay = 0) {
     } else {
         const scrollTop = document.documentElement.scrollTop / document.documentElement.scrollHeight;
         const scrollBottom = (document.documentElement.scrollTop + document.documentElement.clientHeight) / document.documentElement.scrollHeight;
-        const startIndex = Math.max(Math.floor(scrollTop * Songs.length) - 5, 0);
-        const endIndex = Math.min(Math.floor(scrollBottom * Songs.length) + 5, Songs.length - 1);
+        const startIndex = Math.max(Math.floor(scrollTop * Database.length) - 5, 0);
+        const endIndex = Math.min(Math.floor(scrollBottom * Database.length) + 5, Database.length - 1);
         if (song.index >= startIndex && song.index <= endIndex) {
             song.element.querySelector("img").src = song.thumbnail;
             song.thumbnailState = "loaded";
@@ -135,10 +149,10 @@ function LoadThumbnail(song, delay = 0) {
 function UpdateThumbnails(delay = 100) {
     const scrollTop = document.documentElement.scrollTop / document.documentElement.scrollHeight;
     const scrollBottom = (document.documentElement.scrollTop + document.documentElement.clientHeight) / document.documentElement.scrollHeight;
-    const startIndex = Math.max(Math.floor(scrollTop * Songs.length) - 5, 0);
-    const endIndex = Math.min(Math.floor(scrollBottom * Songs.length) + 5, Songs.length - 1);
+    const startIndex = Math.max(Math.floor(scrollTop * Database.length) - 5, 0);
+    const endIndex = Math.min(Math.floor(scrollBottom * Database.length) + 5, Database.length - 1);
     for (let i = startIndex; i <= endIndex; i++) {
-        LoadThumbnail(Songs[i], delay);
+        LoadThumbnail(Database[i], delay);
     }
 }
 
@@ -195,10 +209,10 @@ function SeekTo(newTime) {
 }
 
 async function PlayNextSong() {
-    if (Player.nowPlaying == null || Player.nowPlaying.index == Songs.length - 1) {
+    if (Player.nowPlaying == null || Player.nowPlaying.index == Database.length - 1) {
         await PlaySong(null);
     } else {
-        await PlaySong(Songs[Player.nowPlaying.index + 1]);
+        await PlaySong(Database[Player.nowPlaying.index + 1]);
     }
 }
 
@@ -206,13 +220,13 @@ async function PlayPreviousSong() {
     if (Player.nowPlaying == null || Player.nowPlaying.index == 0) {
         await PlaySong(null);
     } else {
-        await PlaySong(Songs[Player.nowPlaying.index - 1]);
+        await PlaySong(Database[Player.nowPlaying.index - 1]);
     }
 }
 
 async function PlayRandomSong() {
-    const index = Math.floor(Math.random() * Songs.length);
-    await PlaySong(Songs[index]);
+    const index = Math.floor(Math.random() * Database.length);
+    await PlaySong(Database[index]);
 }
 
 async function PlaySong(song) {
@@ -352,4 +366,14 @@ function InitMediaSession() {
     UpdateMediaSession(-1);
 }
 
-Init();
+function RunWhenDomLoaded(callback) {
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", callback, { once: true });
+    } else {
+        callback();
+    }
+}
+
+DataLoader.RunWhenDatabaseLoaded(() => {
+    RunWhenDomLoaded(Init);
+});

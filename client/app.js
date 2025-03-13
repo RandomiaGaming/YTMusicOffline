@@ -1,3 +1,5 @@
+"use strict";
+
 async function LoadDatabase() {
     window.Songs = await (await fetch("/database/database.json")).json();
     for (let i = 0; i < Songs.length; i++) {
