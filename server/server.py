@@ -1,8 +1,8 @@
 # User Settings
-DEBUG = False
 host = "127.0.0.1"
 port = 8080
 custom_root = None
+open_in_browser = True
 
 # Import builtins (part of python)
 import webbrowser
@@ -24,23 +24,6 @@ except:
     else:
         print("Execution cannot continue without required dependency flask. Aborting.")
         exit()
-
-if not DEBUG:
-    try:
-        from gevent import pywsgi
-    except:
-        print("Error missing dependency. Gevent is required. Would you like to install gevent now? (y/n)")
-        choice = input()
-        if choice == "y" or choice == "yes":
-            print()
-            print("> pip install gevent")
-            os.system("pip install gevent")
-            print()
-            from gevent import pywsgi
-        else:
-            print(
-                "Execution cannot continue without required dependency gevent. Aborting.")
-            exit()
 
 url = f"http://{host}:{port}/"
 if custom_root != None:
@@ -85,20 +68,14 @@ def serve_file(file_path):
     response.headers["Etag"] = compute_etag(file_path)
     return response
 
-def open_in_browser(url):
-    if not webbrowser.open(url):
-        if (os.system(f"start {url}") != 0):
-            if (os.system(f"xdg-open {url}") != 0):
-                print(f"Failed to launch {url} please open manually.")
-
 try:
     print(f"Hosting {root} at {url}...")
-    open_in_browser(url)
-    if DEBUG:
-        app.run(host=host, port=port)
-    else:
-        server = pywsgi.WSGIServer((host, port), app)
-        server.serve_forever()
+    if open_in_browser:
+        if not webbrowser.open(url):
+            if (os.system(f"start {url}") != 0):
+                if (os.system(f"xdg-open {url}") != 0):
+                    print(f"Failed to launch {url} please open manually.")
+    app.run(host=host, port=port)
 except KeyboardInterrupt:
     exit()
 except:

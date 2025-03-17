@@ -1,5 +1,6 @@
-// Approved 3/12/2025
+// Approved 03/17/2025
 "use strict";
+
 (() => {
     const context = defModule("VSLib");
     const internals = context.Internals;
@@ -117,11 +118,11 @@
     });
 
     // Initializes element refrences
-    setConst(internals, "InitElementRefrences", () => {
-        internals.ScaleContainerElement = document.querySelector("#vslib_scale_container");
-        internals.FixedContainerElement = document.querySelector("#vslib_fixed_container");
-        internals.ScrollRectElement = document.querySelector("#vslib_scroll_rect");
-        internals.ElementTemplateElement = document.querySelector("#vslib_element_template");
+    setConst(internals, "SetElementRefrences", () => {
+        internals.ScaleContainerElement = document.querySelector(".vslib_scale_container");
+        internals.FixedContainerElement = document.querySelector(".vslib_fixed_container");
+        internals.ScrollRectElement = document.querySelector(".vslib_scroll_rect");
+        internals.ElementTemplateElement = document.querySelector(".vslib_element_template");
 
         internals.FixedContainerElement.addEventListener("scroll", () => {
             context.QueueUpdate();
@@ -179,7 +180,7 @@
 
         // Initialize element refrences if not done already.
         if (internals.ElementRefrencesNull) {
-            internals.InitElementRefrences();
+            internals.SetElementRefrences();
         }
 
         // Basic computations
@@ -205,7 +206,8 @@
         // Add elements if we don't have enough.
         while (internals.VirtualElements.length < targetElementCount) {
             const element = internals.ElementTemplateElement.cloneNode(true);
-            element.removeAttribute("id");
+            element.classList.remove("vslib_element_template");
+            element.classList.add("vslib_element");
             element.style.transform = "translateY(0px)";
             element.style.height = `${elementHeightInPx}px`;
             const virtualElement = { Element: element, Binding: -1, UserData: null };
