@@ -14,6 +14,8 @@
     --text-color: white;
     --dark-text-color: #c0c0c0;
     --border-size: 3px;
+    --search-container-height: 50px;
+    --player-container-height: 150px;
 }
 
 /* General Styles */
@@ -47,7 +49,7 @@ body {
 /* Search */
 .search_container {
     width: 100%;
-    height: 50px;
+    height: var(--search-container-height);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -80,15 +82,8 @@ body {
     border-right: var(--border-size) solid var(--accent-color);
 }
 
+.search_button:active,
 .search_button:hover {
-    border-top: var(--border-size) solid var(--dark-text-color);
-    border-bottom: var(--border-size) solid var(--dark-text-color);
-    border-right: var(--border-size) solid var(--dark-text-color);
-    box-shadow: calc(var(--border-size) * -1) 0px 0px 0px var(--dark-text-color);
-    z-index: 1;
-}
-
-.search_button:active {
     color: var(--text-color);
     border-top: var(--border-size) solid var(--text-color);
     border-bottom: var(--border-size) solid var(--text-color);
@@ -118,11 +113,23 @@ body {
 
 .element_thumbnail {
     height: 100%;
+    width: auto;
     aspect-ratio: 1 / 1;
+    object-fit: fill;
+}
+
+.element_text_container {
+    height: 100%;
+    padding: 0px 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    contain: strict;
 }
 
 .element_text {
-    padding: 0px 30px;
     width: 100%;
 }
 
@@ -138,7 +145,7 @@ body {
 /* Player */
 .player_container {
     width: 100%;
-    height: 150px;
+    height: var(--player-container-height);
     border: var(--border-size) solid var(--accent-color);
     display: flex;
     flex-direction: row;
@@ -148,7 +155,9 @@ body {
 
 .player_thumbnail {
     height: 100%;
+    width: auto;
     aspect-ratio: 1 / 1;
+    object-fit: fill;
 }
 
 .player_flex_container {
@@ -159,6 +168,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    contain: strict;
 }
 
 .player_flex_layer {
@@ -168,6 +178,10 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+}
+
+.player_layer_middle>*:not(:last-child) {
+    margin-right: 25px;
 }
 
 .player_audio {

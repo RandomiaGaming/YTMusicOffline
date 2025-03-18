@@ -2,11 +2,12 @@
 "use strict";
 
 (() => {
-    const context = defModule("Gui");
-    const internals = context.Internals;
+    const internals = DefModule("Gui");
+
+    VSLib.SetElementsPerScreen(10);
 
     internals.Elements = [];
-    setConst(internals, "RebindCallback", (element, binding, userdata) => {
+    SetConst(internals, "RebindCallback", (element, binding, userdata) => {
         if (userdata == null) {
             userdata = {
                 GuiElementId: internals.Elements.length,
@@ -76,29 +77,31 @@
                     userdata.andOthersElement.textContent = ", and others";
                     break;
             }
-            userdata.releaseDateElement.textContent = epochToString(song.releaseDate);
+            userdata.releaseDateElement.textContent = Helper.EpochToString(song.releaseDate);
         }
         return userdata;
     });
     VSLib.SetRebindCallback(internals.RebindCallback);
 
-    setConst(context, "OnElementClicked", (element) => {
+    SetConst(Gui, "OnElementClicked", (element) => {
         const userdata = internals.Elements[element.dataset.GuiElementId];
         const song = Player.Playlist[userdata.binding];
         Player.PlaySong(song);
     });
 
     internals.PortraitMode = undefined;
-    setConst(internals, "OnWindowResize", () => {
+    SetConst(internals, "OnWindowResize", () => {
         if (window.innerHeight > window.innerWidth) {
             if (internals.PortraitMode !== true) {
-                VSLib.SetElementsPerScreen(15);
-                internals.LayoutMode = true;
+                document.documentElement.style.setProperty("--search-container-height", "75px");
+                document.documentElement.style.setProperty("--player-container-height", "250px");
+                internals.PortraitMode = true;
             }
         } else {
-            if (internals.LayoutMode !== false) {
-                VSLib.SetElementsPerScreen(10);
-                internals.LayoutMode = false;
+            if (internals.PortraitMode !== false) {
+                document.documentElement.style.setProperty("--search-container-height", "50px");
+                document.documentElement.style.setProperty("--player-container-height", "150px");
+                internals.PortraitMode = false;
             }
         }
     });
@@ -106,9 +109,8 @@
     internals.OnWindowResize();
 
     internals.PlayerElements = null;
-    setConst(internals, "SetElementRefrences", () => {
+    SetConst(internals, "SetElementRefrences", () => {
         internals.PlayerElements = {};
-        internals.PlayerElements.elementInvisible = true;
 
         internals.PlayerElements.thumbnailElement = document.querySelector(".player_thumbnail");
         internals.PlayerElements.textElement = document.querySelector(".player_text");
@@ -121,25 +123,25 @@
         internals.PlayerElements.artist3Element = document.querySelector(".player_artist_3");
         internals.PlayerElements.andOthersElement = document.querySelector(".player_and_others");
         internals.PlayerElements.releaseDateElement = document.querySelector(".player_release_date");
+        internals.PlayerElements.nothingPlayingElement = document.querySelector(".player_nothing_playing");
+        internals.PlayerElements.loopElement = document.querySelector(".player_loop");
+        internals.PlayerElements.shuffleElement = document.querySelector(".player_shuffle");
+        internals.PlayerElements.watchOriginalHrefElement = document.querySelector(".player_watch_original_href");
 
-        context.OnNowPlayingChanged();
+        Gui.OnNowPlayingChanged();
     });
     document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
 
-    setConst(context, "OnNowPlayingChanged", () => {
+    SetConst(Gui, "OnNowPlayingChanged", () => {
         if (Player.NowPlaying == null) {
+            internals.PlayerElements.textElement.style.display = "none";
+            internals.PlayerElements.nothingPlayingElement.style.removeProperty("display");
             internals.PlayerElements.thumbnailElement.src = ThumbLoader.DefaultThumbUrl;
-            if (!internals.PlayerElements.elementInvisible) {
-                internals.PlayerElements.textElement.style.display = "none";
-                internals.PlayerElements.elementInvisible = true;
-            }
+            internals.PlayerElements.watchOriginalHrefElement.href = "";
         } else {
-            if (internals.PlayerElements.elementInvisible) {
-                internals.PlayerElements.textElement.style.removeProperty("display");
-                internals.PlayerElements.elementInvisible = false;
-            }
-
             const song = Player.NowPlaying;
+            internals.PlayerElements.textElement.style.removeProperty("display");
+            internals.PlayerElements.nothingPlayingElement.style.display = "none";
             internals.PlayerElements.thumbnailElement.src = song.thumbnail;
             internals.PlayerElements.titleElement.textContent = song.title;
             internals.PlayerElements.albumElement.textContent = song.album;
@@ -177,7 +179,24 @@
                     internals.PlayerElements.andOthersElement.textContent = ", and others";
                     break;
             }
-            internals.PlayerElements.releaseDateElement.textContent = epochToString(song.releaseDate);
+            internals.PlayerElements.releaseDateElement.textContent = Helper.EpochToString(song.releaseDate);
+            internals.PlayerElements.watchOriginalHrefElement.href = song.source;
+        }
+    });
+
+    SetConst(Gui, "OnLoopChanged", () => {
+        if (Player.Loop) {
+            internals.PlayerElements.loopElement.textContent = "Loop✅";
+        } else {
+            internals.PlayerElements.loopElement.textContent = "Loop❌";
+        }
+    });
+
+    SetConst(Gui, "OnShuffleChanged", () => {
+        if (Player.Shuffle) {
+            internals.PlayerElements.shuffleElement.textContent = "Shuffle✅";
+        } else {
+            internals.PlayerElements.shuffleElement.textContent = "Shuffle❌";
         }
     });
 })();

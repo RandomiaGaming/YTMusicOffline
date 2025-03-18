@@ -2,8 +2,7 @@
 "use strict";
 
 (() => {
-    const context = defModule("ThumbLoader");
-    const internals = context.Internals;
+    const internals = DefModule("ThumbLoader");
 
-    context.DefaultThumbUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=";
+    SetConst(ThumbLoader, "DefaultThumbUrl", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=");
 })();

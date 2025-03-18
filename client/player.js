@@ -2,17 +2,16 @@
 "use strict";
 
 (() => {
-    const context = defModule("Player");
-    const internals = context.Internals;
+    const internals = DefModule("Player");
 
-    context.Database = [];
-    context.Playlist = [];
-    context.NowPlaying = null;
+    Player.Database = [];
+    Player.Playlist = [];
+    Player.NowPlaying = null;
 
     internals.AudioElement = null;
     internals.ElementRefrencesNull = true;
 
-    setConst(internals, "LoadDatabase", () => {
+    SetConst(internals, "LoadDatabase", () => {
         fetch("/database/database.json").then((result) => {
             result.json().then((result) => {
                 for (let i = 0; i < result.length; i++) {
@@ -33,38 +32,88 @@
                             text += song.artists[0] + ", " + song.artists[1] + ", " + song.artists[2] + ", and others";
                             break;
                     }
-                    text += " released on " + epochToString(song.releaseDate);
+                    text += " released on " + Helper.EpochToString(song.releaseDate);
                     song.text = text;
                 }
-                context.Database = result;
-                context.Playlist = context.Database;
+                Player.Database = result;
+                Player.Playlist = Player.Database;
 
-                VSLib.SetDataset(context.Playlist);
+                VSLib.SetDataset(Player.Playlist);
 
                 console.timeEnd("PageLoad");
             });
         });
     });
+    internals.LoadDatabase();
 
-    setConst(internals, "SetElementRefrences", () => {
+    SetConst(internals, "SetElementRefrences", () => {
         internals.AudioElement = document.querySelector(".player_audio");
+        internals.SearchBarElement = document.querySelector(".search_bar");
+        internals.SearchBarElement.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                Player.Search();
+            }
+        });
         internals.ElementRefrencesNull = false;
     });
+    document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
 
-    setConst(context, "PlaySong", (song) => {
+    SetConst(Player, "PlaySong", (song) => {
         if (internals.ElementRefrencesNull) {
             return;
         }
 
         internals.AudioElement.pause();
-        internals.AudioElement.src = song.src;
         internals.AudioElement.currentTime = 0;
-        internals.AudioElement.play();
+        if (song == null) {
+            internals.AudioElement.src = "";
+        } else {
+            internals.AudioElement.src = song.src;
+            internals.AudioElement.play();
+        }
 
-        context.NowPlaying = song;
+        Player.NowPlaying = song;
         Gui.OnNowPlayingChanged();
     });
 
-    internals.LoadDatabase();
-    document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+    internals.SearchBarElement = null;
+    SetConst(Player, "Search", (query) => {
+        if (query === null || query === undefined) {
+            if (internals.ElementRefrencesNull) {
+                return;
+            }
+            query = internals.SearchBarElement.value;
+        }
+        query = query.toLowerCase();
+
+        const newPlaylist = [];
+        for (let i = 0; i < Player.Database.length; i++) {
+            const song = Player.Database[i];
+            if (song.text.toLowerCase().includes(query)) {
+                newPlaylist.push(song);
+            }
+        }
+
+        Player.Playlist = newPlaylist;
+        VSLib.SetDataset(Player.Playlist);
+    });
+
+    Player.Loop = false;
+    SetConst(Player, "ToggleLoop", () => {
+        if (internals.ElementRefrencesNull) {
+            return;
+        }
+        Player.Loop = !Player.Loop;
+        internals.AudioElement.loop = Player.Loop;
+        Gui.OnLoopChanged();
+    });
+
+    Player.Shuffle = false;
+    SetConst(Player, "ToggleShuffle", () => {
+        if (internals.ElementRefrencesNull) {
+            return;
+        }
+        Player.Shuffle = !Player.Shuffle;
+        Gui.OnShuffleChanged();
+    });
 })();
