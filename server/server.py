@@ -8,6 +8,7 @@ open_in_browser = True
 import webbrowser
 import hashlib
 import os
+import time
 
 # Import externals (must be installed with pip)
 try:
@@ -61,6 +62,7 @@ def serve_slash_database_slash_filename(file_name):
     return serve_file(file_path)
 
 def serve_file(file_path):
+    time.sleep(0.1)
     response = send_from_directory(os.path.dirname(file_path), os.path.basename(file_path))
     response.headers.pop("Content-Disposition", None)
     response.headers.pop("Date", None)

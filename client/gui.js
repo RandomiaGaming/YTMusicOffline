@@ -40,7 +40,7 @@
             }
             const song = Player.Playlist[binding];
             userdata.binding = binding;
-            userdata.thumbnailElement.src = song.thumbnail;
+            FetchLib.BindImage(userdata.thumbnailElement, song.thumbnail);
             userdata.titleElement.textContent = song.title;
             userdata.albumElement.textContent = song.album;
             switch (song.artists.length) {
@@ -136,13 +136,13 @@
         if (Player.NowPlaying == null) {
             internals.PlayerElements.textElement.style.display = "none";
             internals.PlayerElements.nothingPlayingElement.style.removeProperty("display");
-            internals.PlayerElements.thumbnailElement.src = ThumbLoader.DefaultThumbUrl;
+            FetchLib.BindImage(internals.PlayerElements.thumbnailElement, null);
             internals.PlayerElements.watchOriginalHrefElement.href = "";
         } else {
             const song = Player.NowPlaying;
             internals.PlayerElements.textElement.style.removeProperty("display");
             internals.PlayerElements.nothingPlayingElement.style.display = "none";
-            internals.PlayerElements.thumbnailElement.src = song.thumbnail;
+            FetchLib.BindImage(internals.PlayerElements.thumbnailElement, song.thumbnail);
             internals.PlayerElements.titleElement.textContent = song.title;
             internals.PlayerElements.albumElement.textContent = song.album;
             switch (song.artists.length) {

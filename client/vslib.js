@@ -80,8 +80,6 @@
             return;
         }
 
-        console.time("VSLib.Update");
-
         if (internals.ElementRefrencesNull) {
             internals.ContainerElement = document.querySelector(".vslib_container");
             internals.ScrollElement = document.querySelector(".vslib_scroll");
@@ -143,13 +141,11 @@
 
             virtualElement.Binding = newBinding;
             virtualElement.Element.style.setProperty("--binding", virtualElement.Binding.toString());
-            const newUserData = internals.RebindCallback(virtualElement.Element, virtualElement.Binding, virtualElement.Userdata);
+            const newUserData = internals.RebindCallback(virtualElement.Element, virtualElement.Binding, virtualElement.UserData);
             if (newUserData !== undefined) {
                 virtualElement.UserData = newUserData;
             }
         }
-
-        console.timeEnd("VSLib.Update");
     });
 
     internals.QueueUpdate();
