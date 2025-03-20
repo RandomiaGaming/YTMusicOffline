@@ -6,15 +6,6 @@
 
     SetConst(FetchLib, "BlankImageDataUrl", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQI12NgYAAAAAMAASDVlMcAAAAASUVORK5CYII=");
 
-    SetConst(internals, "RootUrl", (url) => {
-        return new URL(url, window.location.href).href;
-    });
-
-    // resourceType: arrayBuffer, blob, bytes, formData, json, text, headers
-    SetConst(FetchLib, "Fetch", (url, callback, noCache = false, resourceType = "json") => {
-        const rootedUrl = internals.RootUrl(url);
-    });
-
     internals.ImageCache = new Map();
     internals.RequestCallbacks = [];
     internals.RequestsInProgress = [];
@@ -24,10 +15,13 @@
             return;
         }
 
+        url = new URL(url, window.location.href).href;
+
         if (internals.ImageCache.has(url)) {
             element.src = internals.ImageCache.get(url);
             return;
         }
+
         element.src = FetchLib.BlankImageDataUrl;
 
         let requestCallbackFound = false;
@@ -46,11 +40,10 @@
         if (internals.RequestsInProgress.includes(url)) {
             return;
         }
+
         fetch(url, {
             method: "GET",
-            headers: {
-                Priority: "high"
-            }
+            headers: { Priority: "high" }
         }).then((response) => {
             response.blob().then((blobObject) => {
                 const blobUrl = URL.createObjectURL(blobObject);
@@ -71,7 +64,10 @@
         internals.RequestsInProgress.push(url);
     });
 
-    SetConst(FetchLib, "DelayBindImage", (element, url, delay) => {
-
-    });
+    internals.
+        SetConst(FetchLib, "DelayBindImage", (element, url, delay) => {
+            setTimeout(() => {
+                console.log("This runs after 500ms");
+            }, delay);
+        });
 })();
