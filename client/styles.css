@@ -1,18 +1,10 @@
-/* Approved 03/17/2025 */
-
-/*
-    Pallet
-    Background: #2A2A2A
-    Accent: cornflowerblue
-    Text: white
-    Dark Text: #c0c0c0
-*/
+/* Approved 03/20/2025 */
 
 :root {
-    --background-color: #2A2A2A;
-    --accent-color: cornflowerblue;
-    --text-color: white;
+    --boarder-color: #7c7c7c;
+    --background-color: #212121;
     --dark-text-color: #c0c0c0;
+    --text-color: white;
     --border-size: 3px;
     --search-container-height: 50px;
     --player-container-height: 150px;
@@ -61,7 +53,7 @@ body {
     height: 100%;
     padding: 0px 20px;
     color: var(--dark-text-color);
-    border: var(--border-size) solid var(--accent-color);
+    border: var(--border-size) solid var(--boarder-color);
 }
 
 .search_bar::placeholder {
@@ -77,9 +69,9 @@ body {
     padding: 0px 20px;
     height: 100%;
     color: var(--dark-text-color);
-    border-top: var(--border-size) solid var(--accent-color);
-    border-bottom: var(--border-size) solid var(--accent-color);
-    border-right: var(--border-size) solid var(--accent-color);
+    border-top: var(--border-size) solid var(--boarder-color);
+    border-bottom: var(--border-size) solid var(--boarder-color);
+    border-right: var(--border-size) solid var(--boarder-color);
 }
 
 .search_button:active,
@@ -96,19 +88,22 @@ body {
 .list_container {
     width: 100%;
     flex-grow: 1;
-    border-left: var(--border-size) solid var(--accent-color);
-    border-right: var(--border-size) solid var(--accent-color);
+    border-left: var(--border-size) solid var(--boarder-color);
 }
 
 /* List Elements */
 .element_container {
     width: 100%;
     height: 100%;
-    border: calc(var(--border-size) / 2) solid var(--text-color);
+    border-bottom: var(--border-size) solid var(--boarder-color);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+}
+
+.vslib_scroll {
+    border-right: var(--border-size) solid var(--boarder-color);
 }
 
 .element_thumbnail {
@@ -133,20 +128,15 @@ body {
     width: 100%;
 }
 
-.element_link {
-    color: white;
-    cursor: pointer;
-}
-
-.element_link:hover {
-    color: cornflowerblue;
+.element_highlight {
+    color: var(--text-color);
 }
 
 /* Player */
 .player_container {
     width: 100%;
     height: var(--player-container-height);
-    border: var(--border-size) solid var(--accent-color);
+    border: var(--border-size) solid var(--boarder-color);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -190,7 +180,7 @@ body {
 }
 
 .player_link {
-    color: white;
+    color: var(--text-color);
     cursor: pointer;
 }
 

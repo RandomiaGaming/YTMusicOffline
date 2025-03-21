@@ -1,4 +1,4 @@
-// Approved 03/17/2025
+// Approved 03/20/2025
 "use strict";
 
 (() => {
@@ -40,8 +40,9 @@
             }
             const song = Player.Playlist[binding];
             userdata.binding = binding;
-            FetchLib.BindImage(userdata.thumbnailElement, song.thumbnail);
+            FetchLib.DelayBindImage(userdata.thumbnailElement, song.thumbnail, 100);
             userdata.titleElement.textContent = song.title;
+
             userdata.albumElement.textContent = song.album;
             switch (song.artists.length) {
                 case 1:
@@ -109,6 +110,7 @@
     internals.OnWindowResize();
 
     internals.PlayerElements = null;
+    internals.SearchBarElement = null;
     SetConst(internals, "SetElementRefrences", () => {
         internals.PlayerElements = {};
 
@@ -128,9 +130,24 @@
         internals.PlayerElements.shuffleElement = document.querySelector(".player_shuffle");
         internals.PlayerElements.watchOriginalHrefElement = document.querySelector(".player_watch_original_href");
 
+        internals.SearchBarElement = document.querySelector(".search_bar");
+        internals.SearchBarElement.addEventListener("keydown", (event) => {
+            if (event.key == "Enter") {
+                Gui.OnSearchButtonClicked();
+                internals.SearchBarElement.blur();
+            } else if (event.key == "Escape") {
+                internals.SearchBarElement.blur();
+            }
+            console.log(event.key);
+        });
+
         Gui.OnNowPlayingChanged();
     });
     document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+
+    SetConst(Gui, "OnSearchButtonClicked", () => {
+        Player.Search(internals.SearchBarElement.value);
+    });
 
     SetConst(Gui, "OnNowPlayingChanged", () => {
         if (Player.NowPlaying == null) {

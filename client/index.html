@@ -23,10 +23,10 @@
 </head>
 
 <body>
-    <div class="search_container">
-        <input type="text" class="search_bar" placeholder="Search...">
-        <button class="search_button" onclick="Player.Search()">Search &#x1F50E;&#xFE0E;</button>
-    </div>
+    <search class="search_container">
+        <input type="text" name="search_bar" role="search" class="search_bar" placeholder="Search...">
+        <button class="search_button" onclick="Gui.OnSearchButtonClicked()">Search &#x1F50E;&#xFE0E;</button>
+    </search>
 
     <div class="list_container">
         <div class="vslib_container vslib_global">
@@ -36,18 +36,18 @@
                         <img class="element_thumbnail">
                         <div class="element_text_container">
                             <p class="element_text">
-                                <a class="element_title element_link"></a><!--
+                                <a class="element_title element_highlight"></a><!--
                              --><span class="element_from"> from </span><!--
-                             --><a class="element_album element_link"></a><!--
+                             --><a class="element_album element_highlight"></a><!--
                              --><span class="element_by"> by </span><!--
-                             --><a class="element_artist_1 element_link"></a><!--
+                             --><a class="element_artist_1 element_highlight"></a><!--
                              --><span class="element_conjunction_1"></span><!--
-                             --><a class="element_artist_2 element_link"></a><!--
+                             --><a class="element_artist_2 element_highlight"></a><!--
                              --><span class="element_conjunction_2"></span><!--
-                             --><a class="element_artist_3 element_link"></a><!--
+                             --><a class="element_artist_3 element_highlight"></a><!--
                              --><span class="element_and_others"></span><!--
                              --><span class="element_released_on"> released on </span><!--
-                             --><a class="element_release_date element_link"></a>
+                             --><a class="element_release_date element_highlight"></a>
                             </p>
                         </div>
                     </div>
@@ -85,6 +85,8 @@
                 <p class="player_watch_original player_link">
                     <a class="player_watch_original_href player_link" href="" target="_blank">Watch Original</a>
                 </p>
+                <p class="player_previous player_link" onclick="Player.Previous()">Previous</p>
+                <p class="player_next player_link" onclick="Player.Next()">Next</p>
             </div>
             <div class="player_layer_bottom player_flex_layer">
                 <audio class="player_audio" controls></audio>

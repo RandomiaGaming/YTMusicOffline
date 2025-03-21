@@ -48,12 +48,6 @@
 
     SetConst(internals, "SetElementRefrences", () => {
         internals.AudioElement = document.querySelector(".player_audio");
-        internals.SearchBarElement = document.querySelector(".search_bar");
-        internals.SearchBarElement.addEventListener("keypress", (event) => {
-            if (event.key === "Enter") {
-                Player.Search();
-            }
-        });
         internals.ElementRefrencesNull = false;
     });
     document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
@@ -76,14 +70,7 @@
         Gui.OnNowPlayingChanged();
     });
 
-    internals.SearchBarElement = null;
     SetConst(Player, "Search", (query) => {
-        if (query === null || query === undefined) {
-            if (internals.ElementRefrencesNull) {
-                return;
-            }
-            query = internals.SearchBarElement.value;
-        }
         query = query.toLowerCase();
 
         const newPlaylist = [];
