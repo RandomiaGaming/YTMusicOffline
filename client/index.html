@@ -8,7 +8,7 @@
     <script src="/helper.js"></script>
     <link rel="stylesheet" href="/vslib.css">
     <script src="/vslib.js"></script>
-    <script src="/fetchLib.js"></script>
+    <script src="/thumbnailLoader.js"></script>
     <script src="/player.js"></script>
     <script src="/gui.js"></script>
     <link rel="stylesheet" href="/styles.css">
@@ -32,23 +32,10 @@
         <div class="vslib_container vslib_global">
             <div class="vslib_scroll vslib_global">
                 <div class="vslib_element_template vslib_global">
-                    <div class="element_container" style="display:none" onclick="Gui.OnElementClicked(this)">
+                    <div class="element_container" onclick="Gui.OnElementClicked(this)">
                         <img class="element_thumbnail">
                         <div class="element_text_container">
-                            <p class="element_text">
-                                <a class="element_title element_highlight"></a><!--
-                             --><span class="element_from"> from </span><!--
-                             --><a class="element_album element_highlight"></a><!--
-                             --><span class="element_by"> by </span><!--
-                             --><a class="element_artist_1 element_highlight"></a><!--
-                             --><span class="element_conjunction_1"></span><!--
-                             --><a class="element_artist_2 element_highlight"></a><!--
-                             --><span class="element_conjunction_2"></span><!--
-                             --><a class="element_artist_3 element_highlight"></a><!--
-                             --><span class="element_and_others"></span><!--
-                             --><span class="element_released_on"> released on </span><!--
-                             --><a class="element_release_date element_highlight"></a>
-                            </p>
+                            <p class="element_text"></p>
                         </div>
                     </div>
                 </div>
@@ -60,23 +47,7 @@
         <img class="player_thumbnail">
         <div class="player_flex_container">
             <div class="player_layer_top player_flex_layer">
-                <p class="player_text" style="display:none">
-                    <a class="player_title player_link"></a><!--
-                 --><span class="player_from"> from </span><!--
-                 --><a class="player_album player_link"></a><!--
-                 --><span class="player_by"> by </span><!--
-                 --><a class="player_artist_1 player_link"></a><!--
-                 --><span class="player_conjunction_1"></span><!--
-                 --><a class="player_artist_2 player_link"></a><!--
-                 --><span class="player_conjunction_2"></span><!--
-                 --><a class="player_artist_3 player_link"></a><!--
-                 --><span class="player_and_others"></span><!--
-                 --><span class="player_released_on"> released on </span><!--
-                 --><a class="player_release_date player_link"></a>
-                </p>
-                <p class="player_nothing_playing">
-                    Nothing is playing...
-                </p>
+                <p class="player_text">Nothing is playing...</p>
             </div>
             <div class="player_layer_middle player_flex_layer">
                 <p class="player_shuffle player_link" onclick="Player.ToggleShuffle()">Shuffle❌</p>

@@ -14,31 +14,12 @@
     SetConst(internals, "LoadDatabase", () => {
         fetch("/database/database.json").then((result) => {
             result.json().then((result) => {
-                for (let i = 0; i < result.length; i++) {
-                    const song = result[i];
-
-                    let text = song.title + " from " + song.album + " by ";
-                    switch (song.artists.length) {
-                        case 1:
-                            text += song.artists[0];
-                            break;
-                        case 2:
-                            text += song.artists[0] + ", and " + song.artists[1];
-                            break;
-                        case 3:
-                            text += song.artists[0] + ", " + song.artists[1] + ", and " + song.artists[2];
-                            break;
-                        default:
-                            text += song.artists[0] + ", " + song.artists[1] + ", " + song.artists[2] + ", and others";
-                            break;
-                    }
-                    text += " released on " + Helper.EpochToString(song.releaseDate);
-                    song.text = text;
-                }
                 Player.Database = result;
                 Player.Playlist = Player.Database;
 
                 VSLib.SetDataset(Player.Playlist);
+
+                Gui.ComputeSongExtraData();
 
                 console.timeEnd("PageLoad");
             });
@@ -67,7 +48,7 @@
         }
 
         Player.NowPlaying = song;
-        Gui.OnNowPlayingChanged();
+        Gui.RefreshPlayer();
     });
 
     SetConst(Player, "Search", (query) => {
@@ -92,7 +73,7 @@
         }
         Player.Loop = !Player.Loop;
         internals.AudioElement.loop = Player.Loop;
-        Gui.OnLoopChanged();
+        Gui.RefreshPlayer();
     });
 
     Player.Shuffle = false;
@@ -101,6 +82,6 @@
             return;
         }
         Player.Shuffle = !Player.Shuffle;
-        Gui.OnShuffleChanged();
+        Gui.RefreshPlayer();
     });
 })();

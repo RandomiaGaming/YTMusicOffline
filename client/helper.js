@@ -2,7 +2,8 @@
 "use strict";
 
 (() => {
-    // Create global helper functions
+    const DEBUG = true;
+
     const setConstFunctionBody = (obj, prop, val) => {
         if (obj === null || obj === undefined) {
             obj = globalThis;
@@ -20,8 +21,23 @@
         const moduleContext = {};
         SetConst(null, moduleName, moduleContext);
         const moduleInternals = {};
-        SetConst(moduleContext, "Internals", moduleInternals);
+        if (DEBUG) {
+            SetConst(null, moduleName + "Internals", moduleInternals);
+        }
         return moduleInternals;
+    });
+
+    SetConst(null, "LockModule", (moduleName) => {
+        const deepFreezeFunctionBody = (obj) => {
+            Object.freeze(obj);
+            Object.getOwnPropertyNames(obj).forEach((key) => {
+                const prop = obj[key];
+                if (prop != null && typeof prop == "object") {
+                    deepFreezeFunctionBody(prop);
+                }
+            });
+        }
+        deepFreezeFunctionBody(globalThis[moduleName]);
     });
 
     // Create helper module functions

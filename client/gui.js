@@ -4,90 +4,77 @@
 (() => {
     const internals = DefModule("Gui");
 
-    VSLib.SetElementsPerScreen(10);
-
-    internals.Elements = [];
-    SetConst(internals, "RebindCallback", (element, binding, userdata) => {
-        if (userdata == null) {
-            userdata = {
-                GuiElementId: internals.Elements.length,
-                elementInvisible: true,
-                binding: 0,
-                containerElement: element.querySelector(".element_container"),
-                thumbnailElement: element.querySelector(".element_thumbnail"),
-                titleElement: element.querySelector(".element_title"),
-                albumElement: element.querySelector(".element_album"),
-                artist1Element: element.querySelector(".element_artist_1"),
-                conjunction1Element: element.querySelector(".element_conjunction_1"),
-                artist2Element: element.querySelector(".element_artist_2"),
-                conjunction2Element: element.querySelector(".element_conjunction_2"),
-                artist3Element: element.querySelector(".element_artist_3"),
-                andOthersElement: element.querySelector(".element_and_others"),
-                releaseDateElement: element.querySelector(".element_release_date"),
-            };
-            userdata.containerElement.dataset.GuiElementId = userdata.GuiElementId;
-            internals.Elements.push(userdata);
-        }
-        if (binding < 0 || binding >= Player.Playlist.length) {
-            if (!userdata.elementInvisible) {
-                userdata.containerElement.style.display = "none";
-                userdata.elementInvisible = true;
+    SetConst(Gui, "ComputeSongExtraData", () => {
+        const highlightStart = "<span class=\"element_highlight\">";
+        const highlightEnd = "</span>";
+        for (let i = 0; i < Player.Database.length; i++) {
+            const song = Player.Database[i];
+            song.textHtml = highlightStart + song.title + highlightEnd;
+            if (song.album == undefined || song.album == null || song.album == "") {
+                song.textHtml += " from " + highlightStart + song.album + highlightEnd;
             }
-        } else {
-            if (userdata.elementInvisible) {
-                userdata.containerElement.style.removeProperty("display");
-                userdata.elementInvisible = false;
-            }
-            const song = Player.Playlist[binding];
-            userdata.binding = binding;
-            FetchLib.DelayBindImage(userdata.thumbnailElement, song.thumbnail, 100);
-            userdata.titleElement.textContent = song.title;
-
-            userdata.albumElement.textContent = song.album;
             switch (song.artists.length) {
+                case 0:
+                    song.textHtml += " by unknown artist";
+                    break;
                 case 1:
-                    userdata.artist1Element.textContent = song.artists[0];
-                    userdata.conjunction1Element.textContent = "";
-                    userdata.artist2Element.textContent = "";
-                    userdata.conjunction2Element.textContent = "";
-                    userdata.artist3Element.textContent = "";
-                    userdata.andOthersElement.textContent = "";
+                    song.textHtml += " by " + highlightStart + song.artists[0] + highlightEnd;
                     break;
                 case 2:
-                    userdata.artist1Element.textContent = song.artists[0];
-                    userdata.conjunction1Element.textContent = ", and ";
-                    userdata.artist2Element.textContent = song.artists[1];
-                    userdata.conjunction2Element.textContent = "";
-                    userdata.artist3Element.textContent = "";
-                    userdata.andOthersElement.textContent = "";
+                    song.textHtml += " by " + highlightStart + song.artists[0] + highlightEnd;
+                    song.textHtml += ", and " + highlightStart + song.artists[1] + highlightEnd;
                     break;
                 case 3:
-                    userdata.artist1Element.textContent = song.artists[0];
-                    userdata.conjunction1Element.textContent = ", ";
-                    userdata.artist2Element.textContent = song.artists[1];
-                    userdata.conjunction2Element.textContent = ", and ";
-                    userdata.artist3Element.textContent = song.artists[2];
-                    userdata.andOthersElement.textContent = "";
+                    song.textHtml += " by " + highlightStart + song.artists[0] + highlightEnd;
+                    song.textHtml += ", " + highlightStart + song.artists[1] + highlightEnd;
+                    song.textHtml += ", and " + highlightStart + song.artists[2] + highlightEnd;
                     break;
                 default:
-                    userdata.artist1Element.textContent = song.artists[0];
-                    userdata.conjunction1Element.textContent = ", ";
-                    userdata.artist2Element.textContent = song.artists[1];
-                    userdata.conjunction2Element.textContent = ", ";
-                    userdata.artist3Element.textContent = song.artists[2];
-                    userdata.andOthersElement.textContent = ", and others";
+                    song.textHtml += " by " + highlightStart + song.artists[0] + highlightEnd;
+                    song.textHtml += ", " + highlightStart + song.artists[1] + highlightEnd;
+                    song.textHtml += ", " + highlightStart + song.artists[2] + highlightEnd;
+                    song.textHtml += ", and others";
                     break;
             }
-            userdata.releaseDateElement.textContent = Helper.EpochToString(song.releaseDate);
+            song.textHtml += " released on " + highlightStart + Helper.EpochToString(song.releaseDate) + highlightEnd;
         }
+    });
+
+    VSLib.SetElementsPerScreen(10);
+
+    internals.Userdata = [];
+    VSLib.SetRebindCallback((element, binding, userdata) => {
+        if (userdata == null) {
+            userdata = {
+                binding: null,
+                containerElement: element.querySelector(".element_container"),
+                thumbnailElement: element.querySelector(".element_thumbnail"),
+                textElement: element.querySelector(".element_text"),
+            };
+            internals.Userdata.push(userdata);
+            userdata.containerElement.dataset.UserdataIndex = internals.Userdata.length - 1;
+        }
+
+        if (binding < 0 || binding >= Player.Playlist.length) {
+            userdata.containerElement.style.visibility = "hidden";
+            userdata.binding = null;
+        } else {
+            userdata.containerElement.style.visibility = "visible";
+            const song = Player.Playlist[binding];
+            userdata.binding = binding;
+            userdata.textElement.innerHTML = song.textHtml;
+            //ThumbnailLoader.Bind(userdata.thumbnailElement, song);
+        }
+
         return userdata;
     });
-    VSLib.SetRebindCallback(internals.RebindCallback);
 
     SetConst(Gui, "OnElementClicked", (element) => {
-        const userdata = internals.Elements[element.dataset.GuiElementId];
-        const song = Player.Playlist[userdata.binding];
-        Player.PlaySong(song);
+        const userdata = internals.Userdata[element.dataset.UserdataIndex];
+        if (userdata.binding != null) {
+            const song = Player.Playlist[userdata.binding];
+            Player.PlaySong(song);
+        }
     });
 
     internals.PortraitMode = undefined;
@@ -109,27 +96,19 @@
     window.addEventListener("resize", internals.OnWindowResize);
     internals.OnWindowResize();
 
-    internals.PlayerElements = null;
+    internals.PlayerThumbnailElement = null;
+    internals.PlayerTextElement = null;
+    internals.PlayerWatchOriginalElement = null;
+    internals.PlayerLoopElement = null;
+    internals.PlayerShuffleElement = null;
     internals.SearchBarElement = null;
+    internals.ElementRefrencesNull = true;
     SetConst(internals, "SetElementRefrences", () => {
-        internals.PlayerElements = {};
-
-        internals.PlayerElements.thumbnailElement = document.querySelector(".player_thumbnail");
-        internals.PlayerElements.textElement = document.querySelector(".player_text");
-        internals.PlayerElements.titleElement = document.querySelector(".player_title");
-        internals.PlayerElements.albumElement = document.querySelector(".player_album");
-        internals.PlayerElements.artist1Element = document.querySelector(".player_artist_1");
-        internals.PlayerElements.conjunction1Element = document.querySelector(".player_conjunction_1");
-        internals.PlayerElements.artist2Element = document.querySelector(".player_artist_2");
-        internals.PlayerElements.conjunction2Element = document.querySelector(".player_conjunction_2");
-        internals.PlayerElements.artist3Element = document.querySelector(".player_artist_3");
-        internals.PlayerElements.andOthersElement = document.querySelector(".player_and_others");
-        internals.PlayerElements.releaseDateElement = document.querySelector(".player_release_date");
-        internals.PlayerElements.nothingPlayingElement = document.querySelector(".player_nothing_playing");
-        internals.PlayerElements.loopElement = document.querySelector(".player_loop");
-        internals.PlayerElements.shuffleElement = document.querySelector(".player_shuffle");
-        internals.PlayerElements.watchOriginalHrefElement = document.querySelector(".player_watch_original_href");
-
+        internals.PlayerThumbnailElement = document.querySelector(".player_thumbnail");
+        internals.PlayerTextElement = document.querySelector(".player_text");
+        internals.PlayerWatchOriginalHrefElement = document.querySelector(".player_watch_original_href");
+        internals.PlayerLoopElement = document.querySelector(".player_loop");
+        internals.PlayerShuffleElement = document.querySelector(".player_shuffle");
         internals.SearchBarElement = document.querySelector(".search_bar");
         internals.SearchBarElement.addEventListener("keydown", (event) => {
             if (event.key == "Enter") {
@@ -140,80 +119,44 @@
             }
             console.log(event.key);
         });
+        internals.ElementRefrencesNull = false;
 
-        Gui.OnNowPlayingChanged();
+        Gui.RefreshPlayer();
     });
     document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
 
     SetConst(Gui, "OnSearchButtonClicked", () => {
+        if (internals.ElementRefrencesNull) {
+            return;
+        }
+
         Player.Search(internals.SearchBarElement.value);
     });
 
-    SetConst(Gui, "OnNowPlayingChanged", () => {
+    SetConst(Gui, "RefreshPlayer", () => {
+        if (internals.ElementRefrencesNull) {
+            return;
+        }
+
         if (Player.NowPlaying == null) {
-            internals.PlayerElements.textElement.style.display = "none";
-            internals.PlayerElements.nothingPlayingElement.style.removeProperty("display");
-            FetchLib.BindImage(internals.PlayerElements.thumbnailElement, null);
-            internals.PlayerElements.watchOriginalHrefElement.href = "";
+            internals.PlayerTextElement.innerHTML = "Nothing is playing...";
+            internals.PlayerWatchOriginalHrefElement.href = "";
+            //ThumbnailLoader.Bind(internals.PlayerThumbnailElement, null);
         } else {
-            const song = Player.NowPlaying;
-            internals.PlayerElements.textElement.style.removeProperty("display");
-            internals.PlayerElements.nothingPlayingElement.style.display = "none";
-            FetchLib.BindImage(internals.PlayerElements.thumbnailElement, song.thumbnail);
-            internals.PlayerElements.titleElement.textContent = song.title;
-            internals.PlayerElements.albumElement.textContent = song.album;
-            switch (song.artists.length) {
-                case 1:
-                    internals.PlayerElements.artist1Element.textContent = song.artists[0];
-                    internals.PlayerElements.conjunction1Element.textContent = "";
-                    internals.PlayerElements.artist2Element.textContent = "";
-                    internals.PlayerElements.conjunction2Element.textContent = "";
-                    internals.PlayerElements.artist3Element.textContent = "";
-                    internals.PlayerElements.andOthersElement.textContent = "";
-                    break;
-                case 2:
-                    internals.PlayerElements.artist1Element.textContent = song.artists[0];
-                    internals.PlayerElements.conjunction1Element.textContent = ", and ";
-                    internals.PlayerElements.artist2Element.textContent = song.artists[1];
-                    internals.PlayerElements.conjunction2Element.textContent = "";
-                    internals.PlayerElements.artist3Element.textContent = "";
-                    internals.PlayerElements.andOthersElement.textContent = "";
-                    break;
-                case 3:
-                    internals.PlayerElements.artist1Element.textContent = song.artists[0];
-                    internals.PlayerElements.conjunction1Element.textContent = ", ";
-                    internals.PlayerElements.artist2Element.textContent = song.artists[1];
-                    internals.PlayerElements.conjunction2Element.textContent = ", and ";
-                    internals.PlayerElements.artist3Element.textContent = song.artists[2];
-                    internals.PlayerElements.andOthersElement.textContent = "";
-                    break;
-                default:
-                    internals.PlayerElements.artist1Element.textContent = song.artists[0];
-                    internals.PlayerElements.conjunction1Element.textContent = ", ";
-                    internals.PlayerElements.artist2Element.textContent = song.artists[1];
-                    internals.PlayerElements.conjunction2Element.textContent = ", ";
-                    internals.PlayerElements.artist3Element.textContent = song.artists[2];
-                    internals.PlayerElements.andOthersElement.textContent = ", and others";
-                    break;
-            }
-            internals.PlayerElements.releaseDateElement.textContent = Helper.EpochToString(song.releaseDate);
-            internals.PlayerElements.watchOriginalHrefElement.href = song.source;
+            internals.PlayerTextElement.innerHTML = Player.NowPlaying.textHtml;
+            internals.PlayerWatchOriginalHrefElement.href = Player.NowPlaying.source;
+            //ThumbnailLoader.Bind(internals.PlayerThumbnailElement, Player.NowPlaying);
         }
-    });
 
-    SetConst(Gui, "OnLoopChanged", () => {
         if (Player.Loop) {
-            internals.PlayerElements.loopElement.textContent = "Loop✅";
+            internals.PlayerLoopElement.textContent = "Loop✅";
         } else {
-            internals.PlayerElements.loopElement.textContent = "Loop❌";
+            internals.PlayerLoopElement.textContent = "Loop❌";
         }
-    });
-
-    SetConst(Gui, "OnShuffleChanged", () => {
         if (Player.Shuffle) {
-            internals.PlayerElements.shuffleElement.textContent = "Shuffle✅";
+            internals.PlayerShuffleElement.textContent = "Shuffle✅";
         } else {
-            internals.PlayerElements.shuffleElement.textContent = "Shuffle❌";
+            internals.PlayerShuffleElement.textContent = "Shuffle❌";
         }
     });
 })();

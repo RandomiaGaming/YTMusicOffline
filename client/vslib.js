@@ -4,19 +4,41 @@
 (() => {
     const internals = DefModule("VSLib");
 
-    internals.RelativeElementHeight = true;
-    internals.ElementHeight = 0.1;
-    internals.RelativeOverscrollHeight = true;
-    internals.OverscrollHeight = 0.9;
-    internals.Dataset = [];
-    internals.DatasetChanged = false;
-    internals.VirtualElements = [];
-    internals.RebindCallback = (element, binding, userdata) => { return null; };
+    function unselectElementIfSelected(element) {
+        const selection = window.getSelection();
+
+        // Check if there's any selection and it includes the target element
+        if (!selection.isCollapsed) {
+            const range = selection.getRangeAt(0);
+            if (range.intersectsNode(element)) {
+                // If the element is selected, clear the selection
+                selection.removeAllRanges();
+            }
+        }
+    }
+
     internals.ContainerElement = null;
     internals.ScrollElement = null;
     internals.ElementTemplateElement = null;
     internals.ElementRefrencesNull = true;
     internals.ResizeObserver = null;
+
+    internals.RelativeElementHeight = true;
+    internals.ElementHeight = 0.1;
+    internals.RelativeOverscrollHeight = true;
+    internals.OverscrollHeight = 0.9;
+    //internals.ElementHeightUnits = "percent";
+    //internals.UserElementHeight = 10;
+    //internals.ElementHeight = 100;
+    //internals.OverscrollHeightUnits = "elements";
+    //internals.UserOverscrollHeight = 9;
+    //internals.OverscrollHeight = 900;
+    //internals.SizingUpdateQueued = true;
+
+    internals.Dataset = [];
+    internals.DatasetChanged = false;
+    internals.VirtualElements = [];
+    internals.RebindCallback = (element, binding, userdata) => { return null; };
 
     SetConst(VSLib, "SetElementHeightInPixels", (val) => {
         internals.RelativeElementHeight = false;
@@ -147,6 +169,6 @@
             }
         }
     });
-
+    LockModule("VSLib");
     internals.QueueUpdate();
 })();

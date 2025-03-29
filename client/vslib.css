@@ -1,18 +1,17 @@
-/* Approved 03/18/2025 */
+/* Approved 03/26/2025 */
 
 :root {
     --vslib-element-height: 108px;
-    --vslib-scroll-element-height: 108px;
+    --vslib-scroll-element-height: 100%;
 }
 
 .vslib_global {
     padding: 0px;
     margin: 0px;
     border: 0px;
+    box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: hidden;
-    box-sizing: border-box;
-    user-select: none;
 }
 
 .vslib_container {
@@ -38,5 +37,4 @@
     width: 100%;
     height: var(--vslib-element-height);
     transform: translateY(calc(var(--vslib-element-height) * var(--binding)));
-    will-change: transform;
 }
