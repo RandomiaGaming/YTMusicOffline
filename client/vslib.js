@@ -4,104 +4,133 @@
 (() => {
     const internals = DefModule("VSLib");
 
-    function unselectElementIfSelected(element) {
-        const selection = window.getSelection();
-
-        // Check if there's any selection and it includes the target element
-        if (!selection.isCollapsed) {
-            const range = selection.getRangeAt(0);
-            if (range.intersectsNode(element)) {
-                // If the element is selected, clear the selection
-                selection.removeAllRanges();
-            }
-        }
-    }
-
     internals.ContainerElement = null;
     internals.ScrollElement = null;
     internals.ElementTemplateElement = null;
+    // Enum: Pixels Percent ElementsPerScreen
+    internals.ElementHeightUnits = "ElementsPerScreen";
+    internals.UserElementHeight = 10;
+    // Enum: Pixels Percent Elements
+    internals.OverscrollHeightUnits = "Elements";
+    internals.UserOverscrollHeight = 9;
+    internals.RebindCallback = null; // (element, index, value, userdata) => userdata
+    internals.UpdateCallback = null; // (elements, startIndex, dataset) => void
     internals.ElementRefrencesNull = true;
-    internals.ResizeObserver = null;
-
-    internals.RelativeElementHeight = true;
-    internals.ElementHeight = 0.1;
-    internals.RelativeOverscrollHeight = true;
-    internals.OverscrollHeight = 0.9;
-    //internals.ElementHeightUnits = "percent";
-    //internals.UserElementHeight = 10;
-    //internals.ElementHeight = 100;
-    //internals.OverscrollHeightUnits = "elements";
-    //internals.UserOverscrollHeight = 9;
-    //internals.OverscrollHeight = 900;
-    //internals.SizingUpdateQueued = true;
-
+    internals.UpdateQueued = false;
+    internals.OldStartIndex = -1;
     internals.Dataset = [];
-    internals.DatasetChanged = false;
     internals.VirtualElements = [];
-    internals.RebindCallback = (element, binding, userdata) => { return null; };
+    internals.Elements = [];
 
-    SetConst(VSLib, "SetElementHeightInPixels", (val) => {
-        internals.RelativeElementHeight = false;
-        internals.ElementHeight = val;
-        internals.QueueUpdate();
-    });
-    SetConst(VSLib, "SetElementHeightInPercent", (val) => {
-        internals.RelativeElementHeight = true;
-        internals.ElementHeight = val / 100;
-        internals.QueueUpdate();
-    });
-    SetConst(VSLib, "SetElementsPerScreen", (val) => {
-        internals.RelativeElementHeight = true;
-        internals.ElementHeight = 1.0 / val;
-        internals.QueueUpdate();
-    });
-
-    SetConst(VSLib, "SetOverscrollHeightInPixels", (val) => {
-        internals.RelativeOverscrollHeight = false;
-        internals.OverscrollHeight = val;
-        internals.QueueUpdate();
-    });
-    SetConst(VSLib, "SetOverscrollHeightInPercent", (val) => {
-        internals.RelativeOverscrollHeight = true;
-        internals.OverscrollHeight = val;
-        internals.QueueUpdate();
-    });
-
-    SetConst(VSLib, "SetDataset", (dataset) => {
-        if (!Array.isArray(dataset)) {
-            throw new Error("dataset must be a valid array.");
+    SetConst(VSLib, "SetRebindCallback", (value) => {
+        if (typeof value != "function" && value != null) {
+            throw new Error("RebindCallback must be a valid function or null.");
         }
-        internals.Dataset = dataset;
-        internals.DatasetChanged = true;
+        internals.RebindCallback = value;
+    });
+    SetConst(VSLib, "SetUpdateCallback", (value) => {
+        if (typeof value != "function" && value != null) {
+            throw new Error("UpdateCallback must be a valid function.");
+        }
+        internals.UpdateCallback = value;
+    });
+    SetConst(VSLib, "SetDataset", (value) => {
+        if (!Array.isArray(value)) {
+            throw new Error("Dataset must be a valid array.");
+        }
+        internals.Dataset = value.slice();
+        Object.freeze(internals.Dataset);
+        internals.OldStartIndex = -1;
         internals.QueueUpdate();
     });
-    SetConst(VSLib, "SetRebindCallback", (callback) => {
-        if (typeof callback !== "function") {
-            throw new Error("callback must be a valid function.");
+    SetConst(VSLib, "SetElementHeightInPixels", (value) => {
+        if (!Number.isFinite(value)) {
+            throw new Error("ElementHeight must be a finite real number.");
         }
-        internals.RebindCallback = callback;
+        internals.ElementHeightUnits = "Pixels";
+        internals.UserElementHeight = value;
+        internals.QueueUpdate();
     });
-    SetConst(VSLib, "ClearAllUserData", () => {
-        for (let i = 0; i < internals.VirtualElements.length; i++) {
-            const virtualElement = internals.VirtualElements[i];
-            virtualElement.UserData = null;
+    SetConst(VSLib, "SetElementHeightInPercent", (value) => {
+        if (!Number.isFinite(value)) {
+            throw new Error("ElementHeight must be a finite real number.");
         }
+        internals.ElementHeightUnits = "Percent";
+        internals.UserElementHeight = value;
+        internals.QueueUpdate();
     });
-
-    SetConst(internals, "QueueUpdate", () => {
+    SetConst(VSLib, "SetElementsPerScreen", (value) => {
+        if (!Number.isFinite(value)) {
+            throw new Error("ElementHeight must be a finite real number.");
+        }
+        internals.ElementHeightUnits = "ElementsPerScreen";
+        internals.UserElementHeight = value;
+        internals.QueueUpdate();
+    });
+    SetConst(VSLib, "SetOverscrollHeightInPixels", (value) => {
+        if (!Number.isFinite(value)) {
+            throw new Error("OverscrollHeight must be a finite real number.");
+        }
+        internals.OverscrollHeightUnits = "Pixels";
+        internals.UserOverscrollHeight = value;
+        internals.QueueUpdate();
+    });
+    SetConst(VSLib, "SetOverscrollHeightInPercent", (value) => {
+        if (!Number.isFinite(value)) {
+            throw new Error("OverscrollHeight must be a finite real number.");
+        }
+        internals.OverscrollHeightUnits = "Percent";
+        internals.UserOverscrollHeight = value;
+        internals.QueueUpdate();
+    });
+    SetConst(VSLib, "SetOverscrollHeightInElements", (value) => {
+        if (!Number.isFinite(value)) {
+            throw new Error("OverscrollHeight must be a finite real number.");
+        }
+        internals.OverscrollHeightUnits = "Elements";
+        internals.UserOverscrollHeight = value;
+        internals.QueueUpdate();
+    });
+    internals.QueueUpdate = () => {
         if (!internals.UpdateQueued) {
             requestAnimationFrame(internals.Update);
             internals.UpdateQueued = true;
         }
-    });
-    SetConst(internals, "Update", () => {
+    };
+    internals.Rebind = (virtualElement, binding) => {
+        // Set css variable binding
+        virtualElement.Element.style.setProperty("--binding", binding);
+
+        // Unselect this element
+        const selection = window.getSelection();
+        for (let j = 0; j < selection.rangeCount; j++) {
+            const range = selection.getRangeAt(j);
+            if (range.intersectsNode(virtualElement.Element)) {
+                selection.removeRange(range);
+            }
+        }
+
+        // Invoke the rebind callback if it is not null
+        if (internals.RebindCallback != null) {
+            const value = binding >= 0 && binding < internals.Dataset.length ? internals.Dataset[binding] : null;
+            try {
+                virtualElement.UserData = internals.RebindCallback(virtualElement.Element, binding, value, virtualElement.UserData);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+    };
+    internals.Update = () => {
+        // Mark update as no longer queued
         internals.UpdateQueued = false;
 
+        // If the page hasn't loaded yet queue and update for next frame and return
         if (document.readyState == "loading") {
             internals.QueueUpdate();
             return;
         }
 
+        // If the element refrences are null then set them
         if (internals.ElementRefrencesNull) {
             internals.ContainerElement = document.querySelector(".vslib_container");
             internals.ScrollElement = document.querySelector(".vslib_scroll");
@@ -109,66 +138,104 @@
             internals.ContainerElement.addEventListener("scroll", () => {
                 internals.QueueUpdate();
             });
-            internals.ResizeObserver = new ResizeObserver(entries => {
+            new ResizeObserver(() => {
                 internals.QueueUpdate();
-            });
-            internals.ResizeObserver.observe(internals.ContainerElement);
+            }).observe(internals.ContainerElement);
             internals.ElementRefrencesNull = false;
         }
 
-        const containerHeightInPx = internals.ContainerElement.clientHeight;
-        const elementHeightInPx = internals.RelativeElementHeight ? containerHeightInPx * internals.ElementHeight : internals.ElementHeight;
-        const overscrollHeightInPx = internals.RelativeOverscrollHeight ? containerHeightInPx * internals.OverscrollHeight : internals.OverscrollHeight;
-        const scrollElementHeightInPx = Math.max((internals.Dataset.length * elementHeightInPx) + overscrollHeightInPx, containerHeightInPx);
-        const targetElementCount = (containerHeightInPx / elementHeightInPx) + 1;
-        const startIndex = Math.floor(internals.ContainerElement.scrollTop / elementHeightInPx);
-
-        document.documentElement.style.setProperty("--vslib-scroll-element-height", `${scrollElementHeightInPx}px`);
-        document.documentElement.style.setProperty("--vslib-element-height", `${elementHeightInPx}px`);
-
-        if (internals.DatasetChanged) {
+        // Recompute the basic numbers
+        const containerHeight = internals.ContainerElement.clientHeight;
+        let elementHeight = 108;
+        switch (internals.ElementHeightUnits) {
+            case "Pixels":
+                elementHeight = internals.UserElementHeight;
+                break;
+            case "Percent":
+                elementHeight = (internals.UserElementHeight / 100) * containerHeight;
+                break;
+            case "ElementsPerScreen":
+                elementHeight = containerHeight / internals.UserElementHeight;
+                break;
+        }
+        document.documentElement.style.setProperty("--vslib-element-height", `${elementHeight}px`);
+        let overscrollHeight = 972;
+        switch (internals.OverscrollHeightUnits) {
+            case "Pixels":
+                overscrollHeight = internals.UserOverscrollHeight;
+                break;
+            case "Percent":
+                overscrollHeight = (internals.UserOverscrollHeight / 100) * containerHeight;
+                break;
+            case "Elements":
+                overscrollHeight = internals.UserOverscrollHeight * elementHeight;
+                break;
+        }
+        const scrollElementHeight = Math.max((internals.Dataset.length * elementHeight) + overscrollHeight, containerHeight);
+        document.documentElement.style.setProperty("--vslib-scroll-element-height", `${scrollElementHeight}px`);
+        const targetElementCount = (containerHeight / elementHeight) + 1;
+        if (internals.OldStartIndex == -1) {
             internals.ContainerElement.scrollTop = 0;
-            for (let i = 0; i < internals.VirtualElements.length; i++) {
-                const virtualElement = internals.VirtualElements[i];
-                virtualElement.Binding = -1;
+        }
+        const startIndex = Math.floor(internals.ContainerElement.scrollTop / elementHeight);
+        const startIndexChanged = startIndex != internals.OldStartIndex;
+        const elementCountChanged = targetElementCount != internals.VirtualElements.length;
+
+        // Rebind the minimal number of elements and reorder internals.VirtualElements
+        if (startIndexChanged) {
+            if (internals.OldStartIndex == -1 || Math.abs(startIndex - internals.OldStartIndex) > internals.VirtualElements.length) {
+                for (let i = 0; i < internals.VirtualElements.length; i++) {
+                    const virtualElement = internals.VirtualElements[i];
+                    const binding = startIndex + i;
+                    internals.Rebind(virtualElement, binding);
+                }
+            } else if (startIndex > internals.OldStartIndex) {
+                const shiftCount = startIndex - internals.OldStartIndex;
+                const shiftStartIndex = internals.OldStartIndex + internals.VirtualElements.length;
+                for (let i = 0; i < shiftCount; i++) {
+                    const virtualElement = internals.VirtualElements.shift();
+                    internals.VirtualElements.push(virtualElement);
+                    const binding = shiftStartIndex + i;
+                    internals.Rebind(virtualElement, binding);
+                }
+            } else if (startIndex < internals.OldStartIndex) {
+                const shiftCount = internals.OldStartIndex - startIndex;
+                const shiftStartIndex = internals.OldStartIndex - 1;
+                for (let i = 0; i < shiftCount; i++) {
+                    const virtualElement = internals.VirtualElements.pop();
+                    internals.VirtualElements.unshift(virtualElement);
+                    const binding = shiftStartIndex - i;
+                    internals.Rebind(virtualElement, binding);
+                }
             }
-            internals.DatasetChanged = false;
+            internals.OldStartIndex = startIndex;
         }
 
-        while (internals.VirtualElements.length < targetElementCount) {
-            const element = internals.ElementTemplateElement.cloneNode(true);
-            element.classList.remove("vslib_element_template");
-            element.classList.add("vslib_element");
-            internals.ScrollElement.appendChild(element);
-            const virtualElement = { Element: element, Binding: -1, UserData: null };
-            internals.VirtualElements.push(virtualElement);
+        // Create new virtual elements if needed
+        if (elementCountChanged) {
+            while (internals.VirtualElements.length < targetElementCount) {
+                const element = internals.ElementTemplateElement.cloneNode(true);
+                element.classList.remove("vslib_element_template");
+                element.classList.add("vslib_element");
+                internals.ScrollElement.appendChild(element);
+                const virtualElement = { Element: element, UserData: null };
+                internals.VirtualElements.push(virtualElement);
+                const binding = startIndex + internals.VirtualElements.length - 1;
+                internals.Rebind(virtualElement, binding);
+            }
+            internals.Elements = internals.VirtualElements.map(virtualElement => virtualElement.Element);
+            Object.freeze(internals.Elements);
         }
 
-        const indexesCurrentlyUnbound = Array.from({ length: internals.VirtualElements.length }, (_, i) => startIndex + i);
-        const elementsAvailibleToRebind = [];
-        for (let i = 0; i < internals.VirtualElements.length; i++) {
-            const virtualElement = internals.VirtualElements[i];
-            const index = indexesCurrentlyUnbound.indexOf(virtualElement.Binding);
-            if (index != -1) {
-                indexesCurrentlyUnbound.splice(index, 1);
-            } else {
-                elementsAvailibleToRebind.push(i);
+        // Invoke the update callback if it is not null
+        if (internals.UpdateCallback != null && (startIndexChanged || elementCountChanged)) {
+            try {
+                internals.UpdateCallback(internals.Elements, startIndex, internals.Dataset);
+            } catch (error) {
+                console.error(error);
             }
         }
-        while (indexesCurrentlyUnbound.length > 0) {
-            const virtualElement = internals.VirtualElements[elementsAvailibleToRebind[0]];
-            const newBinding = indexesCurrentlyUnbound[0];
-            elementsAvailibleToRebind.shift();
-            indexesCurrentlyUnbound.shift();
-
-            virtualElement.Binding = newBinding;
-            virtualElement.Element.style.setProperty("--binding", virtualElement.Binding.toString());
-            const newUserData = internals.RebindCallback(virtualElement.Element, virtualElement.Binding, virtualElement.UserData);
-            if (newUserData !== undefined) {
-                virtualElement.UserData = newUserData;
-            }
-        }
-    });
-    LockModule("VSLib");
+    };
+    DeepFreeze(VSLib);
     internals.QueueUpdate();
 })();

@@ -1,4 +1,4 @@
-// Approved 03/17/2025
+// Approved 04/01/2025
 "use strict";
 
 (() => {
@@ -27,17 +27,14 @@
         return moduleInternals;
     });
 
-    SetConst(null, "LockModule", (moduleName) => {
-        const deepFreezeFunctionBody = (obj) => {
-            Object.freeze(obj);
-            Object.getOwnPropertyNames(obj).forEach((key) => {
-                const prop = obj[key];
-                if (prop != null && typeof prop == "object") {
-                    deepFreezeFunctionBody(prop);
-                }
-            });
-        }
-        deepFreezeFunctionBody(globalThis[moduleName]);
+    SetConst(null, "DeepFreeze", (obj) => {
+        Object.freeze(obj);
+        Object.getOwnPropertyNames(obj).forEach((key) => {
+            const prop = obj[key];
+            if (prop != null && typeof prop == "object") {
+                DeepFreeze(prop);
+            }
+        });
     });
 
     // Create helper module functions
@@ -62,4 +59,6 @@
     SetConst(Helper, "RandomRange", (min, max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     });
+
+    DeepFreeze(Helper);
 })();

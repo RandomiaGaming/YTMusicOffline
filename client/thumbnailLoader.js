@@ -7,6 +7,11 @@
     SetConst(internals, "BlankThumbUrl", "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==");
     SetConst(internals, "FetchConcurrencyLimit", 5);
 
+    // FetchConcurrencyLimit = 5
+    // PreloadConcurrencyLimit = 1
+    // Bind
+    // SetOnScreenRange
+
     internals.NextRequestId = 0;
     internals.ImageCache = new Map();
     internals.RequestCount = 0;
