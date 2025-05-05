@@ -1,4 +1,4 @@
-// Approved 03/20/2025
+// Approved 04/03/2025
 "use strict";
 
 (() => {
@@ -23,13 +23,13 @@
     internals.Elements = [];
 
     SetConst(VSLib, "SetRebindCallback", (value) => {
-        if (typeof value != "function" && value != null) {
+        if (typeof value != "function" && value !== null) {
             throw new Error("RebindCallback must be a valid function or null.");
         }
         internals.RebindCallback = value;
     });
     SetConst(VSLib, "SetUpdateCallback", (value) => {
-        if (typeof value != "function" && value != null) {
+        if (typeof value != "function" && value !== null) {
             throw new Error("UpdateCallback must be a valid function.");
         }
         internals.UpdateCallback = value;
@@ -111,7 +111,7 @@
         }
 
         // Invoke the rebind callback if it is not null
-        if (internals.RebindCallback != null) {
+        if (internals.RebindCallback !== null) {
             const value = binding >= 0 && binding < internals.Dataset.length ? internals.Dataset[binding] : null;
             try {
                 virtualElement.UserData = internals.RebindCallback(virtualElement.Element, binding, value, virtualElement.UserData);
@@ -228,7 +228,7 @@
         }
 
         // Invoke the update callback if it is not null
-        if (internals.UpdateCallback != null && (startIndexChanged || elementCountChanged)) {
+        if (internals.UpdateCallback !== null && (startIndexChanged || elementCountChanged)) {
             try {
                 internals.UpdateCallback(internals.Elements, startIndex, internals.Dataset);
             } catch (error) {

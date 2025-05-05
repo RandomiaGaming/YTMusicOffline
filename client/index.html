@@ -8,7 +8,7 @@
     <script src="/helper.js"></script>
     <link rel="stylesheet" href="/vslib.css">
     <script src="/vslib.js"></script>
-    <script src="/thumbnailLoader.js"></script>
+    <script src="/imageLoader.js"></script>
     <script src="/player.js"></script>
     <script src="/gui.js"></script>
     <link rel="stylesheet" href="/styles.css">
@@ -58,7 +58,7 @@
                 <p class="player_next player_link" onclick="Player.Next()">Next</p>
             </div>
             <div class="player_layer_bottom player_flex_layer">
-                <audio class="player_audio" controls></audio>
+                <audio class="player_audio" fetchpriority="high" controls></audio>
             </div>
         </div>
     </div>

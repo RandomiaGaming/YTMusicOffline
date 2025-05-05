@@ -76,10 +76,24 @@
         } else {
             userdata.containerElement.style.visibility = "visible";
             userdata.textElement.innerHTML = value.textHtml;
-            //ThumbnailLoader.Bind(userdata.thumbnailElement, song);
+            ImageLoader.Bind(userdata.thumbnailElement, value.thumbnail);
         }
 
         return userdata;
+    });
+
+    VSLib.SetUpdateCallback((elements, startIndex, dataset) => {
+        ImageLoader.ClearPreloads();
+        const endIndex = startIndex + elements.length;
+        startIndex--;
+        for (let i = 0; i < elements.length; i++) {
+            if (endIndex + i > 0 && endIndex + i < dataset.length) {
+                ImageLoader.Preload(dataset[endIndex + i].thumbnail);
+            }
+            if (startIndex - i > 0 && startIndex - i < dataset.length) {
+                ImageLoader.Preload(dataset[startIndex - i].thumbnail);
+            }
+        }
     });
 
     SetConst(Gui, "OnElementClicked", (element) => {
@@ -122,18 +136,6 @@
         internals.PlayerWatchOriginalElement.addEventListener("click", (event) => {
             event.preventDefault();
             if (Player.NowPlaying != null) {
-                if (event.button == 0 && event.ctrlKey) {
-                    window.open(Player.NowPlaying.source, "_blank");
-                } else if (event.button == 2) {
-                    window.open(Player.NowPlaying.source, "_blank");
-                } else {
-                    window.location = Player.NowPlaying.source;
-                }
-            }
-        });
-        internals.PlayerWatchOriginalElement.addEventListener("auxclick", (event) => {
-            event.preventDefault();
-            if (Player.NowPlaying != null) {
                 window.open(Player.NowPlaying.source, "_blank");
             }
         });
@@ -169,10 +171,10 @@
 
         if (Player.NowPlaying == null) {
             internals.PlayerTextElement.innerHTML = "Nothing is playing...";
-            //ThumbnailLoader.Bind(internals.PlayerThumbnailElement, null);
+            ImageLoader.Bind(internals.PlayerThumbnailElement, null);
         } else {
             internals.PlayerTextElement.innerHTML = Player.NowPlaying.textHtml;
-            //ThumbnailLoader.Bind(internals.PlayerThumbnailElement, Player.NowPlaying);
+            ImageLoader.Bind(internals.PlayerThumbnailElement, Player.NowPlaying.thumbnail);
         }
 
         if (Player.Loop) {
