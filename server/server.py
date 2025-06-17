@@ -5,34 +5,41 @@ custom_root = None
 open_in_browser = True
 
 # Import builtins (part of python)
+import sys
 import webbrowser
 import hashlib
 import os
 import time
+import subprocess
 
-# Import externals (must be installed with pip)
+# Import pip dependencies
 try:
-    from flask import *
+    import flask
 except:
-    print("Error missing dependency. Flask is required. Would you like to install flask now? (y/n)")
-    choice = input()
+    print(f"ERROR: Dependency flask not found. Would you like to install it now? (y/n)")
+    choice = input().lower()
     if choice == "y" or choice == "yes":
+        print()            
+        print(f"> python -m pip install flask")
+        errorCode = subprocess.run("python -m pip install flask", env=os.environ.copy()).returncode
         print()
-        print("> pip install flask")
-        os.system("pip install flask")
-        print()
-        from flask import *
+        if errorCode != 0:
+           print(f"ERROR: python -m pip install flask failed with error code {errorCode}.")
+           sys.exit(1)
+        import flask
     else:
-        print("Execution cannot continue without required dependency flask. Aborting.")
-        exit()
+        print(f"Execution cannot continue without required dependency flask.")
+        sys.exit(1)
 
+# Init flask
 url = f"http://{host}:{port}/"
 if custom_root != None:
     root = custom_root
 else:
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-app = Flask("YTMOffline")
+app = flask.Flask("YTMusicOffline")
 
+# Define flask methods and endpoints
 def compute_etag(filepath):
     hash_bytes = hashlib.sha256(filepath.encode("utf-8")).digest()
     hash_int = int.from_bytes(hash_bytes) % 1000000000
@@ -41,10 +48,10 @@ def compute_etag(filepath):
 @app.route("/api/save_database", methods=["POST"])
 def update_database():
     database_path = os.path.join(root, "database", "database.json")
-    database_json = request.data.decode("utf-8")
+    database_json = flask.request.data.decode("utf-8")
     with open(database_path, "w", encoding="utf-8") as file:
         file.write(database_json)
-    return make_response("", 200)
+    return flask.make_response("", 200)
 
 @app.route("/")
 def serve_slash():
@@ -63,13 +70,14 @@ def serve_slash_database_slash_filename(file_name):
 
 def serve_file(file_path):
     time.sleep(0.5)
-    response = send_from_directory(os.path.dirname(file_path), os.path.basename(file_path))
+    response = flask.send_from_directory(os.path.dirname(file_path), os.path.basename(file_path))
     response.headers.pop("Content-Disposition", None)
     response.headers.pop("Date", None)
     response.headers["Accept-Ranges"] = "bytes"
     response.headers["Etag"] = compute_etag(file_path)
     return response
 
+# Run server and catch errors
 try:
     print(f"Hosting {root} at {url}...")
     if open_in_browser:
@@ -79,6 +87,6 @@ try:
                     print(f"Failed to launch {url} please open manually.")
     app.run(host=host, port=port)
 except KeyboardInterrupt:
-    exit()
+    sys.exit(0)
 except:
     raise

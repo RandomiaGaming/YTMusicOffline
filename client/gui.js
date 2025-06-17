@@ -11,7 +11,7 @@
             const song = Player.Database[i];
             song.textHtml = highlightStart + song.title + highlightEnd;
             song.text = song.title;
-            if (song.album == undefined || song.album == null || song.album == "") {
+            if (song.album != undefined && song.album != null && song.album != "") {
                 song.textHtml += " from " + highlightStart + song.album + highlightEnd;
                 song.text += " from " + song.album;
             }
