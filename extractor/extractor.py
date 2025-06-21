@@ -12,6 +12,15 @@ SongDownloadRateLimit = 1_000_000
 SegmentDownloadMinDelay = 0
 SegmentDownloadMaxDelay = 5
 
+
+
+# NOTE ON API COST:
+# Total API cost is at maximum the following assuming only the Liked Music playlist is larger than 100 videos:
+# ciel(NumOfPlaylists / 50) + ciel(NumOfVideos / 50) + (NumOfPlaylists * 2) + ciel(NumOfVideos / 50)
+# That's about 322 querries for 79 playlists and 4005 videos.
+
+
+
 # Import builtins (part of python)
 import json
 import sys
@@ -23,7 +32,6 @@ import time
 from datetime import datetime, timezone
 import random
 import importlib
-
 # Import pip dependencies
 def PromptPipInstall(importName, pipName):
     pipCommand = f"python -m pip install -U {pipName}"
@@ -57,14 +65,15 @@ try:
     import yt_dlp
 except ImportError:
     PromptPipInstall("yt_dlp", "yt-dlp")
-
 # Import submodules of pip packages not previously imported
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
 
-# Define helper functions
+
+
+# Helper functions
 def DictionaryHas(dictionary, path):
     if dictionary == None:
         return False
@@ -95,47 +104,33 @@ def PathToClientUrl(filePath):
     if not "..\\" in os.path.relpath(filePath, clientDir):
         return "/" + os.path.relpath(filePath, clientDir).replace("\\", "/")
     raise Exception(f"{filePath} is not within the client or database folders and therefore is innaccesable to the client.")
-Database = None
-def LoadDatabase(echo=False):
-    global Database
-    if Database != None:
-        return
-    if echo: print("Loading database...")
-
+def LoadSongDatabase():
     ChangeDir()
     databaseDir = os.path.abspath("database")
     os.makedirs(databaseDir, exist_ok=True)
     databasePath = os.path.abspath("database/database.json")
-
     if not os.path.exists(databasePath):
-        Database = {}
+        return {}
     with open(databasePath, "r", encoding="utf-8") as databaseFile:
-        Database = json.load(databaseFile)
-def SaveDatabase(echo=False):
-    global Database
-    if Database == None:
-        raise Exception("Database must be loaded before calling SaveDatabase.")
-    if echo: print("Saving database...")
-
+        return json.load(databaseFile)
+def SaveSongDatabase(songDatabase):
     ChangeDir()
     databaseDir = os.path.abspath("database")
     os.makedirs(databaseDir, exist_ok=True)
     databasePath = os.path.abspath("database/database.json")
-
     with open(databasePath, "w", encoding="utf-8") as databaseFile:
-        json.dump(Database, databaseFile, indent=4, ensure_ascii=True)
-YouTubeApi = None
-def AuthApi(echo=False):
-    global YouTubeApi
-    if YouTubeApi != None:
-        return
-    if echo: print("Authenticating with YouTube Api...")
+        json.dump(songDatabase, databaseFile, indent=4, ensure_ascii=True)
 
+
+
+# Module 1 - Add New Songs To The Database - APPROVED
+# This module is complex and documentation will come later.
+def AuthApi():
     ChangeDir()
     userSecretsPath = os.path.abspath("extractor/user_secrets.json")
     clientSecretsPath = os.path.abspath("extractor/client_secrets.json")
-
     credentials = None
+
     if os.path.exists(userSecretsPath):
         credentials = Credentials.from_authorized_user_file(userSecretsPath, [ "https://www.googleapis.com/auth/youtube.readonly" ])
         if credentials.expired:
@@ -150,34 +145,29 @@ def AuthApi(echo=False):
 
     with open(userSecretsPath, "w") as userSecretsFile: userSecretsFile.write(credentials.to_json())
 
-    YouTubeApi = googleapiclient.discovery.build("youtube", "v3", credentials=credentials)
-
-# Phase 1 - Getting MyVideoIds
-MyVideoIds = None
-def EnumMyPlaylists(includeLikes=False, includeLikedMusic=False):
-    global YouTubeApi
-    output = set()
-
-    if includeLikedMusic:
-        output.add("LM")
+    return googleapiclient.discovery.build("youtube", "v3", credentials=credentials)
+def EnumMyPlaylists(youtubeApi, includeLikes=False, includeLikedMusic=False):
+    output = []
     if includeLikes:
-        output.add("LL")
+        output.append("LL")
+    if includeLikedMusic:
+        output.append("LM")
 
-    request = YouTubeApi.playlists().list(
+    request = youtubeApi.playlists().list(
         part="id",
         mine=True,
         maxResults=50
     )
     response = request.execute()
     for item in response["items"]:
-        output.add(item["id"])
+        output.append(item["id"])
     if DictionaryHas(response, "nextPageToken"):
         nextPageToken = response["nextPageToken"]
     else:
         nextPageToken = None
 
     while nextPageToken != None:
-        request = YouTubeApi.playlists().list(
+        request = youtubeApi.playlists().list(
             part="id",
             mine=True,
             maxResults=50,
@@ -185,31 +175,29 @@ def EnumMyPlaylists(includeLikes=False, includeLikedMusic=False):
         )
         response = request.execute()
         for item in response["items"]:
-            output.add(item["id"])
+            output.append(item["id"])
         if DictionaryHas(response, "nextPageToken"):
             nextPageToken = response["nextPageToken"]
         else:
             nextPageToken = None
     return output
-def EnumPlaylistContents(playlistId):
-    global YouTubeApi
-    output = set()
-
-    request = YouTubeApi.playlistItems().list(
+def EnumPlaylistContents(youtubeApi, playlistId):
+    output = []
+    request = youtubeApi.playlistItems().list(
         part="snippet", # Snippet used instead of id because id returns the playlistItemId not the videoId
         playlistId=playlistId,
         maxResults=50
     )
     response = request.execute()
     for item in response["items"]:
-        output.add(item["snippet"]["resourceId"]["videoId"])
+        output.append(item["snippet"]["resourceId"]["videoId"])
     if DictionaryHas(response, "nextPageToken"):
         nextPageToken = response["nextPageToken"]
     else:
         nextPageToken = None
     
     while nextPageToken != None:
-        request = YouTubeApi.playlistItems().list(
+        request = youtubeApi.playlistItems().list(
             part="snippet",
             playlistId=playlistId,
             maxResults=50,
@@ -217,40 +205,32 @@ def EnumPlaylistContents(playlistId):
         )
         response = request.execute()
         for item in response["items"]:
-            output.add(item["snippet"]["resourceId"]["videoId"])
+            output.append(item["snippet"]["resourceId"]["videoId"])
         if DictionaryHas(response, "nextPageToken"):
             nextPageToken = response["nextPageToken"]
         else:
             nextPageToken = None
     return output
-def Phase1():
-    global MyVideoIds
-    print("Fetching playlists including music likes...")
-    
-    MyVideoIds = set()
+def EnumMyVideos(youtubeApi):
+    myPlaylistIds = EnumMyPlaylists(youtubeApi, includeLikedMusic=True)
 
-    myPlaylistIds = EnumMyPlaylists(includeLikedMusic=True)
-
+    myVideoIds = []
     i = 0
-    for playlistId in myPlaylistIds:
-        print(f"Fetching playlist contents {i} of {len(myPlaylistIds)}...")
+    for myPlaylistId in myPlaylistIds:
+        print(f"Progress {i} of {len(myPlaylistIds)}...")
         i += 1
-        for videoId in EnumPlaylistContents(playlistId):
-            MyVideoIds.add(videoId)
-
-# Phase 2 - Getting Video Info
-VideoInfo = {}
-def GetVideoInfo(videoIds, echo=False):
-    videoInfo = {}
-    noMetadataVideoIds = set()
-
+        for myVideoId in EnumPlaylistContents(youtubeApi, myPlaylistId):
+            if not myVideoId in myVideoIds:
+                myVideoIds.append(myVideoId)
+    return myVideoIds
+def GetVideoInfo(youtubeApi, videoIds):
+    output = {}
     i = 0
-    videoIds = list(videoIds)
     while i < len(videoIds):
         nextVideoIds = videoIds[i:i + 50]
-        print(f"Fetching video info for videos {i} to {i + (len(nextVideoIds) - 1)} of {len(videoIds)}...")
+        print(f"Progress {i} of {len(videoIds)}...")
         i += len(nextVideoIds)
-        request = YouTubeApi.videos().list(
+        request = youtubeApi.videos().list(
             part="contentDetails,id,liveStreamingDetails,localizations,paidProductPlacementDetails,player,recordingDetails,snippet,statistics,status,topicDetails",
             id=",".join(nextVideoIds),
             maxResults=50
@@ -258,33 +238,11 @@ def GetVideoInfo(videoIds, echo=False):
         response = request.execute()
         for video in response["items"]:
             videoId = video["id"]
+            output[videoId] = video
             nextVideoIds.remove(videoId)
-            videoInfo[videoId] = video
         for videoId in nextVideoIds:
-            noMetadataVideoIds.add(videoId)
-    return videoInfo, noMetadataVideoIds
-def Phase2():
-    global MyVideoIds, VideoInfo
-    print("Fetching video info for videos not yet in the video database...")
-
-    for videoId in list(VideoInfo.keys()):
-        if videoId not in MyVideoIds:
-            del VideoInfo[videoId]
-
-    infoNeededVideoIds = set()
-    for videoId in MyVideoIds:
-        if videoId in VideoInfo:
-            continue
-        infoNeededVideoIds.add(videoId)
-    if len(infoNeededVideoIds) <= 0:
-        return False
-    
-    newVideoInfo, noMetadataVideoIds = GetVideoInfo(infoNeededVideoIds, echo=True)
-    VideoInfo.update(newVideoInfo)
-    MyVideoIds.difference_update(noMetadataVideoIds)
-    return True
-
-# Phase 3 - Tracing Redirected Videos
+            print(f"Warning: Unable to get video info for video Id {videoId}.")
+    return output
 def IsVideoUnavailable(video):
     if DictionaryHas(video, "status.privacyStatus"):
         privacyStatus = video["status"]["privacyStatus"]
@@ -332,29 +290,25 @@ def TraceVideo(videoId):
             return None
         return tracedVideoId
     return None
-def Phase3():
-    global MyVideoIds, VideoInfo, TraceMinDelay, TraceMaxDelay
-    print("Tracing unavailable videos to see if they were redirected...")
-    
+def TraceAndRemoveUnavailableVideos(videoInfoDatabase):
     traceNeededVideoIds = set()
-    for videoId in MyVideoIds:
-        if IsVideoUnavailable(VideoInfo[videoId]):
+    for videoId in list(videoInfoDatabase.keys()):
+        if IsVideoUnavailable(videoInfoDatabase[videoId]):
             traceNeededVideoIds.add(videoId)
-    if len(traceNeededVideoIds) <= 0:
-        return False
-    
+            del videoInfoDatabase[videoId]
+
+    output = []
     i = 0
     for videoId in traceNeededVideoIds:
-        print(f"Tracing unavailable video {i} of {len(traceNeededVideoIds)}...")
+        print(f"Progress {i} of {len(traceNeededVideoIds)}...")
         i += 1
         tracedVideoId = TraceVideo(videoId)
+        if (tracedVideoId != None
+            and not tracedVideoId in videoInfoDatabase
+            and not tracedVideoId in traceNeededVideoIds):
+            output.append(tracedVideoId)
         RandomSleep(TraceMinDelay, TraceMaxDelay)
-        MyVideoIds.remove(videoId)
-        if tracedVideoId != None:
-            MyVideoIds.add(tracedVideoId)
-    return True
-
-# Phase 4 - Converting Video Info To Song Database And Saving
+    return output
 def GetBestThumbnail(video):
     bestThumbnailSize = 0
     bestThumbnailUrl = None
@@ -365,17 +319,17 @@ def GetBestThumbnail(video):
             bestThumbnailSize = thumbnail["width"] * thumbnail["height"]
             bestThumbnailUrl = thumbnail["url"]
     return bestThumbnailUrl
-def ConvertVideoToSong(videoId, video):
+def ConvertVideoToSong(videoId, videoInfo):
     srcUrl = f"https://www.youtube.com/watch?v={videoId}"
     src = None
-    thumbnailUrl = GetBestThumbnail(video)
+    thumbnailUrl = GetBestThumbnail(videoInfo)
     thumbnail = None
     title = None
     album = None
     artists = None
     releaseDate = None
 
-    description = video["snippet"]["description"]
+    description = videoInfo["snippet"]["description"]
     descriptionLines = [line.strip() for line in description.replace("\r\n", "\n").split("\n") if len(line) > 0]
     if len(descriptionLines) > 0 and descriptionLines[-1] == "Auto-generated by YouTube.":
         if descriptionLines[0].startswith("Provided to YouTube by "):
@@ -394,32 +348,60 @@ def ConvertVideoToSong(videoId, video):
                 break
 
     if title == None:
-        title = video["snippet"]["title"]
+        title = videoInfo["snippet"]["title"]
     if album == None:
         album = ""
     if artists == None:
-        artistRaw = video["snippet"]["channelTitle"]
+        artistRaw = videoInfo["snippet"]["channelTitle"]
         artists = [ artistRaw[0:-len(" - Topic")] if artistRaw.endswith(" - Topic") else artistRaw ]
     if releaseDate == None:
-        rawReleaseDate = video["snippet"]["publishedAt"]
+        rawReleaseDate = videoInfo["snippet"]["publishedAt"]
         releaseDate = int(datetime.strptime(rawReleaseDate, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc).timestamp())
 
     return { "srcUrl": srcUrl, "src": src, "thumbnailUrl": thumbnailUrl, "thumbnail": thumbnail, "title": title, "album": album, "artists": artists, "releaseDate": releaseDate }
-def Phase4():
-    global MyVideoIds, VideoInfo, Database
-    print("Extracting song info from video info...")
+def AddNewVideosToSongDatabase(videoInfoDatabase, songDatabase):
+    for songId in songDatabase:
+        if not songId in videoInfoDatabase:
+            print(f"Warning: Song exists in song database with Id {songId} but that song isn't in your likes or any playlist.")
     
-    for videoId in MyVideoIds:
-        if not videoId in Database:
-            Database[videoId] = ConvertVideoToSong(videoId, VideoInfo[videoId])
-        else:
-            print(f"Warning: Song {videoId} was already in the database.")
-    SaveDatabase()
+    # New songs must be added in reverse order so that when the database is reversed it goes back to normal.
+    for videoId in reversed(list(videoInfoDatabase.keys())):
+        if not videoId in songDatabase:
+            songDatabase[videoId] = ConvertVideoToSong(videoId, videoInfoDatabase[videoId])
+def Module1():
+    print("Authenticating with YouTube Api...")
+    youtubeApi = AuthApi()
 
-# Module 2 - Download Each Song's Thumbnail
-# Downloads the thumbnail for any song in the Database which does not already have a thumbnail in database/thumbnails
-# Regardless of weather a thumbnail is needed it updates song.thumbnail to reflect the client url of the thumbnail
-# Does not depend on previous steps and runs independently
+    print("Fetching playlists including music likes...")
+    infoNeededVideoIds = EnumMyVideos(youtubeApi)
+
+    videoInfoDatabase = {}
+    while len(infoNeededVideoIds) > 0:
+        print("Fetching video info for all videos currently without info...")
+        videoInfoDatabase.update(GetVideoInfo(youtubeApi, infoNeededVideoIds))
+
+        print("Tracing unavailable videos to see if they were redirected...")
+        infoNeededVideoIds = TraceAndRemoveUnavailableVideos(videoInfoDatabase)
+
+    print("Loading database...")
+    songDatabase = LoadSongDatabase()
+
+    # Database must be reversed before calls to AddNewVideosToSongDatabase.
+    # This makes insertions to the end go to the beginning of the database.
+    print("Extracting song info from video info...")
+    songDatabase = dict(reversed(list(songDatabase.items())))
+    AddNewVideosToSongDatabase(videoInfoDatabase, songDatabase)
+    songDatabase = dict(reversed(list(songDatabase.items())))
+
+    print("Saving database...")
+    SaveSongDatabase(songDatabase)
+
+
+
+# Module 2 - Download Each Song's Thumbnail - APPROVED
+# Downloads the thumbnail for any song in the Database which does not already have a thumbnail in database/thumbnails.
+# Regardless of weather a thumbnail is needed it updates song.thumbnail to reflect the client url of the thumbnail.
+# Does not depend on previous steps and runs independently.
 def DownloadThumbnail(songId, song, thumbnailsDir):
     thumbnailUrl = song["thumbnailUrl"]
     thumbnailUrlPath = urllib.parse.urlparse(thumbnailUrl).path
@@ -430,8 +412,8 @@ def DownloadThumbnail(songId, song, thumbnailsDir):
     with open(thumbnailFilePath, "wb") as thumbnailFile: thumbnailFile.write(response)
     song["thumbnail"] = PathToClientUrl(thumbnailFilePath)
 def Module2():
-    global Database, ThumbnailDownloadMinDelay, ThumbnailDownloadMaxDelay
-    LoadDatabase(echo=True)
+    print("Loading database...")
+    songDatabase = LoadSongDatabase()
 
     print("Downloading thumbnails for songs without a thumbnail...")
     ChangeDir()
@@ -442,14 +424,14 @@ def Module2():
     for fileName in os.listdir(thumbnailsDir):
         filePath = os.path.join(thumbnailsDir, fileName)
         songId = os.path.splitext(fileName)[0]
-        if not songId in Database:
+        if not songId in songDatabase:
             print(f"Warning: Thumbnail exists for song {songId} at {filePath} but that song isn't in the database.")
         existingFiles[songId] = filePath
 
     thumbnailNeededSongIds = set()
-    for songId in Database:
+    for songId in songDatabase:
         if songId in existingFiles:
-            Database[songId]["thumbnail"] = PathToClientUrl(existingFiles[songId])
+            songDatabase[songId]["thumbnail"] = PathToClientUrl(existingFiles[songId])
             continue
         thumbnailNeededSongIds.add(songId)
 
@@ -457,15 +439,19 @@ def Module2():
     for songId in thumbnailNeededSongIds:
         print(f"Downloading thumbnail for song {i} of {len(thumbnailNeededSongIds)}...")
         i += 1
-        DownloadThumbnail(songId, Database[songId], thumbnailsDir)
+        DownloadThumbnail(songId, songDatabase[songId], thumbnailsDir)
         RandomSleep(ThumbnailDownloadMinDelay, ThumbnailDownloadMaxDelay)
-    SaveDatabase(echo=True)
+    
+    print("Saving database...")
+    SaveSongDatabase(songDatabase)
 
-# Module 3 - Download Each Song's Audio Stream
-# Downloads the audio stream for any song in the Database which does not already have an audio stream in database/songs
-# Regardless of weather an audio stream is needed it updates song.src to reflect the client url of the audio stream
-# Does not depend on previous steps and runs independently
-# If an audio stream can't be downloaded normally tries again with cookies enabled
+
+
+# Module 3 - Download Each Song's Audio Stream - APPROVED
+# Downloads the audio stream for any song in the Database which does not already have an audio stream in database/songs.
+# Regardless of weather an audio stream is needed it updates song.src to reflect the client url of the audio stream.
+# Does not depend on previous steps and runs independently.
+# If an audio stream can't be downloaded normally tries again with cookies enabled.
 def DownloadAudioStream(songId, song, audioStreamsDir):
     global SongDownloadRateLimit, SegmentDownloadMinDelay, SegmentDownloadMaxDelay
     ytdlpOptions = {
@@ -504,8 +490,8 @@ def DownloadAudioStream(songId, song, audioStreamsDir):
             return
     raise Exception(f"Downloaded audio stream for song {songId} but the output file from ytdlp could not be located.")
 def Module3():
-    global Database, AudioStreamDownloadMinDelay, AudioStreamDownloadMaxDelay
-    LoadDatabase(echo=True)
+    print("Loading database...")
+    songDatabase = LoadSongDatabase()
     
     print("Downloading audio stream for songs without an audio stream...")
     ChangeDir()
@@ -516,14 +502,14 @@ def Module3():
     for fileName in os.listdir(audioStreamsDir):
         filePath = os.path.join(audioStreamsDir, fileName)
         songId = os.path.splitext(fileName)[0]
-        if not songId in Database:
+        if not songId in songDatabase:
             print(f"Warning: Audio stream exists for song {songId} at {filePath} but that song isn't in the database.")
         existingFiles[songId] = filePath
 
     audioStreamNeededSongIds = set()
-    for songId in Database:
+    for songId in songDatabase:
         if songId in existingFiles:
-            Database[songId]["src"] = PathToClientUrl(existingFiles[songId])
+            songDatabase[songId]["src"] = PathToClientUrl(existingFiles[songId])
             continue
         audioStreamNeededSongIds.add(songId)
 
@@ -531,38 +517,18 @@ def Module3():
     for songId in audioStreamNeededSongIds:
         print(f"Downloading audio stream for song {i} of {len(audioStreamNeededSongIds)}...")
         i += 1
-        DownloadAudioStream(songId, Database[songId], audioStreamsDir)
+        DownloadAudioStream(songId, songDatabase[songId], audioStreamsDir)
         RandomSleep(AudioStreamDownloadMinDelay, AudioStreamDownloadMaxDelay)
-    SaveDatabase(echo=True)
 
-# Run extractor with error checking
-try:
-    # Fix new song data overwritting old songs in database
-    # Only new songs should be added TODO
-    """
-    Phase0()
+    print("Saving database...")
+    SaveSongDatabase(songDatabase)
 
-    Phase1()
 
-    while True:
-        didSomething = False
-        if Phase2():
-            didSomething = True
-        if Phase3():
-            didSomething = True
-        if not didSomething:
-            break
 
-    Phase4()
-    """
-
+def main():
+    Module1()
     Module2()
-
     Module3()
-
     print("All tasks completed successfully")
     sys.exit(0)
-except KeyboardInterrupt:
-    sys.exit(0)
-except:
-    raise
+main()
