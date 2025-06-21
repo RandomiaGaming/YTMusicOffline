@@ -136,7 +136,7 @@
         internals.PlayerWatchOriginalElement.addEventListener("click", (event) => {
             event.preventDefault();
             if (Player.NowPlaying != null) {
-                window.open(Player.NowPlaying.source, "_blank");
+                window.open(Player.NowPlaying.srcUrl, "_blank");
             }
         });
         internals.PlayerLoopElement = document.querySelector(".player_loop");

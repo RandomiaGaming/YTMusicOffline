@@ -14,7 +14,7 @@
     SetConst(internals, "LoadDatabase", () => {
         fetch("/database/database.json").then((result) => {
             result.json().then((result) => {
-                Player.Database = result;
+                Player.Database = Object.values(result);
                 Player.Playlist = Player.Database;
 
                 VSLib.SetDataset(Player.Playlist);
