@@ -11,25 +11,27 @@ import hashlib
 import os
 import time
 import subprocess
-
-# Import pip dependencies
-try:
-    import flask
-except:
-    print(f"ERROR: Dependency flask not found. Would you like to install it now? (y/n)")
+import importlib
+def PromptPipInstall(importName, pipName):
+    pipCommand = f"python -m pip install -U {pipName}"
+    print(f"ERROR: Dependency {pipName} not found. Would you like to install it now? (y/n)")
     choice = input().lower()
-    if choice == "y" or choice == "yes":
-        print()            
-        print(f"> python -m pip install flask")
-        errorCode = subprocess.run("python -m pip install flask", env=os.environ.copy()).returncode
+    if choice in [ "y", "yes" ]:
+        print()
+        print(f"> {pipCommand}")
+        errorCode = subprocess.run(pipCommand, shell=True, env=os.environ.copy()).returncode
         print()
         if errorCode != 0:
-           print(f"ERROR: python -m pip install flask failed with error code {errorCode}.")
+           print(f"ERROR: {pipCommand} failed with error code {errorCode}.")
            sys.exit(1)
-        import flask
+        globals()[importName] = importlib.import_module(importName)
     else:
-        print(f"Execution cannot continue without required dependency flask.")
+        print(f"Execution cannot continue without required dependency {pipName}.")
         sys.exit(1)
+try:
+    import flask
+except ImportError:
+    PromptPipInstall("flask", "flask")
 
 # Init flask
 url = f"http://{host}:{port}/"

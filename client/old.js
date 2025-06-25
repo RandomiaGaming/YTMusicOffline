@@ -1,3 +1,66 @@
+"use strict";
+
+(() => {
+    let pendingCallbacks = [];
+
+    const recursiveFreeze = (obj) => {
+        Object.freeze(obj);
+        Object.getOwnPropertyNames(obj).forEach((key) => {
+            if (obj[key] != null && typeof obj[key] == "object") {
+                recursiveFreeze(obj[key]);
+            }
+        });
+    };
+
+    Object.defineProperty(globalThis, "DefLib", {
+        writable: false,
+        configurable: false,
+        value: (lib, libName) => {
+            recursiveFreeze(lib);
+            Object.defineProperty(globalThis, libName, {
+                writable: false,
+                configurable: false,
+                value: lib
+            });
+            for (let i = 0; i < pendingCallbacks.length; i++) {
+                const pendingCallback = pendingCallbacks[i];
+                let hasAllDeps = true;
+                for (let dep of pendingCallback.deps) {
+                    if (!(dep in globalThis)) {
+                        hasAllDeps = false;
+                        break;
+                    }
+                }
+                if (hasAllDeps) {
+                    pendingCallback.callback();
+                    pendingCallbacks.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+    });
+
+    Object.defineProperty(globalThis, "AwaitDeps", {
+        writable: false,
+        configurable: false,
+        value: (deps, callback) => {
+            const newPendingCallback = { deps: deps, callback: callback };
+            let hasAllDeps = true;
+            for (let dep of newPendingCallback.deps) {
+                if (!(dep in globalThis)) {
+                    hasAllDeps = false;
+                    break;
+                }
+            }
+            if (hasAllDeps) {
+                newPendingCallback.callback();
+            } else {
+                pendingCallbacks.push(newPendingCallback);
+            }
+        }
+    });
+})();
+
 function SeekTo(newTime) {
     if ("fastSeek" in Player.audioElement) {
         Player.audioElement.fastSeek(newTime);

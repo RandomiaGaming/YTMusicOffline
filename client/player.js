@@ -2,7 +2,8 @@
 "use strict";
 
 (() => {
-    const internals = DefModule("Player");
+    const Player = {};
+    const internals = {};
 
     Player.Database = [];
     Player.Playlist = [];
@@ -11,7 +12,7 @@
     internals.AudioElement = null;
     internals.ElementRefrencesNull = true;
 
-    SetConst(internals, "LoadDatabase", () => {
+    internals.LoadDatabase = () => {
         fetch("/database/database.json").then((result) => {
             result.json().then((result) => {
                 Player.Database = Object.values(result);
@@ -24,20 +25,20 @@
                 console.timeEnd("PageLoad");
             });
         });
-    });
+    };
     internals.LoadDatabase();
 
-    SetConst(internals, "SetElementRefrences", () => {
+    internals.SetElementRefrences = () => {
         internals.AudioElement = document.querySelector(".player_audio");
         internals.ElementRefrencesNull = false;
-    });
-    document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+    };
+    if (document.readyState == "loading") {
+        document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+    } else {
+        internals.SetElementRefrences();
+    }
 
-    SetConst(Player, "PlaySong", (song) => {
-        if (internals.ElementRefrencesNull) {
-            return;
-        }
-
+    Player.PlaySong = (song) => {
         internals.AudioElement.pause();
         internals.AudioElement.currentTime = 0;
         if (song == null) {
@@ -49,9 +50,9 @@
 
         Player.NowPlaying = song;
         Gui.RefreshPlayer();
-    });
+    };
 
-    SetConst(Player, "Search", (query) => {
+    Player.Search = (query) => {
         query = query.toLowerCase();
 
         const newPlaylist = [];
@@ -64,24 +65,20 @@
 
         Player.Playlist = newPlaylist;
         VSLib.SetDataset(Player.Playlist);
-    });
+    };
 
     Player.Loop = false;
-    SetConst(Player, "ToggleLoop", () => {
-        if (internals.ElementRefrencesNull) {
-            return;
-        }
+    Player.ToggleLoop = () => {
         Player.Loop = !Player.Loop;
         internals.AudioElement.loop = Player.Loop;
         Gui.RefreshPlayer();
-    });
+    };
 
     Player.Shuffle = false;
-    SetConst(Player, "ToggleShuffle", () => {
-        if (internals.ElementRefrencesNull) {
-            return;
-        }
+    Player.ToggleShuffle = () => {
         Player.Shuffle = !Player.Shuffle;
         Gui.RefreshPlayer();
-    });
+    };
+
+    globalThis.Player = Player;
 })();

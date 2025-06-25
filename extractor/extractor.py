@@ -109,6 +109,9 @@ def LoadSongDatabase():
     databaseDir = os.path.abspath("database")
     os.makedirs(databaseDir, exist_ok=True)
     databasePath = os.path.abspath("database/database.json")
+    databaseBackupPath = os.path.join(databaseDir, "database_backup.json")
+    if os.path.exists(databaseBackupPath):
+        raise Exception("A previous failed save exists of the database. Bailing out for manual audit.")
     if not os.path.exists(databasePath):
         return {}
     with open(databasePath, "r", encoding="utf-8") as databaseFile:
@@ -118,8 +121,15 @@ def SaveSongDatabase(songDatabase):
     databaseDir = os.path.abspath("database")
     os.makedirs(databaseDir, exist_ok=True)
     databasePath = os.path.abspath("database/database.json")
+    databaseBackupPath = os.path.join(databaseDir, "database_backup.json")
+    if os.path.exists(databaseBackupPath):
+        raise Exception("A previous failed save exists of the database. Bailing out for manual audit.")
+    if os.path.exists(databasePath):
+        os.rename(databasePath, databaseBackupPath)
     with open(databasePath, "w", encoding="utf-8") as databaseFile:
         json.dump(songDatabase, databaseFile, indent=4, ensure_ascii=True)
+    if os.path.exists(databaseBackupPath):
+        os.remove(databaseBackupPath)
 
 
 

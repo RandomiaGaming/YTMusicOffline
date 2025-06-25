@@ -1,19 +1,26 @@
-<!-- Approved 03/17/2025 -->
+<!-- Approved 06/24/2025 -->
 
 <!DOCTYPE html>
 <html>
-    
+
 <head>
     <script>console.time("PageLoad")</script>
-    <script src="/helper.js"></script>
-    <link rel="stylesheet" href="/vslib.css">
-    <script src="/vslib.js"></script>
-    <script src="/imageLoader.js"></script>
-    <script src="/player.js"></script>
-    <script src="/gui.js"></script>
-    <link rel="stylesheet" href="/styles.css">
+
     <title>EzMusic</title>
-    <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no, interactive-widget=overlays-content">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no, interactive-widget=overlays-content">
+
+    <!-- CSS Stylesheets are high priority -->
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/vslib/vslib.css">
+
+    <!-- JS Scripts are low priority and run after DOM load -->
+    <script src="/vslib/vslib.js" defer></script>
+    <script src="/thumblib.js" defer></script>
+    <script src="/player.js" defer></script>
+    <script src="/gui.js" defer></script>
+
+    <!-- Icons are always low priority -->
     <link rel="icon" sizes="16x16" href="/icons/icon16x16.png">
     <link rel="icon" sizes="32x32" href="/icons/icon32x32.png">
     <link rel="icon" sizes="48x48" href="/icons/icon48x48.png">

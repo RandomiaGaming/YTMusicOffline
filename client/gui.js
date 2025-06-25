@@ -2,9 +2,18 @@
 "use strict";
 
 (() => {
-    const internals = DefModule("Gui");
+    const Gui = {};
+    const internals = {};
 
-    SetConst(Gui, "ComputeSongExtraData", () => {
+    internals.EpochToString = (timestamp) => {
+        const date = new Date(timestamp * 1000);
+        const day = ("0" + date.getUTCDate().toString()).slice(-2);
+        const month = ("0" + (date.getUTCMonth() + 1).toString()).slice(-2);
+        const year = ("000" + date.getUTCFullYear().toString()).slice(-4);
+        return month + "/" + day + "/" + year;
+    };
+
+    Gui.ComputeSongExtraData = () => {
         const highlightStart = "<span class=\"element_highlight\">";
         const highlightEnd = "</span>";
         for (let i = 0; i < Player.Database.length; i++) {
@@ -49,14 +58,14 @@
                     song.text += ", and others";
                     break;
             }
-            song.textHtml += " released on " + highlightStart + Helper.EpochToString(song.releaseDate) + highlightEnd;
-            song.text += " released on " + Helper.EpochToString(song.releaseDate);
+            song.textHtml += " released on " + highlightStart + internals.EpochToString(song.releaseDate) + highlightEnd;
+            song.text += " released on " + internals.EpochToString(song.releaseDate);
         }
-    });
+    };
 
     VSLib.SetElementsPerScreen(10);
 
-    internals.Userdata = [];
+    internals.Userdata = new Map();
     VSLib.SetRebindCallback((element, binding, value, userdata) => {
         if (userdata == null) {
             userdata = {
@@ -66,8 +75,7 @@
                 thumbnailElement: element.querySelector(".element_thumbnail"),
                 textElement: element.querySelector(".element_text"),
             };
-            internals.Userdata.push(userdata);
-            userdata.containerElement.dataset.UserdataIndex = internals.Userdata.length - 1;
+            internals.Userdata.set(element, userdata);
         }
         userdata.binding = binding;
         userdata.value = value;
@@ -76,35 +84,29 @@
         } else {
             userdata.containerElement.style.visibility = "visible";
             userdata.textElement.innerHTML = value.textHtml;
-            ImageLoader.Bind(userdata.thumbnailElement, value.thumbnail);
         }
 
         return userdata;
     });
 
     VSLib.SetUpdateCallback((elements, startIndex, dataset) => {
-        ImageLoader.ClearPreloads();
-        const endIndex = startIndex + elements.length;
-        startIndex--;
-        for (let i = 0; i < elements.length; i++) {
-            if (endIndex + i > 0 && endIndex + i < dataset.length) {
-                ImageLoader.Preload(dataset[endIndex + i].thumbnail);
-            }
-            if (startIndex - i > 0 && startIndex - i < dataset.length) {
-                ImageLoader.Preload(dataset[startIndex - i].thumbnail);
-            }
+        const imgElements = [];
+        for (let element of elements) {
+            imgElements.push(internals.Userdata.get(element).thumbnailElement);
         }
+        dataset = [];
+        for (let song of Player.Playlist) {
+            dataset.push(song.thumbnail);            
+        }
+        ThumbLib.Rebind(imgElements, dataset, startIndex);
     });
 
-    SetConst(Gui, "OnElementClicked", (element) => {
-        const userdata = internals.Userdata[element.dataset.UserdataIndex];
-        if (userdata.value != null) {
-            Player.PlaySong(userdata.value);
-        }
-    });
+    Gui.OnElementClicked = (element) => {
+        Player.PlaySong(internals.Userdata.get(element.parentElement).value);
+    };
 
     internals.PortraitMode = undefined;
-    SetConst(internals, "OnWindowResize", () => {
+    internals.OnWindowResize = () => {
         if (window.innerHeight > window.innerWidth) {
             if (internals.PortraitMode !== true) {
                 document.documentElement.style.setProperty("--search-container-height", "75px");
@@ -118,9 +120,34 @@
                 internals.PortraitMode = false;
             }
         }
-    });
+    };
     window.addEventListener("resize", internals.OnWindowResize);
     internals.OnWindowResize();
+
+    Gui.OnSearchButtonClicked = () => {
+        Player.Search(internals.SearchBarElement.value);
+    };
+
+    Gui.RefreshPlayer = () => {
+        if (Player.NowPlaying == null) {
+            internals.PlayerTextElement.innerHTML = "Nothing is playing...";
+            internals.PlayerThumbnailElement.src = ThumbLib.BlankImageSrc;
+        } else {
+            internals.PlayerTextElement.innerHTML = Player.NowPlaying.textHtml;
+            internals.PlayerThumbnailElement.src = Player.NowPlaying.thumbnail;
+        }
+
+        if (Player.Loop) {
+            internals.PlayerLoopElement.textContent = "Loop✅";
+        } else {
+            internals.PlayerLoopElement.textContent = "Loop❌";
+        }
+        if (Player.Shuffle) {
+            internals.PlayerShuffleElement.textContent = "Shuffle✅";
+        } else {
+            internals.PlayerShuffleElement.textContent = "Shuffle❌";
+        }
+    };
 
     internals.PlayerThumbnailElement = null;
     internals.PlayerTextElement = null;
@@ -129,7 +156,7 @@
     internals.PlayerShuffleElement = null;
     internals.SearchBarElement = null;
     internals.ElementRefrencesNull = true;
-    SetConst(internals, "SetElementRefrences", () => {
+    internals.SetElementRefrences = () => {
         internals.PlayerThumbnailElement = document.querySelector(".player_thumbnail");
         internals.PlayerTextElement = document.querySelector(".player_text");
         internals.PlayerWatchOriginalElement = document.querySelector(".player_watch_original");
@@ -153,41 +180,12 @@
         internals.ElementRefrencesNull = false;
 
         Gui.RefreshPlayer();
-    });
-    document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+    };
+    if (document.readyState == "loading") {
+        document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+    } else {
+        internals.SetElementRefrences();
+    }
 
-    SetConst(Gui, "OnSearchButtonClicked", () => {
-        if (internals.ElementRefrencesNull) {
-            return;
-        }
-
-        Player.Search(internals.SearchBarElement.value);
-    });
-
-    SetConst(Gui, "RefreshPlayer", () => {
-        if (internals.ElementRefrencesNull) {
-            return;
-        }
-
-        if (Player.NowPlaying == null) {
-            internals.PlayerTextElement.innerHTML = "Nothing is playing...";
-            ImageLoader.Bind(internals.PlayerThumbnailElement, null);
-        } else {
-            internals.PlayerTextElement.innerHTML = Player.NowPlaying.textHtml;
-            ImageLoader.Bind(internals.PlayerThumbnailElement, Player.NowPlaying.thumbnail);
-        }
-
-        if (Player.Loop) {
-            internals.PlayerLoopElement.textContent = "Loop✅";
-        } else {
-            internals.PlayerLoopElement.textContent = "Loop❌";
-        }
-        if (Player.Shuffle) {
-            internals.PlayerShuffleElement.textContent = "Shuffle✅";
-        } else {
-            internals.PlayerShuffleElement.textContent = "Shuffle❌";
-        }
-    });
-
-    DeepFreeze(Gui);
+    globalThis.Gui = Gui;
 })();
