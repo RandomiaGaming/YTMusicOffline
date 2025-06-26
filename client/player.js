@@ -19,6 +19,7 @@
                 Player.Playlist = Player.Database;
 
                 VSLib.SetDataset(Player.Playlist);
+                ThumbLib.SetDataset(Player.Playlist.map(song => song.thumbnail));
 
                 Gui.ComputeSongExtraData();
 
@@ -65,6 +66,7 @@
 
         Player.Playlist = newPlaylist;
         VSLib.SetDataset(Player.Playlist);
+        ThumbLib.SetDataset(Player.Playlist.map(song => song.thumbnail));
     };
 
     Player.Loop = false;

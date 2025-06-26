@@ -20,7 +20,6 @@
     let OldStartIndex = -1;
     let Dataset = [];
     let VirtualElements = [];
-    let Elements = [];
 
     VSLib.SetRebindCallback = (value) => {
         if (typeof value != "function" && value !== null) {
@@ -223,12 +222,12 @@
                 const binding = startIndex + VirtualElements.length - 1;
                 Rebind(virtualElement, binding);
             }
-            Elements = VirtualElements.map(virtualElement => virtualElement.Element);
-            Object.freeze(Elements);
         }
 
         // Invoke the update callback if it is not null
         if (UpdateCallback !== null && (startIndexChanged || elementCountChanged)) {
+            // No point caching Elements as the order changes with each rebind and since this array is passed to the user its untrusted anyways.
+            const Elements = VirtualElements.map(virtualElement => virtualElement.Element);
             try {
                 UpdateCallback(Elements, startIndex, Dataset);
             } catch (error) {

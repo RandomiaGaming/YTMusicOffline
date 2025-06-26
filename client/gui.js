@@ -94,11 +94,10 @@
         for (let element of elements) {
             imgElements.push(internals.Userdata.get(element).thumbnailElement);
         }
-        dataset = [];
-        for (let song of Player.Playlist) {
-            dataset.push(song.thumbnail);            
-        }
-        ThumbLib.Rebind(imgElements, dataset, startIndex);
+        ThumbLib.StartTransaction();
+        ThumbLib.SetElements(imgElements);
+        ThumbLib.SetStartIndex(startIndex);
+        ThumbLib.EndTransaction();
     });
 
     Gui.OnElementClicked = (element) => {
