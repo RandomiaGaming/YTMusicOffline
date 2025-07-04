@@ -42,6 +42,7 @@
         OldStartIndex = -1;
         QueueUpdate();
     };
+
     VSLib.SetElementHeightInPixels = (value) => {
         if (!Number.isFinite(value)) {
             throw new Error("ElementHeight must be a finite real number.");
@@ -66,6 +67,7 @@
         UserElementHeight = value;
         QueueUpdate();
     };
+
     VSLib.SetOverscrollHeightInPixels = (value) => {
         if (!Number.isFinite(value)) {
             throw new Error("OverscrollHeight must be a finite real number.");
@@ -90,6 +92,7 @@
         UserOverscrollHeight = value;
         QueueUpdate();
     };
+    
     const QueueUpdate = () => {
         if (!UpdateQueued) {
             requestAnimationFrame(Update);

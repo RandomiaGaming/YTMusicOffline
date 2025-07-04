@@ -3,9 +3,8 @@
 
 (() => {
     const Gui = {};
-    const internals = {};
 
-    internals.EpochToString = (timestamp) => {
+    const EpochToString = (timestamp) => {
         const date = new Date(timestamp * 1000);
         const day = ("0" + date.getUTCDate().toString()).slice(-2);
         const month = ("0" + (date.getUTCMonth() + 1).toString()).slice(-2);
@@ -58,14 +57,14 @@
                     song.text += ", and others";
                     break;
             }
-            song.textHtml += " released on " + highlightStart + internals.EpochToString(song.releaseDate) + highlightEnd;
-            song.text += " released on " + internals.EpochToString(song.releaseDate);
+            song.textHtml += " released on " + highlightStart + EpochToString(song.releaseDate) + highlightEnd;
+            song.text += " released on " + EpochToString(song.releaseDate);
         }
     };
 
     VSLib.SetElementsPerScreen(10);
 
-    internals.Userdata = new Map();
+    let Userdata = new Map();
     VSLib.SetRebindCallback((element, binding, value, userdata) => {
         if (userdata == null) {
             userdata = {
@@ -75,7 +74,7 @@
                 thumbnailElement: element.querySelector(".element_thumbnail"),
                 textElement: element.querySelector(".element_text"),
             };
-            internals.Userdata.set(element, userdata);
+            Userdata.set(element, userdata);
         }
         userdata.binding = binding;
         userdata.value = value;
@@ -92,7 +91,7 @@
     VSLib.SetUpdateCallback((elements, startIndex, dataset) => {
         const imgElements = [];
         for (let element of elements) {
-            imgElements.push(internals.Userdata.get(element).thumbnailElement);
+            imgElements.push(Userdata.get(element).thumbnailElement);
         }
         ThumbLib.StartTransaction();
         ThumbLib.SetElements(imgElements);
@@ -101,89 +100,89 @@
     });
 
     Gui.OnElementClicked = (element) => {
-        Player.PlaySong(internals.Userdata.get(element.parentElement).value);
+        Player.PlaySong(Userdata.get(element.parentElement).value);
     };
 
-    internals.PortraitMode = undefined;
-    internals.OnWindowResize = () => {
+    let PortraitMode = undefined;
+    const OnWindowResize = () => {
         if (window.innerHeight > window.innerWidth) {
-            if (internals.PortraitMode !== true) {
+            if (PortraitMode !== true) {
                 document.documentElement.style.setProperty("--search-container-height", "75px");
                 document.documentElement.style.setProperty("--player-container-height", "250px");
-                internals.PortraitMode = true;
+                PortraitMode = true;
             }
         } else {
-            if (internals.PortraitMode !== false) {
+            if (PortraitMode !== false) {
                 document.documentElement.style.setProperty("--search-container-height", "50px");
                 document.documentElement.style.setProperty("--player-container-height", "150px");
-                internals.PortraitMode = false;
+                PortraitMode = false;
             }
         }
     };
-    window.addEventListener("resize", internals.OnWindowResize);
-    internals.OnWindowResize();
+    window.addEventListener("resize", OnWindowResize);
+    OnWindowResize();
 
     Gui.OnSearchButtonClicked = () => {
-        Player.Search(internals.SearchBarElement.value);
+        Player.Search(SearchBarElement.value);
     };
 
     Gui.RefreshPlayer = () => {
         if (Player.NowPlaying == null) {
-            internals.PlayerTextElement.innerHTML = "Nothing is playing...";
-            internals.PlayerThumbnailElement.src = ThumbLib.BlankImageSrc;
+            PlayerTextElement.innerHTML = "Nothing is playing...";
+            PlayerThumbnailElement.src = ThumbLib.BlankImageSrc;
         } else {
-            internals.PlayerTextElement.innerHTML = Player.NowPlaying.textHtml;
-            internals.PlayerThumbnailElement.src = Player.NowPlaying.thumbnail;
+            PlayerTextElement.innerHTML = Player.NowPlaying.textHtml;
+            PlayerThumbnailElement.src = Player.NowPlaying.thumbnail;
         }
 
         if (Player.Loop) {
-            internals.PlayerLoopElement.textContent = "Loop✅";
+            PlayerLoopElement.textContent = "Loop✅";
         } else {
-            internals.PlayerLoopElement.textContent = "Loop❌";
+            PlayerLoopElement.textContent = "Loop❌";
         }
         if (Player.Shuffle) {
-            internals.PlayerShuffleElement.textContent = "Shuffle✅";
+            PlayerShuffleElement.textContent = "Shuffle✅";
         } else {
-            internals.PlayerShuffleElement.textContent = "Shuffle❌";
+            PlayerShuffleElement.textContent = "Shuffle❌";
         }
     };
 
-    internals.PlayerThumbnailElement = null;
-    internals.PlayerTextElement = null;
-    internals.PlayerWatchOriginalElement = null;
-    internals.PlayerLoopElement = null;
-    internals.PlayerShuffleElement = null;
-    internals.SearchBarElement = null;
-    internals.ElementRefrencesNull = true;
-    internals.SetElementRefrences = () => {
-        internals.PlayerThumbnailElement = document.querySelector(".player_thumbnail");
-        internals.PlayerTextElement = document.querySelector(".player_text");
-        internals.PlayerWatchOriginalElement = document.querySelector(".player_watch_original");
-        internals.PlayerWatchOriginalElement.addEventListener("click", (event) => {
+    let PlayerThumbnailElement = null;
+    let PlayerTextElement = null;
+    let PlayerWatchOriginalElement = null;
+    let PlayerLoopElement = null;
+    let PlayerShuffleElement = null;
+    let SearchBarElement = null;
+    let ElementRefrencesNull = true;
+    const SetElementRefrences = () => {
+        PlayerThumbnailElement = document.querySelector(".player_thumbnail");
+        PlayerTextElement = document.querySelector(".player_text");
+        PlayerWatchOriginalElement = document.querySelector(".player_watch_original");
+        PlayerWatchOriginalElement.addEventListener("click", (event) => {
             event.preventDefault();
             if (Player.NowPlaying != null) {
                 window.open(Player.NowPlaying.srcUrl, "_blank");
             }
         });
-        internals.PlayerLoopElement = document.querySelector(".player_loop");
-        internals.PlayerShuffleElement = document.querySelector(".player_shuffle");
-        internals.SearchBarElement = document.querySelector(".search_bar");
-        internals.SearchBarElement.addEventListener("keydown", (event) => {
+        PlayerLoopElement = document.querySelector(".player_loop");
+        PlayerShuffleElement = document.querySelector(".player_shuffle");
+        SearchBarElement = document.querySelector(".search_bar");
+        SearchBarElement.addEventListener("keydown", (event) => {
             if (event.key == "Enter") {
                 Gui.OnSearchButtonClicked();
-                internals.SearchBarElement.blur();
+                SearchBarElement.blur();
             } else if (event.key == "Escape") {
-                internals.SearchBarElement.blur();
+                SearchBarElement.blur();
             }
         });
-        internals.ElementRefrencesNull = false;
+        ElementRefrencesNull = false;
 
         Gui.RefreshPlayer();
     };
     if (document.readyState == "loading") {
-        document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+        document.addEventListener("DOMContentLoaded", SetElementRefrences);
     } else {
-        internals.SetElementRefrences();
+        SetElementRefrences();
     }
 
     globalThis.Gui = Gui;

@@ -3,16 +3,15 @@
 
 (() => {
     const Player = {};
-    const internals = {};
 
     Player.Database = [];
     Player.Playlist = [];
     Player.NowPlaying = null;
 
-    internals.AudioElement = null;
-    internals.ElementRefrencesNull = true;
+    let AudioElement = null;
+    let ElementRefrencesNull = true;
 
-    internals.LoadDatabase = () => {
+    const LoadDatabase = () => {
         fetch("/database/database.json").then((result) => {
             result.json().then((result) => {
                 Player.Database = Object.values(result);
@@ -27,26 +26,26 @@
             });
         });
     };
-    internals.LoadDatabase();
+    LoadDatabase();
 
-    internals.SetElementRefrences = () => {
-        internals.AudioElement = document.querySelector(".player_audio");
-        internals.ElementRefrencesNull = false;
+    const SetElementRefrences = () => {
+        AudioElement = document.querySelector(".player_audio");
+        ElementRefrencesNull = false;
     };
     if (document.readyState == "loading") {
-        document.addEventListener("DOMContentLoaded", internals.SetElementRefrences);
+        document.addEventListener("DOMContentLoaded", SetElementRefrences);
     } else {
-        internals.SetElementRefrences();
+        SetElementRefrences();
     }
 
     Player.PlaySong = (song) => {
-        internals.AudioElement.pause();
-        internals.AudioElement.currentTime = 0;
+        AudioElement.pause();
+        AudioElement.currentTime = 0;
         if (song == null) {
-            internals.AudioElement.src = "";
+            AudioElement.src = "";
         } else {
-            internals.AudioElement.src = song.src;
-            internals.AudioElement.play();
+            AudioElement.src = song.src;
+            AudioElement.play();
         }
 
         Player.NowPlaying = song;
@@ -72,7 +71,7 @@
     Player.Loop = false;
     Player.ToggleLoop = () => {
         Player.Loop = !Player.Loop;
-        internals.AudioElement.loop = Player.Loop;
+        AudioElement.loop = Player.Loop;
         Gui.RefreshPlayer();
     };
 

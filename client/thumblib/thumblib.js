@@ -66,7 +66,7 @@
         Dataset = dataset.slice();
         Update();
     };
-    
+
     let StartIndex = 0;
     ThumbLib.SetStartIndex = (startIndex) => {
         if (!Number.isInteger(startIndex) || startIndex < 0) {
@@ -76,7 +76,7 @@
         Update();
     };
 
-    ThumbLib.BlankImageSrc = "data:image/gif;base64,R0lGODlhAQABAPAAAAAAAP///yH5BAUAAAAALAAAAAABAAEAAAICRAEAOw==";
+    //ThumbLib.BlankImageSrc = "data:image/gif;base64,R0lGODlhAQABAPAAAAAAAP///yH5BAUAAAAALAAAAAABAAEAAAICRAEAOw==";
 
     let ImageCache = new Map();
     let InProgressRequests = new Set();
@@ -126,14 +126,18 @@
             const element = Elements[i];
             const url = Dataset[StartIndex + i];
 
-            let src;
             if (ImageCache.has(url)) {
-                src = ImageCache.get(url);
+                const src = ImageCache.get(url);
+                if (element.src != src) {
+                    element.src = src;
+                }
+                if (element.style.visibility != "visible") {
+                    element.style.visibility = "visible";
+                }
             } else {
-                src = ThumbLib.BlankImageSrc;
-            }
-            if (element.src != src) {
-                element.src = src;
+                if (element.style.visibility != "hidden") {
+                    element.style.visibility = "hidden";
+                }
             }
 
             HelperFetch(url);
