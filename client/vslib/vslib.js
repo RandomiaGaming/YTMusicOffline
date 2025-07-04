@@ -92,8 +92,10 @@
         UserOverscrollHeight = value;
         QueueUpdate();
     };
-    
+
     const QueueUpdate = () => {
+        Update();
+        return;
         if (!UpdateQueued) {
             requestAnimationFrame(Update);
             UpdateQueued = true;

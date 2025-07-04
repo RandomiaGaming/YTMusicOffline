@@ -131,8 +131,8 @@
                 if (element.src != src) {
                     element.src = src;
                 }
-                if (element.style.visibility != "visible") {
-                    element.style.visibility = "visible";
+                if (element.style.visibility != '' && element.style.visibility != undefined) {
+                    element.style.removeProperty("visibility");
                 }
             } else {
                 if (element.style.visibility != "hidden") {
