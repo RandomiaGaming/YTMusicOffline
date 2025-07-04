@@ -129,10 +129,11 @@
     Gui.RefreshPlayer = () => {
         if (Player.NowPlaying == null) {
             PlayerTextElement.innerHTML = "Nothing is playing...";
-            PlayerThumbnailElement.src = ThumbLib.BlankImageSrc;
+            PlayerThumbnailElement.style.visibility = "hidden";
         } else {
             PlayerTextElement.innerHTML = Player.NowPlaying.textHtml;
             PlayerThumbnailElement.src = Player.NowPlaying.thumbnail;
+            PlayerThumbnailElement.style.visibility = "visible";
         }
 
         if (Player.Loop) {
