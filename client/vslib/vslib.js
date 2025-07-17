@@ -7,11 +7,9 @@
     let ContainerElement = null;
     let ScrollElement = null;
     let ElementTemplateElement = null;
-    // Enum: Pixels Percent ElementsPerScreen
-    let ElementHeightUnits = "ElementsPerScreen";
+    let ElementHeightUnits = "ElementsPerScreen"; // Enum: Pixels Percent ElementsPerScreen
     let UserElementHeight = 10;
-    // Enum: Pixels Percent Elements
-    let OverscrollHeightUnits = "Elements";
+    let OverscrollHeightUnits = "Elements"; // Enum: Pixels Percent Elements
     let UserOverscrollHeight = 9;
     let RebindCallback = null; // (element, index, value, userdata) => userdata
     let UpdateCallback = null; // (elements, startIndex, dataset) => void
